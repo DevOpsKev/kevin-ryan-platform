@@ -23,13 +23,10 @@ export default function Page() {
               Kevin Ryan
             </h1>
             <p className="text-xl md:text-2xl text-base-content/70 mb-6">
-              DevOps & Agile Coach · AI Adoption & Governance · Author
+              Technical Project Manager · Delivery Manager · Platform Engineering · Cloud Infrastructure · Author
             </p>
             <p className="text-lg leading-relaxed text-base-content/80 max-w-2xl">
-              I help organizations adopt AI responsibly — balancing technical
-              implementation with ethical frameworks and governance, while
-              empowering development teams to leverage AI tools for better
-              code quality and productivity.
+              Technical Project Manager and Delivery Manager with 30 years leading complex technology programmes across enterprise organisations. I bring structure to ambiguity — standing up delivery functions, building teams, and driving programmes from inception through to production. Accountable for programme budgets of £10m+, managing distributed engineering teams across multiple geographies.
             </p>
 
             <p className="text-lg leading-relaxed text-base-content/80 max-w-2xl mt-6">
@@ -86,9 +83,7 @@ export default function Page() {
       <section className="bg-base-200/50 py-16">
         <div className="max-w-4xl mx-auto px-6">
           <blockquote className="text-2xl md:text-3xl font-light text-center italic text-base-content/90 leading-relaxed">
-            "Good technology makes people more effective, not obsolete.
-            I focus on AI tools that enhance human judgment rather than
-            bypass it."
+            "I don't need a translator between the boardroom and the build team."
           </blockquote>
         </div>
       </section>
@@ -98,13 +93,10 @@ export default function Page() {
         <h2 className="text-3xl md:text-4xl font-bold mb-8 font-serif">About</h2>
         <div className="prose prose-lg max-w-none">
           <p className="text-lg leading-relaxed text-base-content/80">
-            I build AI-powered software and help companies modernize how they develop and deploy technology. Over the years, I've worked with clients ranging from startups to multinational corporations across Europe, wearing different hats depending on what they needed—agile coach, engineer, product owner, enterprise consultant. But software engineering has always been my foundation. It's where I started, and it's what keeps me grounded when I'm helping organizations transform.
+            I've worked with clients ranging from startups to multinational corporations across Europe, wearing different hats depending on what they needed — delivery manager, programme director, agile coach, enterprise consultant. But software engineering has always been my foundation. It's where I started, and it's what gives me the technical fluency to govern delivery with credibility — challenging architectural decisions, assessing risk first-hand, and bridging the gap between engineering teams and senior stakeholders.
           </p>
           <p className="text-lg leading-relaxed text-base-content/80 mt-4">
-            I'm based between the UK and Hungary, work remotely, and travel when projects or conferences need me there in person.
-          </p>
-          <p className="text-lg leading-relaxed text-base-content/80 mt-4">
-            Right now, I'm focused on the ethical application of AI and exploring frameworks like Specification-Driven Development that amplify what developers can do rather than replace them.
+            I'm based between the UK and Hungary, work remotely, and travel when projects need me there in person. Available immediately for contract and permanent roles.
           </p>
         </div>
       </section>
@@ -143,12 +135,32 @@ export default function Page() {
 
             <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
               <div className="card-body">
-                <h3 className="card-title text-primary font-serif">AI Integration</h3>
+                <h3 className="card-title text-primary font-serif">Programme & Portfolio Delivery</h3>
                 <p className="text-base-content/80">
-                  Integrating AI where it makes practical sense—improving developer workflows, enhancing observability, and giving teams better operational insight. I focus on applications that solve real problems, not AI for its own sake.
+                 Leading complex programmes from inception through to production. I stand up governance frameworks, manage budgets, build teams, and keep distributed delivery on track — whether that's a single workstream or a multi-million pound portfolio spanning multiple geographies.
                 </p>
               </div>
             </div>
+
+            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="card-body">
+                <h3 className="card-title text-primary font-serif">AI Integration</h3>
+                <p className="text-base-content/80">
+                  Integrating AI where it makes practical sense — improving developer workflows, enhancing observability, and giving teams better operational insight. Recent work includes enterprise AI adoption strategy at board level and governance frameworks for responsible AI use.
+                </p>
+              </div>
+            </div>
+
+            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="card-body">
+                <h3 className="card-title text-primary font-serif">Cloud Migration & Modernisation</h3>
+                <p className="text-base-content/80">
+                  Leading large-scale migrations across platforms, toolchains, and infrastructure. From Bitbucket to GitHub at Nestlé to full CI/CD re-platforming at Dematic, I plan and deliver migrations that minimise disruption while modernising how teams build and ship software.
+                </p>
+              </div>
+            </div>
+
+
           </div>
         </div>
       </section>
@@ -289,8 +301,7 @@ export default function Page() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 font-serif">Let's Work Together</h2>
           <p className="text-lg text-base-content/80 mb-8 max-w-2xl mx-auto">
-            Available for consulting engagements, speaking opportunities, and strategic
-            advisory roles. Based in UK/Hungary with international travel capability.
+            Available immediately for contract and permanent Technical Project Manager and Delivery Manager roles. Remote preferred with UK-wide availability for hybrid arrangements. Based between London and Budapest with international travel capability.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
 

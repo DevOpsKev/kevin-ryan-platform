@@ -18,7 +18,7 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kevin Ryan | DevOps Leader & AI Architect",
+  title: "Kevin Ryan | Technical Project Manager & Delivery Manager",
   description: "Dynamic technology leader specializing in AI-native and cloud-native software development, DevOps transformation, and enterprise automation.",
 };
 
