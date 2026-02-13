@@ -55,14 +55,14 @@ export default function AIImmigrantsPage() {
               </div>
 
               {/* Download Buttons */}
-              <div className="flex flex-wrap justify-center lg:justify-start gap-4 mt-8">
+                           <div className="flex flex-wrap justify-center lg:justify-start gap-4 mt-8">
                 <a href="/aiimmigrants.epub" download className="btn btn-primary">
                   Download EPUB
                 </a>
+                <a href="https://open.spotify.com/show/4kmEP6R0vaa5mXVnltwJ0j?si=dc85edc5df984df2" className="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                  🎧 Listen on Spotify
+                </a>
               </div>
-
-              {/* Audiobook Teaser */}
-              <p className="text-sm text-base-content/60 mt-4">🎧 Audiobook coming soon on Spotify</p>
 
               {/* Author Bio */}
               <div className="mt-8 pt-8 border-t border-base-300">
