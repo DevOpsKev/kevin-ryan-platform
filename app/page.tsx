@@ -31,7 +31,7 @@ export default function Page() {
 
             <p className="text-lg leading-relaxed text-base-content/80 max-w-2xl mt-6">
               Author of{' '}
-              <Link href="/aiimmigrants" className="text-primary hover:underline">
+              <Link href="https://aiimmigrants.com" target="_blank" className="text-primary hover:underline">
                 AI Immigrants
               </Link>
               {' '}and founder of{' '}

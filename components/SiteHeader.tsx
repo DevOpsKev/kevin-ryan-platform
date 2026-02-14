@@ -13,7 +13,7 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { label: 'kevinryan.io', href: '/', external: false },
   { label: 'Spec Driven Development', href: 'https://sddbook.com', external: true },
-  { label: 'AI Immigrants', href: '/aiimmigrants', external: false },
+  { label: 'AI Immigrants', href: 'https://aiimmigrants.com', external: true },
   { label: 'Distributed Equity', href: 'https://distributedequity.org', external: true },
 ]
 
