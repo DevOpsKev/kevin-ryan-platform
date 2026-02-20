@@ -18,8 +18,8 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kevin Ryan | Technical Project Manager & Delivery Manager",
-  description: "Dynamic technology leader specializing in AI-native and cloud-native software development, DevOps transformation, and enterprise automation.",
+  title: "Kevin Ryan | Forward Deployed Engineer · AI Native Software Engineering",
+  description: "Forward Deployed Engineer with 30 years embedding with enterprise clients and making complex technology work in production. Platform engineering, developer experience, and AI governance depth. CERN, Nestlé, NatWest, BBC Worldwide, Financial Times, Dematic.",
 };
 
 export default function RootLayout({
