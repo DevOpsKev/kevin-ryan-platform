@@ -23,10 +23,10 @@ export default function Page() {
               Kevin Ryan
             </h1>
             <p className="text-xl md:text-2xl text-base-content/70 mb-6">
-              Forward Deployed Engineer · AI Native Software Engineering · Author
+              DevOps Engineer · Platform Engineer · AI-Native · Cloud-Native · Author
             </p>
             <p className="text-lg leading-relaxed text-base-content/80 max-w-2xl">
-              I embed with enterprise clients and make complex technology work in production. Thirty years of forward deployment across CERN, Nestlé, NatWest, BBC Worldwide, the Financial Times, and Dematic — before the role had a name. Platform engineering, developer experience, and AI governance depth. Writing the book on what comes next.
+              I embed with enterprise clients and make complex technology work in production. Thirty years of platform engineering and DevOps delivery across CERN, Nestlé, NatWest, BBC Worldwide, the Financial Times, and Dematic. CI/CD architecture, Kubernetes, Terraform, and AI governance depth. Writing the book on what comes next.
             </p>
 
             <p className="text-lg leading-relaxed text-base-content/80 max-w-2xl mt-6">
@@ -87,7 +87,7 @@ export default function Page() {
       <section className="bg-base-200/50 py-16">
         <div className="max-w-4xl mx-auto px-6">
           <blockquote className="text-2xl md:text-3xl font-light text-center italic text-base-content/90 leading-relaxed">
-            "I was doing forward deployment engineering for about a decade before Palantir coined the term."
+            "AI-native engineering is an unprecedented shift — I've never been happier than when I'm walking the cutting edge."
           </blockquote>
         </div>
       </section>
@@ -97,53 +97,53 @@ export default function Page() {
         <h2 className="text-3xl md:text-4xl font-bold mb-8 font-serif">About</h2>
         <div className="prose prose-lg max-w-none">
           <p className="text-lg leading-relaxed text-base-content/80">
-            Most people entering the FDE space are either product engineers who've never run a client engagement, or consultants who've never written production code in a customer's environment. I've done both — for thirty years. Every major engagement in my career maps to the FDE pattern: identify the problem, embed with the client, build the solution in production, transfer capability, grow the relationship.
+            Most DevOps contractors are infrastructure specialists who have never managed a client engagement, or consultants who have never built a production pipeline. I have done both. What sets me apart is a rare combination: I can build the pipeline architecture, operate the platform, and run the programme that scales delivery across the enterprise.
           </p>
           <p className="text-lg leading-relaxed text-base-content/80 mt-4">
-            There's a second pattern that matters just as much: I've been early to every wave. XP and TDD when they were fringe. Agile before it was the default. Cloud-native and containerisation before the industry caught up. DORA metrics before they were fashionable. On the GitHub Copilot beta waiting list. When I say AI-native engineering is the next paradigm, that's pattern recognition backed by three decades of being right about what comes next.
+            There is a second pattern that matters just as much: I have been early to every wave. XP and TDD when they were fringe. Agile before it was the default. Cloud-native and containerisation before the industry caught up. DORA metrics before they were fashionable. On the GitHub Copilot beta waiting list. AI-native engineering is the next shift — and I am writing the book on it.
           </p>
           <p className="text-lg leading-relaxed text-base-content/80 mt-4">
-            Based between London and Budapest. Available for FDE, Solutions Engineer, and AI adoption roles — FTE or contract.
+            The industry is shifting toward engineers whose breadth lets them leverage AI across the full delivery lifecycle. Thirty years spanning code, architecture, platform engineering, delivery, and governance means AI amplifies what I already know — and you cannot shortcut that context. I am not theorising about AI-native engineering. I am practising it, writing the book on it, and building the tooling.
+          </p>
+          <p className="text-lg leading-relaxed text-base-content/80 mt-4">
+            Based in Budapest and Dublin. Available for DevOps and Platform Engineering contracts. Remote preferred.
           </p>
         </div>
       </section>
 
-      {/* The FDE Trifecta */}
+      {/* What I Bring */}
       <section className="bg-base-200/30 py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">The FDE Trifecta</h2>
-          <p className="text-lg text-base-content/60 mb-12">Forward Deployed Engineering sits at the intersection of three domains. Most candidates have one. I have all three.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">What I Bring</h2>
+          <p className="text-lg text-base-content/60 mb-12">Enterprise DevOps and Platform Engineering with delivery depth. Most candidates have one of these. I have all three.</p>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
               <div className="card-body">
-                <h3 className="card-title text-primary font-serif">Software Engineering</h3>
+                <h3 className="card-title text-primary font-serif">Platform Engineering</h3>
                 <p className="text-base-content/80">
-                  Write production code. Build integrations. Deploy to real infrastructure. Dematic CI/CD platform achieving 98% time-to-solution reduction. Nestlé DevOps platform build. CERN Kubernetes architecture. SpecMCP open-source. GitLab ×9, GitHub ×4 certified.
+                  Build and operate internal developer platforms. CI/CD architecture, Kubernetes, Terraform, infrastructure as code. Nestlé global DevOps platform from zero. Dematic CI/CD transformation — 98% time-to-solution reduction. CERN Kubernetes architecture review. GitLab ×9, GitHub ×4 certified.
                 </p>
               </div>
             </div>
 
             <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
               <div className="card-body">
-                <h3 className="card-title text-primary font-serif">Product Thinking</h3>
+                <h3 className="card-title text-primary font-serif">DevOps Delivery</h3>
                 <p className="text-base-content/80">
-                  Understand the customer's problem. Identify what to build and why. Feed insights back to product. NatWest AI adoption strategy at board level. BBC Worldwide £10m+ portfolio direction. SDD methodology. Won engagements through technical proposals at Nestlé and Dematic.
+                  Pipeline architecture, automation, migration, modernisation. Jenkins-to-AKS migration at Nestlé. Reusable CI/CD templates at Dematic. Terraform IaC governance. Bitbucket-to-GitHub migration strategy. DORA four key metrics as the governance framework for engineering performance.
                 </p>
               </div>
             </div>
 
             <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
               <div className="card-body">
-                <h3 className="card-title text-primary font-serif">Customer Consulting</h3>
+                <h3 className="card-title text-primary font-serif">Delivery Management</h3>
                 <p className="text-base-content/80">
-                  Embed with client teams. Translate between technical and business. Transfer capability. 11 years client-embedded at Cprime. Built and transferred teams at Nestlé and Dematic across India, Spain, UK, and Ukraine. Stakeholder management to C-suite.
+                  Embed with client teams. Run the programme that scales the solution. 11 years client-embedded at Cprime. Built and transferred teams at Nestlé (India/Spain/UK) and Dematic (Ukraine). Stakeholder management to C-suite. £10m+ programme budgets. The capability most contractors lack.
                 </p>
               </div>
             </div>
           </div>
-          <p className="text-base-content/60 mt-8 text-center italic">
-            The critical addition most FDEs lack: delivery management as a superpower. I can embed with a client, write production code, and run the programme that scales the solution across the enterprise.
-          </p>
         </div>
       </section>
 
@@ -152,15 +152,6 @@ export default function Page() {
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 font-serif">Expertise</h2>
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="card-body">
-                <h3 className="card-title text-primary font-serif">AI Native Software Engineering</h3>
-                <p className="text-base-content/80">
-                  Not AI as a chatbot — AI as the medium through which software gets conceived, specified, built, tested, and operated. Enterprise AI adoption strategy, governance frameworks, and specification-driven development methodology. Author of AI Immigrants and the forthcoming Spec Driven Development.
-                </p>
-              </div>
-            </div>
-
             <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
               <div className="card-body">
                 <h3 className="card-title text-primary font-serif">Platform Engineering & DevEx</h3>
@@ -181,18 +172,18 @@ export default function Page() {
 
             <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
               <div className="card-body">
-                <h3 className="card-title text-primary font-serif">AI Governance & Ethics</h3>
+                <h3 className="card-title text-primary font-serif">AI Native Software Engineering</h3>
                 <p className="text-base-content/80">
-                  Published 70,000 words on AI governance, the EU AI Act, and the societal dynamics of automation. Trinity College Dublin AI Ethics CPD. NatWest board-level AI adoption recommendations. SpecMCP making API specifications enforceable for AI assistants.
+                  Not AI as a chatbot — AI as the medium through which software gets conceived, specified, built, tested, and operated. Enterprise AI adoption strategy, governance frameworks, and specification-driven development methodology. Author of AI Immigrants and the forthcoming Spec Driven Development.
                 </p>
               </div>
             </div>
 
             <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
               <div className="card-body">
-                <h3 className="card-title text-primary font-serif">Enterprise Forward Deployment</h3>
+                <h3 className="card-title text-primary font-serif">AI Governance & Ethics</h3>
                 <p className="text-base-content/80">
-                  Embedding with client teams in complex, regulated enterprise environments. Navigating security constraints, data residency requirements, and the politics of getting production credentials. No amount of prompt engineering fixes legacy integrations.
+                  Published 70,000 words on AI governance, the EU AI Act, and the societal dynamics of automation. Trinity College Dublin AI Ethics CPD. NatWest board-level AI adoption recommendations. The governance thinking that regulated enterprises need before they let AI into production.
                 </p>
               </div>
             </div>
@@ -202,6 +193,15 @@ export default function Page() {
                 <h3 className="card-title text-primary font-serif">Cloud Migration & Modernisation</h3>
                 <p className="text-base-content/80">
                   Leading large-scale migrations across platforms, toolchains, and infrastructure. From Bitbucket to GitHub at Nestlé to full CI/CD re-platforming at Dematic. Migrations that minimise disruption while modernising how teams build and ship software.
+                </p>
+              </div>
+            </div>
+
+            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="card-body">
+                <h3 className="card-title text-primary font-serif">Enterprise Delivery</h3>
+                <p className="text-base-content/80">
+                  Embedding with client teams in complex, regulated enterprise environments. Navigating security constraints, data residency requirements, and the politics of getting production credentials. Technical pre-sales, proposal authorship, and client acquisition.
                 </p>
               </div>
             </div>
@@ -223,7 +223,7 @@ export default function Page() {
               { era: "2010s", label: "Cloud & Containerisation", detail: "Cloud-native development and Infrastructure as Code before it was mainstream." },
               { era: "2012–2018", label: "DevOps & DORA Metrics", detail: "Nicole Forsgren's Accelerate as a personal touchstone. DORA four key metrics as the governance framework." },
               { era: "2014–2020", label: "Platform Engineering", detail: "Nestlé, Dematic, CERN. DevEx and developer productivity before it had its own conference circuit." },
-              { era: "2020 →", label: "Forward Deployed Engineer — AI Native", detail: "Writing Spec Driven Development. Building SpecMCP. The fifth paradigm of abstraction.", highlight: true },
+              { era: "2020 →", label: "AI-Native Engineering", detail: "GitHub Copilot beta. Writing Spec Driven Development. The next level of abstraction — and I'm early again.", highlight: true },
             ].map((phase) => (
               <div key={phase.era} className={`flex flex-col md:flex-row gap-2 md:gap-6 p-4 rounded-lg ${phase.highlight ? 'bg-primary/5 ring-1 ring-primary/20' : 'bg-base-100'}`}>
                 <span className="text-sm font-mono text-base-content/50 md:w-28 flex-shrink-0">{phase.era}</span>
@@ -235,30 +235,37 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Forward Deployment Evidence */}
+      {/* Enterprise Delivery */}
       <section className="py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">Forward Deployment in Practice</h2>
-          <p className="text-lg text-base-content/60 mb-12">Every engagement follows the same pattern: identify, embed, build, transfer, grow.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">Enterprise Delivery</h2>
+          <p className="text-lg text-base-content/60 mb-12">Every engagement follows the same pattern: embed with the client, build the platform, transfer capability.</p>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-xl font-bold mb-2 text-primary font-serif">Nestlé</h3>
               <p className="text-base-content/80">
-                Embedded with global engineering teams. Built a DevOps platform from zero, assembling a distributed team across India, Spain, and the UK to serve thousands of developers. Transferred capability for long-term sustainability. Platform engineering as forward deployment.
+                Built a global DevOps platform from zero, assembling a distributed team across India, Spain, and the UK to serve thousands of developers. Migrated Jenkins into AKS, optimised CI/CD pipelines, implemented Terraform IaC governance. Transferred capability for long-term sustainability.
               </p>
             </div>
 
             <div>
               <h3 className="text-xl font-bold mb-2 text-primary font-serif">Dematic</h3>
               <p className="text-base-content/80">
-                First through the door with the client. CI/CD transformation for a warehouse automation leader — 98% reduction in time-to-solution. Built reusable pipeline architecture and transferred ownership to a nearshore team in Ukraine.
+                First through the door. CI/CD transformation for a warehouse automation leader — 98% reduction in time-to-solution. GitLab and Azure-based platform. Reusable pipeline templates, Terraform IaC, Helm-based Kubernetes deployments. Transferred ownership to nearshore team.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-bold mb-2 text-primary font-serif">CERN</h3>
+              <p className="text-base-content/80">
+                Kubernetes and CI/CD architectural review for the Large Hadron Collider control systems. Delivered recommendations that shipped to production infrastructure.
               </p>
             </div>
 
             <div>
               <h3 className="text-xl font-bold mb-2 text-primary font-serif">NatWest</h3>
               <p className="text-base-content/80">
-                Embedded with enterprise engineering leadership. AI-assisted development pilot and adoption strategy. Navigated regulatory and security constraints in a tier-one financial institution. Board-level recommendations.
+                Enterprise AI-assisted development pilot. Assessment framework across Java, Python, and Node.js. Board-level AI adoption recommendations. Navigated regulatory and security constraints in a tier-one financial institution.
               </p>
             </div>
 
@@ -272,14 +279,7 @@ export default function Page() {
             <div>
               <h3 className="text-xl font-bold mb-2 text-primary font-serif">BBC Worldwide</h3>
               <p className="text-base-content/80">
-                Embedded with digital product teams. £10m+ portfolio including BBC Good Food, Top Gear, and Global iPlayer. Delivered production systems in a complex media environment across product, engineering, editorial, and commercial teams.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-2 text-primary font-serif">HelloFresh</h3>
-              <p className="text-base-content/80">
-                Embedded with Berlin-based engineering teams during the critical period leading to their €1.5 billion IPO. Coached delivery practices and collaboration as they scaled from startup to public company.
+                £10m+ digital portfolio including BBC Good Food, Top Gear, and Global iPlayer. Agile programme management, product re-platform, cross-functional stakeholder management across product, engineering, editorial, and commercial teams.
               </p>
             </div>
 
@@ -385,7 +385,7 @@ export default function Page() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 font-serif">Let's Work Together</h2>
           <p className="text-lg text-base-content/80 mb-8 max-w-2xl mx-auto">
-            Available for Forward Deployed Engineer, Solutions Engineer, and AI adoption roles — FTE and contract. Remote preferred, based between London and Budapest with international travel capability. SDD training and AI governance advisory available through Kevin Ryan & Associates.
+            Available for DevOps and Platform Engineering contracts. Remote preferred, based in Budapest and Dublin. SDD training and AI governance advisory available through Kevin Ryan & Associates.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
 
