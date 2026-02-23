@@ -1,146 +1,133 @@
 'use client'
 
-import React from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import React, { useState } from 'react'
 
-interface NavItem {
-  label: string
-  href: string
-  external: boolean
-}
-
-const NAV_ITEMS: NavItem[] = [
-  { label: 'kevinryan.io', href: '/', external: false },
-  { label: 'Spec Driven Development', href: 'https://sddbook.com', external: true },
-  { label: 'AI Immigrants', href: 'https://aiimmigrants.com', external: true },
-  { label: 'Distributed Equity', href: 'https://distributedequity.org', external: true },
+const NAV_ITEMS = [
+  { label: 'About', href: '#about' },
+  { label: 'Capabilities', href: '#capabilities' },
+  { label: 'Delivery', href: '#delivery' },
+  { label: 'Timeline', href: '#timeline' },
+  { label: 'Writing', href: '#projects' },
+  { label: 'Contact', href: '#contact' },
 ]
 
-function HamburgerIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M4 6h16M4 12h16M4 18h16"
-      />
-    </svg>
-  )
-}
-
-function ExternalLinkIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-      />
-    </svg>
-  )
-}
-
 export default function SiteHeader(): React.JSX.Element {
-  const pathname = usePathname()
+  const [open, setOpen] = useState(false)
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const target = document.querySelector(href)
+    if (target) {
+      const navHeight = 80
+      const top = target.getBoundingClientRect().top + window.scrollY - navHeight
+      window.scrollTo({ top, behavior: 'smooth' })
+      setOpen(false)
+    }
+  }
 
   return (
-    <header className="navbar bg-base-100 px-4">
-      <div className="flex-1" />
+    <nav
+      className="fixed top-0 left-0 right-0 z-50"
+      style={{ background: 'var(--white)', borderBottom: '2px solid var(--black)' }}
+    >
+      <div
+        className="flex justify-between items-center mx-auto"
+        style={{ maxWidth: '1400px', padding: '1rem clamp(1.5rem, 5vw, 6rem)' }}
+      >
+        <a
+          href="#"
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: '1.5rem',
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase' as const,
+          }}
+        >
+          Kevin<span style={{ color: 'var(--accent-dim)' }}>—</span>Ryan
+        </a>
 
-      <nav className="hidden md:flex">
-        <ul className="menu menu-horizontal gap-2">
+        {/* Desktop nav */}
+        <ul className="hidden md:flex items-center" style={{ gap: '2.5rem', listStyle: 'none' }}>
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
-              {item.external ? (
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`transition-colors duration-200 ${
-                    pathname === item.href
-                      ? 'text-primary font-semibold'
-                      : 'hover:text-primary'
-                  }`}
-                >
-                  {item.label}
-                  <ExternalLinkIcon className="w-4 h-4 ml-1 inline" />
-                </a>
-              ) : (
-                <Link
-                  href={item.href}
-                  className={`transition-colors duration-200 ${
-                    pathname === item.href
-                      ? 'text-primary font-semibold'
-                      : 'hover:text-primary'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              )}
+              <a
+                href={item.href}
+                onClick={(e) => handleClick(e, item.href)}
+                className="nav-link"
+                style={{
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase' as const,
+                  position: 'relative' as const,
+                  paddingBottom: '2px',
+                }}
+              >
+                {item.label}
+              </a>
             </li>
           ))}
         </ul>
-      </nav>
 
-      <div className="dropdown dropdown-end md:hidden">
+        {/* Mobile hamburger */}
         <button
-          tabIndex={0}
-          className="btn btn-ghost"
-          aria-label="Open navigation menu"
+          className="md:hidden"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }}
         >
-          <HamburgerIcon className="w-6 h-6" />
+          <span style={{ display: 'block', width: '26px', height: '2px', background: 'var(--black)', margin: '6px 0' }} />
+          <span style={{ display: 'block', width: '26px', height: '2px', background: 'var(--black)', margin: '6px 0' }} />
+          <span style={{ display: 'block', width: '26px', height: '2px', background: 'var(--black)', margin: '6px 0' }} />
         </button>
+      </div>
+
+      {/* Mobile menu */}
+      {open && (
         <ul
-          tabIndex={0}
-          className="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow"
+          className="md:hidden flex flex-col"
+          style={{
+            background: 'var(--white)',
+            borderBottom: '2px solid var(--black)',
+            padding: '2rem clamp(1.5rem, 5vw, 6rem)',
+            gap: '1.25rem',
+            listStyle: 'none',
+          }}
         >
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
-              {item.external ? (
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`transition-colors duration-200 ${
-                    pathname === item.href
-                      ? 'text-primary font-semibold'
-                      : 'hover:text-primary'
-                  }`}
-                >
-                  {item.label}
-                  <ExternalLinkIcon className="w-4 h-4 ml-1 inline" />
-                </a>
-              ) : (
-                <Link
-                  href={item.href}
-                  className={`transition-colors duration-200 ${
-                    pathname === item.href
-                      ? 'text-primary font-semibold'
-                      : 'hover:text-primary'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              )}
+              <a
+                href={item.href}
+                onClick={(e) => handleClick(e, item.href)}
+                style={{
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase' as const,
+                }}
+              >
+                {item.label}
+              </a>
             </li>
           ))}
         </ul>
-      </div>
-    </header>
+      )}
+
+      <style jsx>{`
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: var(--accent);
+          transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+          width: 100%;
+        }
+      `}</style>
+    </nav>
   )
 }

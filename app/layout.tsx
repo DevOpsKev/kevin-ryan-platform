@@ -1,21 +1,7 @@
 import type { Metadata } from "next";
-import { Cormorant, Inter } from "next/font/google";
 import Script from "next/script";
 import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
-
-const serif = Cormorant({
-  subsets: ["latin"],
-  variable: "--font-cormorant",
-  display: 'swap',
-  weight: ['400', '600', '700'],
-});
-
-const sans = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: "Kevin Ryan | DevOps Engineer · Platform Engineer · AI-Native · Author",
@@ -28,13 +14,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="minimal" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-sans text-base-content bg-base-100">
+      <body>
         <SiteHeader />
         {children}
         <Script

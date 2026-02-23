@@ -1,410 +1,503 @@
+'use client'
+
 import Image from "next/image"
-import Link from "next/link"
+import { useEffect } from "react"
 import SiteFooter from "@/components/SiteFooter"
 
+const TICKER_ITEMS = [
+  "DevOps", "Platform Engineering", "AI-Native", "Kubernetes", "CI/CD",
+  "Terraform", "Spec Driven Development", "Enterprise Delivery", "DORA Metrics", "Cloud Migration",
+]
+
+const CAPABILITIES = [
+  {
+    number: "01",
+    title: "Platform Engineering & DevEx",
+    text: "Build and operate internal developer platforms. CI/CD architecture, Kubernetes, Terraform, infrastructure as code. Nestlé global DevOps platform from zero. Dematic CI/CD transformation. CERN Kubernetes architecture review. GitLab ×9, GitHub ×4 certified.",
+  },
+  {
+    number: "02",
+    title: "DevOps & CI/CD",
+    text: "Pipeline architecture, automation, migration, modernisation. DORA four key metrics and OKRs as governance frameworks. Infrastructure as Code with Terraform and Bicep — versioned, tested, repeatable.",
+  },
+  {
+    number: "03",
+    title: "Delivery Management",
+    text: "Embed with client teams. Run the programme that scales the solution. 11 years client-embedded at Cprime. Built and transferred teams at Nestlé and Dematic. Stakeholder management to C-suite. The capability most contractors lack.",
+  },
+  {
+    number: "04",
+    title: "AI-Native Engineering",
+    text: "AI as the medium through which software gets conceived, specified, built, tested, and operated. Enterprise AI adoption strategy, governance frameworks, and specification-driven development. Author of the forthcoming Spec Driven Development.",
+  },
+  {
+    number: "05",
+    title: "AI Governance & Ethics",
+    text: "Published 70,000 words on AI governance, the EU AI Act, and societal dynamics of automation. Trinity College Dublin AI Ethics CPD. NatWest board-level AI adoption recommendations.",
+  },
+  {
+    number: "06",
+    title: "Cloud Migration",
+    text: "Large-scale migrations across platforms, toolchains, and infrastructure. From Bitbucket to GitHub at Nestlé to full CI/CD re-platforming at Dematic. Minimise disruption while modernising delivery.",
+  },
+]
+
+const CASES = [
+  { tag: "Global Platform", client: "Nestlé", desc: "Built a global DevOps platform from zero. Distributed team across India, Spain, and the UK serving thousands of developers. Migrated Jenkins into AKS, Terraform IaC governance. Transferred capability for long-term sustainability." },
+  { tag: "CI/CD Transformation", client: "Dematic", desc: "First through the door. CI/CD transformation for a warehouse automation leader. GitLab and Azure-based platform. Reusable pipeline templates, Helm-based Kubernetes deployments.", stat: "98%", statLabel: "Reduction in time-to-solution" },
+  { tag: "Architecture Review", client: "CERN", desc: "Kubernetes and CI/CD architectural review for the Large Hadron Collider control systems. Delivered recommendations that shipped to production infrastructure." },
+  { tag: "AI Adoption", client: "NatWest", desc: "Enterprise AI-assisted development pilot. Assessment framework across Java, Python, and Node.js. Board-level AI adoption recommendations in a tier-one financial institution." },
+  { tag: "Platform Rebuild", client: "Financial Times", desc: "Platform rebuild during the period leading to Nikkei's £844M acquisition. Modernised how one of the world's leading publications delivers content during rapid digital transformation." },
+  { tag: "Digital Portfolio", client: "BBC Worldwide", desc: "£10m+ digital portfolio including BBC Good Food, Top Gear, and Global iPlayer. Agile programme management across product, engineering, editorial, and commercial teams." },
+]
+
+const CLIENTS = [
+  "Accenture", "Barclays", "BBC Worldwide", "CBRE", "CERN",
+  "Deloitte Digital", "Elsevier", "EY", "Financial Times", "Heathrow Airport",
+  "HelloFresh", "Lloyds Bank", "Maersk", "McKinsey & Co", "NatWest",
+  "Nestlé", "Pearson", "Sky", "Vodafone", "Volkswagen",
+]
+
+const TIMELINE = [
+  { date: "Mid-1990s", title: "Software Engineer", desc: "Writing code. Foundation layer." },
+  { date: "Late 1990s", title: "XP, TDD, BDD, CI/CD", desc: "Super early adopter. These practices were fringe — most teams hadn't heard of them." },
+  { date: "2000s", title: "Agile & Scrum", desc: "Adopted agile methodologies before they became the industry default." },
+  { date: "2007–2016", title: "Agile Transformation", desc: "Barclays, Heathrow, Pearson, Financial Times, BBC Worldwide, EY, McKinsey. UK Agile Award 2014." },
+  { date: "2010s", title: "Cloud & Containerisation", desc: "Cloud-native development and Infrastructure as Code before it was mainstream." },
+  { date: "2012–2018", title: "DevOps & DORA Metrics", desc: "Nicole Forsgren's Accelerate as a personal touchstone. DORA four key metrics as the governance framework." },
+  { date: "2014–2020", title: "Platform Engineering", desc: "Nestlé, Dematic, CERN. DevEx and developer productivity before it had its own conference circuit." },
+  { date: "2020 →", title: "AI-Native Engineering", desc: "GitHub Copilot beta. Writing Spec Driven Development. The next level of abstraction — and I'm early again." },
+]
+
+const CONTAINER = { maxWidth: '1400px', margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 6rem)' }
+
 export default function Page() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('visible')
+        })
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    )
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <main className="min-h-screen bg-base-100">
-      {/* Hero Section */}
-      <section className="max-w-5xl mx-auto px-6 py-12 md:py-20">
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
-          <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden ring-4 ring-primary/20 shadow-2xl flex-shrink-0">
-            <Image
-              src="/kevin.jpg"
-              alt="Kevin Ryan"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-
-          <div className="flex-1 text-center md:text-left">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-serif leading-tight pb-2">
-              Kevin Ryan
-            </h1>
-            <p className="text-xl md:text-2xl text-base-content/70 mb-6">
-              DevOps Engineer · Platform Engineer · AI-Native · Cloud-Native · Author
-            </p>
-            <p className="text-lg leading-relaxed text-base-content/80 max-w-2xl">
-              I embed with enterprise clients and make complex technology work in production. Thirty years of platform engineering and DevOps delivery across CERN, Nestlé, NatWest, BBC Worldwide, the Financial Times, and Dematic. CI/CD architecture, Kubernetes, Terraform, and AI governance depth. Writing the book on what comes next.
-            </p>
-
-            <p className="text-lg leading-relaxed text-base-content/80 max-w-2xl mt-6">
-              Author of{' '}
-              <Link href="https://aiimmigrants.com" target="_blank" className="text-primary hover:underline">
-                AI Immigrants
-              </Link>
-              {' '}and{' '}
-              <Link href="https://sddbook.com" target="_blank" className="text-primary hover:underline">
-                Spec Driven Development
-              </Link>
-              . Founder of{' '}
-              <a
-                href="https://distributedequity.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
+    <main>
+      {/* ═══ HERO ═══ */}
+      <section
+        className="flex items-end"
+        style={{ paddingTop: '7rem', minHeight: '100vh' }}
+      >
+        <div style={CONTAINER}>
+          <div
+            className="grid items-end"
+            style={{
+              gridTemplateColumns: '1.1fr 0.9fr',
+              gap: 'calc(2rem * 2)',
+              paddingBottom: '4rem',
+            }}
+          >
+            <div>
+              <div
+                className="flex flex-wrap"
+                style={{
+                  fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.18em',
+                  textTransform: 'uppercase', color: 'var(--grey-400)',
+                  marginBottom: '2rem', gap: '1.5rem',
+                }}
               >
-                Distributed Equity
-              </a>.
-            </p>
-
-            <div className="flex gap-6 mt-8 justify-center md:justify-start items-center">
-              <a
-                href="https://github.com/devopskev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="opacity-70 hover:opacity-100 transition-opacity"
-              >
+                {['DevOps', 'Platform', 'AI-Native', 'Author'].map((item, i, arr) => (
+                  <span key={item}>
+                    {item}
+                    {i < arr.length - 1 && (
+                      <span style={{ marginLeft: '1.5rem', color: 'var(--accent)', fontWeight: 900 }}>·</span>
+                    )}
+                  </span>
+                ))}
+              </div>
+              <h1 className="display-xl" style={{ marginBottom: '2rem' }}>
+                Kevin<br /><span style={{ color: 'var(--accent-dim)' }}>Ryan</span>
+              </h1>
+              <p style={{
+                fontSize: '1.1rem', lineHeight: 1.75, maxWidth: '48ch',
+                marginBottom: '2.5rem', color: 'var(--grey-800)',
+              }}>
+                I embed with enterprise clients and make complex technology work in production. Thirty years of platform engineering and DevOps delivery. Writing the book on what comes next.
+              </p>
+              <div className="flex items-center" style={{ gap: '1rem' }}>
+                <a
+                  href="#contact"
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', fontSize: '0.72rem',
+                    fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
+                    padding: '0.85rem 2rem', background: 'var(--accent)',
+                    border: '2px solid var(--accent)', color: 'var(--black)',
+                    transition: 'all 0.25s ease',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--black)'; e.currentTarget.style.borderColor = 'var(--black)'; e.currentTarget.style.color = 'var(--accent)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--black)' }}
+                >
+                  Get in touch
+                </a>
+                <a
+                  href="#delivery"
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', fontSize: '0.72rem',
+                    fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
+                    padding: '0.85rem 2rem', border: '2px solid var(--black)',
+                    transition: 'all 0.25s ease',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--black)'; e.currentTarget.style.color = 'var(--white)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--black)' }}
+                >
+                  Case studies
+                </a>
+              </div>
+            </div>
+            <div className="hero-image-col">
+              <div style={{ position: 'relative', aspectRatio: '3 / 4', overflow: 'hidden', background: 'var(--grey-100)' }} className="hero-image-frame">
                 <Image
-                  src="/github_logo_black.png"
-                  alt="GitHub"
-                  width={40}
-                  height={40}
-                  className="h-10 w-auto"
+                  src="/kevin.jpg"
+                  alt="Kevin Ryan"
+                  fill
+                  className="object-cover"
+                  style={{ filter: 'grayscale(100%) contrast(1.15)', transition: 'filter 0.5s ease' }}
+                  priority
+                  onMouseEnter={(e) => { (e.target as HTMLElement).style.filter = 'grayscale(0%) contrast(1.05)' }}
+                  onMouseLeave={(e) => { (e.target as HTMLElement).style.filter = 'grayscale(100%) contrast(1.15)' }}
                 />
-              </a>
-              <a
-                href="https://linkedin.com/in/devopskev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="opacity-70 hover:opacity-100 transition-opacity"
-              >
-                <Image
-                  src="/linkedin_black_logo.png"
-                  alt="LinkedIn"
-                  width={40}
-                  height={40}
-                  className="h-10 w-auto"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quote Section */}
-      <section className="bg-base-200/50 py-16">
-        <div className="max-w-4xl mx-auto px-6">
-          <blockquote className="text-2xl md:text-3xl font-light text-center italic text-base-content/90 leading-relaxed">
-            "AI-native engineering is an unprecedented shift — I've never been happier than when I'm walking the cutting edge."
-          </blockquote>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 font-serif">About</h2>
-        <div className="prose prose-lg max-w-none">
-          <p className="text-lg leading-relaxed text-base-content/80">
-            Most DevOps contractors are infrastructure specialists who have never managed a client engagement, or consultants who have never built a production pipeline. I have done both. What sets me apart is a rare combination: I can build the pipeline architecture, operate the platform, and run the programme that scales delivery across the enterprise.
-          </p>
-          <p className="text-lg leading-relaxed text-base-content/80 mt-4">
-            There is a second pattern that matters just as much: I have been early to every wave. XP and TDD when they were fringe. Agile before it was the default. Cloud-native and containerisation before the industry caught up. DORA metrics before they were fashionable. On the GitHub Copilot beta waiting list. AI-native engineering is the next shift — and I am writing the book on it.
-          </p>
-          <p className="text-lg leading-relaxed text-base-content/80 mt-4">
-            The industry is shifting toward engineers whose breadth lets them leverage AI across the full delivery lifecycle. Thirty years spanning code, architecture, platform engineering, delivery, and governance means AI amplifies what I already know — and you cannot shortcut that context. I am not theorising about AI-native engineering. I am practising it, writing the book on it, and building the tooling.
-          </p>
-          <p className="text-lg leading-relaxed text-base-content/80 mt-4">
-            Based in Budapest and Dublin. Available for DevOps and Platform Engineering contracts. Remote preferred.
-          </p>
-        </div>
-      </section>
-
-      {/* What I Bring */}
-      <section className="bg-base-200/30 py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">What I Bring</h2>
-          <p className="text-lg text-base-content/60 mb-12">Enterprise DevOps and Platform Engineering with delivery depth. Most candidates have one of these. I have all three.</p>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="card-body">
-                <h3 className="card-title text-primary font-serif">Platform Engineering</h3>
-                <p className="text-base-content/80">
-                  Build and operate internal developer platforms. CI/CD architecture, Kubernetes, Terraform, infrastructure as code. Nestlé global DevOps platform from zero. Dematic CI/CD transformation — 98% time-to-solution reduction. CERN Kubernetes architecture review. GitLab ×9, GitHub ×4 certified.
-                </p>
-              </div>
-            </div>
-
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="card-body">
-                <h3 className="card-title text-primary font-serif">DevOps Delivery</h3>
-                <p className="text-base-content/80">
-                  Pipeline architecture, automation, migration, modernisation. Jenkins-to-AKS migration at Nestlé. Reusable CI/CD templates at Dematic. Terraform IaC governance. Bitbucket-to-GitHub migration strategy. DORA four key metrics as the governance framework for engineering performance.
-                </p>
-              </div>
-            </div>
-
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="card-body">
-                <h3 className="card-title text-primary font-serif">Delivery Management</h3>
-                <p className="text-base-content/80">
-                  Embed with client teams. Run the programme that scales the solution. 11 years client-embedded at Cprime. Built and transferred teams at Nestlé (India/Spain/UK) and Dematic (Ukraine). Stakeholder management to C-suite. £10m+ programme budgets. The capability most contractors lack.
-                </p>
+                <div style={{
+                  position: 'absolute', bottom: 0, left: 0, right: 0,
+                  padding: '0.9rem 1.25rem', background: 'var(--black)',
+                  color: 'var(--accent)', fontSize: '0.65rem', fontWeight: 700,
+                  letterSpacing: '0.18em', textTransform: 'uppercase',
+                  display: 'flex', justifyContent: 'space-between',
+                }}>
+                  <span>Budapest / Dublin</span>
+                  <span>Available for contract</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Expertise Section */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 font-serif">Expertise</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="card-body">
-                <h3 className="card-title text-primary font-serif">Platform Engineering & DevEx</h3>
-                <p className="text-base-content/80">
-                  Building internal platforms that make development teams more productive. Nestlé's global DevOps platform from zero. Dematic's CI/CD transformation. CERN's Kubernetes architecture. Tooling, workflows, and infrastructure abstractions that let engineers focus on shipping.
-                </p>
-              </div>
-            </div>
+      {/* ═══ TICKER ═══ */}
+      <div className="ticker">
+        <div className="ticker__track">
+          {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
+            <span key={i} className="ticker__item">{item}</span>
+          ))}
+        </div>
+      </div>
 
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="card-body">
-                <h3 className="card-title text-primary font-serif">DevOps & CI/CD</h3>
-                <p className="text-base-content/80">
-                  Continuous delivery as both a technical and cultural practice. DORA four key metrics and OKRs as governance frameworks for engineering performance. GitLab ×9 and GitHub ×4 certified. Infrastructure as Code with Terraform and Bicep — versioned, tested, repeatable.
-                </p>
-              </div>
+      {/* ═══ ABOUT ═══ */}
+      <section className="section section--grey" id="about">
+        <div style={CONTAINER}>
+          <div className="section__header reveal">
+            <div className="section__number">01</div>
+            <div>
+              <div className="section__subtitle">About</div>
+              <h2 className="display-lg">Breadth<br />Is Depth</h2>
             </div>
-
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="card-body">
-                <h3 className="card-title text-primary font-serif">AI Native Software Engineering</h3>
-                <p className="text-base-content/80">
-                  Not AI as a chatbot — AI as the medium through which software gets conceived, specified, built, tested, and operated. Enterprise AI adoption strategy, governance frameworks, and specification-driven development methodology. Author of AI Immigrants and the forthcoming Spec Driven Development.
-                </p>
-              </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 'calc(2rem * 3)' }}>
+            <div className="reveal">
+              <p style={{ fontSize: '1.05rem', lineHeight: 1.7, maxWidth: '60ch', marginBottom: '1.5rem' }}>
+                Most DevOps contractors are infrastructure specialists who have never managed a client engagement, or consultants who have never built a production pipeline. I have done both. What sets me apart is a rare combination: I can build the pipeline architecture, operate the platform, and run the programme that scales delivery across the enterprise.
+              </p>
+              <p style={{ fontSize: '1.05rem', lineHeight: 1.7, maxWidth: '60ch', marginBottom: '1.5rem' }}>
+                The industry is shifting toward engineers whose breadth lets them leverage AI across the full delivery lifecycle. Thirty years spanning code, architecture, platform engineering, delivery, and governance means AI amplifies what I already know — and you cannot shortcut that context.
+              </p>
+              <blockquote style={{
+                borderLeft: '4px solid var(--accent)', paddingLeft: '1.5rem',
+                fontSize: '1.1rem', fontStyle: 'italic', lineHeight: 1.65,
+                marginTop: '2.5rem', maxWidth: '50ch',
+              }}>
+                &ldquo;AI-native engineering is an unprecedented shift — I&rsquo;ve never been happier than when I&rsquo;m walking the cutting edge.&rdquo;
+              </blockquote>
             </div>
-
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="card-body">
-                <h3 className="card-title text-primary font-serif">AI Governance & Ethics</h3>
-                <p className="text-base-content/80">
-                  Published 70,000 words on AI governance, the EU AI Act, and the societal dynamics of automation. Trinity College Dublin AI Ethics CPD. NatWest board-level AI adoption recommendations. The governance thinking that regulated enterprises need before they let AI into production.
-                </p>
-              </div>
-            </div>
-
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="card-body">
-                <h3 className="card-title text-primary font-serif">Cloud Migration & Modernisation</h3>
-                <p className="text-base-content/80">
-                  Leading large-scale migrations across platforms, toolchains, and infrastructure. From Bitbucket to GitHub at Nestlé to full CI/CD re-platforming at Dematic. Migrations that minimise disruption while modernising how teams build and ship software.
-                </p>
-              </div>
-            </div>
-
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="card-body">
-                <h3 className="card-title text-primary font-serif">Enterprise Delivery</h3>
-                <p className="text-base-content/80">
-                  Embedding with client teams in complex, regulated enterprise environments. Navigating security constraints, data residency requirements, and the politics of getting production credentials. Technical pre-sales, proposal authorship, and client acquisition.
-                </p>
+            <div className="reveal" style={{ transitionDelay: '0.2s' }}>
+              <p style={{ fontSize: '1.05rem', lineHeight: 1.7, maxWidth: '60ch', marginBottom: '1.5rem' }}>
+                I have been early to every wave. XP and TDD when they were fringe. Agile before it was the default. Cloud-native and containerisation before the industry caught up. DORA metrics before they were fashionable. On the GitHub Copilot beta waiting list. AI-native engineering is the next shift — and I am writing the book on it.
+              </p>
+              <p style={{ fontSize: '1.05rem', lineHeight: 1.7, maxWidth: '60ch', marginBottom: '1.5rem' }}>
+                I am not theorising about AI-native engineering. I am practising it, writing the book on it, and building the tooling.
+              </p>
+              <div className="grid grid-cols-2 gap-8" style={{ marginTop: '3rem' }}>
+                {[
+                  { num: '30', label: 'Years in technology' },
+                  { num: '13', label: 'Certifications' },
+                  { num: '20+', label: 'Enterprise clients' },
+                  { num: '£10m+', label: 'Programme budgets' },
+                ].map((s) => (
+                  <div key={s.label} style={{ borderTop: '3px solid var(--black)', paddingTop: '1rem' }}>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '3.8rem', lineHeight: 1, marginBottom: '0.25rem' }}>{s.num}</div>
+                    <div style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--grey-600)' }}>{s.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Early to Every Wave */}
-      <section className="bg-base-200/30 py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">Early to Every Wave</h2>
-          <p className="text-lg text-base-content/60 mb-12">Every phase of my career has operated at a higher level of abstraction than the last — and at every stage, I arrived early.</p>
-          <div className="grid gap-4">
-            {[
-              { era: "Mid-1990s", label: "Software Engineer", detail: "Writing code. Foundation layer." },
-              { era: "Late 1990s", label: "XP, TDD, BDD, CI/CD", detail: "Super early adopter. These practices were fringe — most teams hadn't heard of them." },
-              { era: "2000s", label: "Agile & Scrum", detail: "Adopted agile methodologies before they became the industry default." },
-              { era: "2007–2016", label: "Agile Transformation", detail: "Barclays, Heathrow, Pearson, Financial Times, BBC Worldwide, EY, McKinsey. UK Agile Award 2014." },
-              { era: "2010s", label: "Cloud & Containerisation", detail: "Cloud-native development and Infrastructure as Code before it was mainstream." },
-              { era: "2012–2018", label: "DevOps & DORA Metrics", detail: "Nicole Forsgren's Accelerate as a personal touchstone. DORA four key metrics as the governance framework." },
-              { era: "2014–2020", label: "Platform Engineering", detail: "Nestlé, Dematic, CERN. DevEx and developer productivity before it had its own conference circuit." },
-              { era: "2020 →", label: "AI-Native Engineering", detail: "GitHub Copilot beta. Writing Spec Driven Development. The next level of abstraction — and I'm early again.", highlight: true },
-            ].map((phase) => (
-              <div key={phase.era} className={`flex flex-col md:flex-row gap-2 md:gap-6 p-4 rounded-lg ${phase.highlight ? 'bg-primary/5 ring-1 ring-primary/20' : 'bg-base-100'}`}>
-                <span className="text-sm font-mono text-base-content/50 md:w-28 flex-shrink-0">{phase.era}</span>
-                <span className="font-bold text-primary md:w-64 flex-shrink-0 font-serif">{phase.label}</span>
-                <span className="text-base-content/70">{phase.detail}</span>
+      {/* ═══ CAPABILITIES ═══ */}
+      <section className="section" id="capabilities">
+        <div style={CONTAINER}>
+          <div className="section__header reveal">
+            <div className="section__number">02</div>
+            <div>
+              <div className="section__subtitle">Capabilities</div>
+              <h2 className="display-lg">What I<br />Bring</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 reveal" style={{ gap: 0 }}>
+            {CAPABILITIES.map((cap) => (
+              <div key={cap.number} className="capability">
+                <div className="capability__number">{cap.number}</div>
+                <h3 className="capability__title">{cap.title}</h3>
+                <p className="capability__text">{cap.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Enterprise Delivery */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">Enterprise Delivery</h2>
-          <p className="text-lg text-base-content/60 mb-12">Every engagement follows the same pattern: embed with the client, build the platform, transfer capability.</p>
-          <div className="grid md:grid-cols-2 gap-8">
+      {/* ═══ ENTERPRISE DELIVERY ═══ */}
+      <section className="section section--dark" id="delivery">
+        <div style={CONTAINER}>
+          <div className="section__header reveal">
+            <div className="section__number">03</div>
             <div>
-              <h3 className="text-xl font-bold mb-2 text-primary font-serif">Nestlé</h3>
-              <p className="text-base-content/80">
-                Built a global DevOps platform from zero, assembling a distributed team across India, Spain, and the UK to serve thousands of developers. Migrated Jenkins into AKS, optimised CI/CD pipelines, implemented Terraform IaC governance. Transferred capability for long-term sustainability.
-              </p>
+              <div className="section__subtitle">Enterprise Delivery</div>
+              <h2 className="display-lg">Embed. Build.<br />Transfer.</h2>
             </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-2 text-primary font-serif">Dematic</h3>
-              <p className="text-base-content/80">
-                First through the door. CI/CD transformation for a warehouse automation leader — 98% reduction in time-to-solution. GitLab and Azure-based platform. Reusable pipeline templates, Terraform IaC, Helm-based Kubernetes deployments. Transferred ownership to nearshore team.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-2 text-primary font-serif">CERN</h3>
-              <p className="text-base-content/80">
-                Kubernetes and CI/CD architectural review for the Large Hadron Collider control systems. Delivered recommendations that shipped to production infrastructure.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-2 text-primary font-serif">NatWest</h3>
-              <p className="text-base-content/80">
-                Enterprise AI-assisted development pilot. Assessment framework across Java, Python, and Node.js. Board-level AI adoption recommendations. Navigated regulatory and security constraints in a tier-one financial institution.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-2 text-primary font-serif">Financial Times</h3>
-              <p className="text-base-content/80">
-                Platform rebuild during the period leading to Nikkei's £844M acquisition. Helped modernise how one of the world's leading publications delivers content during rapid digital transformation.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-2 text-primary font-serif">BBC Worldwide</h3>
-              <p className="text-base-content/80">
-                £10m+ digital portfolio including BBC Good Food, Top Gear, and Global iPlayer. Agile programme management, product re-platform, cross-functional stakeholder management across product, engineering, editorial, and commercial teams.
-              </p>
-            </div>
-
           </div>
-        </div>
-      </section>
-
-      {/* Notable Clients Section */}
-      <section className="bg-base-200/30 py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center font-serif">Notable Clients</h2>
-          <div className="flex flex-wrap justify-center gap-4 text-base-content/60 text-sm md:text-base">
-            {[
-              "Accenture", "Barclays", "BBC Worldwide", "CBRE", "CERN", "Deloitte Digital",
-              "Elsevier", "EY", "Financial Times", "Heathrow Airport", "HelloFresh",
-              "Lloyds Bank", "Maersk", "McKinsey & Company", "NatWest", "Nestlé",
-              "Pearson", "Sky", "TU Delft", "Vodafone", "Volkswagen"
-            ].map((client) => (
-              <span key={client} className="badge badge-lg badge-outline">
-                {client}
-              </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 reveal" style={{ gap: 0 }}>
+            {CASES.map((c) => (
+              <div key={c.client} className="case">
+                <div className="case__tag">{c.tag}</div>
+                <h3 className="case__client">{c.client}</h3>
+                <p className="case__desc">{c.desc}</p>
+                {c.stat && <div className="case__stat">{c.stat}</div>}
+                {c.statLabel && <div className="case__stat-label">{c.statLabel}</div>}
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Certifications Section */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 font-serif">Certifications</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+      {/* ═══ CLIENTS ═══ */}
+      <section className="section">
+        <div style={CONTAINER}>
+          <div className="section__header reveal">
+            <div className="section__number">04</div>
             <div>
-              <h3 className="text-xl font-bold mb-4 text-primary font-serif">GitHub</h3>
-              <ul className="space-y-2 text-base-content/80 text-sm">
-                <li>• <a href="https://www.credly.com/badges/02e9c449-9385-4c95-9cfa-e72765f0d4de" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">GitHub Administration</a></li>
-                <li>• <a href="https://www.credly.com/badges/b4a9987d-3a31-4cf3-8ee9-53607a4ef572" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">GitHub Actions</a></li>
-                <li>• <a href="https://www.credly.com/badges/74bdfd55-a572-46a9-9c00-5d4158385ca9" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">GitHub Advanced Security</a></li>
-                <li>• <a href="https://www.credly.com/badges/2cf756b5-013f-4336-adda-1af6ce3c11c8/public_url" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">GitHub Foundations</a></li>
+              <div className="section__subtitle">Notable Clients</div>
+              <h2 className="display-lg">Who I&rsquo;ve<br />Worked With</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 reveal" style={{ gap: 0 }}>
+            {CLIENTS.map((c) => (
+              <div key={c} className="client">{c}</div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ TIMELINE ═══ */}
+      <section className="section section--black" id="timeline">
+        <div style={CONTAINER}>
+          <div className="section__header reveal">
+            <div className="section__number">05</div>
+            <div>
+              <div className="section__subtitle">Career Arc</div>
+              <h2 className="display-lg">Early to<br />Every Wave</h2>
+            </div>
+          </div>
+          <div className="reveal">
+            {TIMELINE.map((t) => (
+              <div key={t.date} className="timeline__item">
+                <div className="timeline__date">
+                  <div className="timeline__date-text">{t.date}</div>
+                </div>
+                <div className="timeline__line">
+                  <div className="timeline__dot" />
+                </div>
+                <div className="timeline__content">
+                  <h4 className="timeline__title">{t.title}</h4>
+                  <p className="timeline__desc">{t.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ WRITING & PROJECTS ═══ */}
+      <section className="section" id="projects">
+        <div style={CONTAINER}>
+          <div className="section__header reveal">
+            <div className="section__number">06</div>
+            <div>
+              <div className="section__subtitle">Writing &amp; Projects</div>
+              <h2 className="display-lg">Published<br />Work</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 reveal" style={{ gap: 0 }}>
+            {[
+              { label: 'Book — Forthcoming', title: 'Spec Driven Development', desc: 'AI-native software engineering methodology where specifications become the primary artifact and code becomes a generated side effect. The book that documents the shift.', url: 'https://sddbook.com', urlLabel: 'sddbook.com' },
+              { label: 'Book — Published', title: 'AI Immigrants', desc: '70,000 words on AI governance, the EU AI Act, and the societal dynamics of automation. The governance thinking enterprises need before letting AI into production.', url: 'https://aiimmigrants.com', urlLabel: 'aiimmigrants.com' },
+              { label: 'Non-Profit', title: 'Distributed Equity', desc: 'Ensuring the benefits of AI are distributed equitably across society. Research, advocacy, and community building.', url: 'https://distributedequity.org', urlLabel: 'distributedequity.org' },
+            ].map((p) => (
+              <div key={p.title} className="project">
+                <div className="project__label">{p.label}</div>
+                <h3 className="project__title">{p.title}</h3>
+                <p className="project__desc">{p.desc}</p>
+                <a href={p.url} className="project__link" target="_blank" rel="noopener noreferrer">
+                  {p.urlLabel} <span className="arrow">→</span>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ CERTIFICATIONS ═══ */}
+      <section className="section section--black" id="certs">
+        <div style={CONTAINER}>
+          <div className="section__header reveal">
+            <div className="section__number">07</div>
+            <div>
+              <div className="section__subtitle">Certifications</div>
+              <h2 className="display-lg">Verified<br />Expertise</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 reveal">
+            <div className="cert-group">
+              <h3 className="cert-group__title">GitHub ×4</h3>
+              <ul className="cert-group__list">
+                <li><a href="https://www.credly.com/badges/02e9c449-9385-4c95-9cfa-e72765f0d4de" target="_blank" rel="noopener noreferrer">Administration</a></li>
+                <li><a href="https://www.credly.com/badges/b4a9987d-3a31-4cf3-8ee9-53607a4ef572" target="_blank" rel="noopener noreferrer">Actions</a></li>
+                <li><a href="https://www.credly.com/badges/74bdfd55-a572-46a9-9c00-5d4158385ca9" target="_blank" rel="noopener noreferrer">Advanced Security</a></li>
+                <li><a href="https://www.credly.com/badges/2cf756b5-013f-4336-adda-1af6ce3c11c8/public_url" target="_blank" rel="noopener noreferrer">Foundations</a></li>
               </ul>
             </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-4 text-primary font-serif">GitLab</h3>
-              <ul className="space-y-2 text-base-content/80 text-sm">
-                <li>• <a href="https://www.credly.com/badges/60bf5ece-b4b0-4bec-9c56-fc4d227fc689" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Partner Technical Engineer</a></li>
-                <li>• <a href="https://www.credly.com/badges/73b62343-d671-4477-b412-2d833dc4ea42/public_url" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">DevOps Professional</a></li>
-                <li>• <a href="https://www.credly.com/badges/a64f651f-aa8c-4000-bf6e-9e5d3070dcb6/public_url" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Security Specialist</a></li>
-                <li>• <a href="https://www.credly.com/badges/90be4ffc-c869-4d0c-8143-99fcbe7099d5/public_url" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Services Engineer Professional</a></li>
-                <li>• <a href="https://www.credly.com/badges/5ed58594-5438-45df-b57a-f2f8ef7435eb/public_url" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Migration Services Specialist</a></li>
-                <li>• <a href="https://www.credly.com/badges/9340463c-a5d4-418e-9342-c18b145344e4/public_url" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">CI/CD Associate</a></li>
+            <div className="cert-group">
+              <h3 className="cert-group__title">GitLab ×6</h3>
+              <ul className="cert-group__list">
+                <li><a href="https://www.credly.com/badges/60bf5ece-b4b0-4bec-9c56-fc4d227fc689" target="_blank" rel="noopener noreferrer">Partner Technical Engineer</a></li>
+                <li><a href="https://www.credly.com/badges/73b62343-d671-4477-b412-2d833dc4ea42/public_url" target="_blank" rel="noopener noreferrer">DevOps Professional</a></li>
+                <li><a href="https://www.credly.com/badges/a64f651f-aa8c-4000-bf6e-9e5d3070dcb6/public_url" target="_blank" rel="noopener noreferrer">Security Specialist</a></li>
+                <li><a href="https://www.credly.com/badges/90be4ffc-c869-4d0c-8143-99fcbe7099d5/public_url" target="_blank" rel="noopener noreferrer">Services Engineer Professional</a></li>
+                <li><a href="https://www.credly.com/badges/5ed58594-5438-45df-b57a-f2f8ef7435eb/public_url" target="_blank" rel="noopener noreferrer">Migration Services Specialist</a></li>
+                <li><a href="https://www.credly.com/badges/9340463c-a5d4-418e-9342-c18b145344e4/public_url" target="_blank" rel="noopener noreferrer">CI/CD Associate</a></li>
               </ul>
             </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-4 text-primary font-serif">LaunchDarkly</h3>
-              <ul className="space-y-2 text-base-content/80 text-sm">
-                <li>• <a href="https://verify.skilljar.com/c/b7tc7cjjjdv9" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Platinum Developer</a></li>
-                <li>• <a href="https://verify.skilljar.com/c/xvvkdsp227on" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Gold Developer</a></li>
-                <li>• <a href="https://verify.skilljar.com/c/cw4ix2japf23" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Silver Developer</a></li>
-                <li>• <a href="https://verify.skilljar.com/c/8m35pkrme9s8" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Bronze Developer</a></li>
+            <div className="cert-group">
+              <h3 className="cert-group__title">LaunchDarkly ×4</h3>
+              <ul className="cert-group__list">
+                <li><a href="https://verify.skilljar.com/c/b7tc7cjjjdv9" target="_blank" rel="noopener noreferrer">Platinum Developer</a></li>
+                <li><a href="https://verify.skilljar.com/c/xvvkdsp227on" target="_blank" rel="noopener noreferrer">Gold Developer</a></li>
+                <li><a href="https://verify.skilljar.com/c/cw4ix2japf23" target="_blank" rel="noopener noreferrer">Silver Developer</a></li>
+                <li><a href="https://verify.skilljar.com/c/8m35pkrme9s8" target="_blank" rel="noopener noreferrer">Bronze Developer</a></li>
               </ul>
+            </div>
+            <div className="cert-group">
+              <h3 className="cert-group__title">Education</h3>
+              <ul className="cert-group__list">
+                <li>Hons, Digital Media — Birmingham City University</li>
+                <li>AI and Ethics — Trinity College Dublin</li>
+                <li>MA Applied Linguistics — University of Pannonia <em style={{ color: 'var(--accent)', fontStyle: 'normal', fontSize: '0.68rem', fontWeight: 700 }}>(PLANNED)</em></li>
+              </ul>
+            </div>
+          </div>
+          <div className="award-banner reveal">
+            <div className="award-banner__year">2014</div>
+            <div className="award-banner__text">
+              <strong>UK Agile Awards — Best Use of Agile in the Private Sector</strong>
+              National recognition for enterprise agile delivery excellence.
             </div>
           </div>
         </div>
       </section>
 
-      {/* Education & Awards Section */}
-      <section className="bg-base-200/30 py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12">
+      {/* ═══ CONTACT ═══ */}
+      <section className="section section--dark" id="contact">
+        <div style={CONTAINER}>
+          <div className="section__header reveal">
+            <div className="section__number">08</div>
             <div>
-              <h2 className="text-3xl font-bold mb-6 font-serif">Education</h2>
-              <ul className="space-y-3 text-base-content/80">
-                <li>
-                  <strong>Hons, Digital Media</strong><br />
-                  Birmingham City University
-                </li>
-                <li>
-                  <strong>AI and Ethics</strong><br />
-                  Trinity College Dublin (HCI CPD)
-                </li>
-                <li>
-                  <strong>MA in Applied Linguistics</strong> (Planned)<br />
-                  University of Pannonia, Hungary
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-bold mb-6 font-serif">Notable Achievement</h2>
-              <ul className="space-y-3 text-base-content/80">
-                <li>
-                  Awarded 'Best Use of Agile in the Private Sector' at the UK Agile Awards (2014)
-                </li>
-              </ul>
+              <div className="section__subtitle">Contact</div>
+              <h2 className="display-lg">Let&rsquo;s Work<br />Together</h2>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="bg-gradient-to-br from-primary/10 to-secondary/10 py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-serif">Let's Work Together</h2>
-          <p className="text-lg text-base-content/80 mb-8 max-w-2xl mx-auto">
-            Available for DevOps and Platform Engineering contracts. Remote preferred, based in Budapest and Dublin. SDD training and AI governance advisory available through Kevin Ryan & Associates.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-
-            <a href="mailto:kevin@kevinryan.io"
-              className="btn btn-primary btn-lg"
-            >
-              Email Me
-            </a>
-
-            <a href="tel:+447402083261"
-              className="btn btn-outline btn-lg"
-            >
-              +44 7402 083261
-            </a>
+          <div className="grid grid-cols-1 md:grid-cols-2 reveal" style={{ gap: 'calc(2rem * 3)', alignItems: 'end' }}>
+            <div>
+              <p style={{ fontSize: '1.1rem', lineHeight: 1.7, color: 'var(--grey-400)', marginTop: '1.5rem', maxWidth: '45ch' }}>
+                Available for DevOps and Platform Engineering contracts. Remote preferred, based in Budapest and Dublin. SDD training and AI governance advisory available through Kevin Ryan &amp; Associates.
+              </p>
+            </div>
+            <div className="md:text-right">
+              <div style={{ marginBottom: '2rem' }}>
+                <div style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--grey-600)', marginBottom: '0.5rem' }}>Email</div>
+                <a href="mailto:kevin@kevinryan.io" style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--white)', transition: 'color 0.2s ease' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--white)' }}
+                >kevin@kevinryan.io</a>
+              </div>
+              <div style={{ marginBottom: '2rem' }}>
+                <div style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--grey-600)', marginBottom: '0.5rem' }}>Phone</div>
+                <a href="tel:+447402083261" style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--white)', transition: 'color 0.2s ease' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--white)' }}
+                >+44 7402 083261</a>
+              </div>
+              <div className="flex gap-4 md:justify-end" style={{ marginTop: '2rem' }}>
+                {[
+                  { label: 'GitHub', href: 'https://github.com/devopskev' },
+                  { label: 'LinkedIn', href: 'https://linkedin.com/in/devopskev' },
+                ].map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.14em',
+                      textTransform: 'uppercase', color: 'var(--grey-400)',
+                      padding: '0.6rem 1.4rem', border: '1px solid var(--grey-600)',
+                      transition: 'all 0.25s ease',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)' }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--grey-600)'; e.currentTarget.style.color = 'var(--grey-400)' }}
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <SiteFooter />
+
+      {/* ═══ RESPONSIVE HERO ═══ */}
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .hero-image-col { order: -1; }
+          .hero-image-frame { aspect-ratio: 1 / 1 !important; }
+          section:first-of-type > div > div {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </main>
   )
 }
