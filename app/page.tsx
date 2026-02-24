@@ -52,10 +52,26 @@ const CASES = [
 ]
 
 const CLIENTS = [
-  "Accenture", "Barclays", "BBC Worldwide", "CBRE", "CERN",
-  "Deloitte Digital", "Elsevier", "EY", "Financial Times", "Heathrow Airport",
-  "HelloFresh", "Lloyds Bank", "Maersk", "McKinsey & Co", "NatWest",
-  "Nestlé", "Pearson", "Sky", "Vodafone", "Volkswagen",
+  { name: "Accenture", url: "https://www.accenture.com" },
+  { name: "Barclays", url: "https://www.barclays.co.uk" },
+  { name: "BBC Worldwide", url: "https://www.bbcstudios.com" },
+  { name: "CBRE", url: "https://www.cbre.com" },
+  { name: "CERN", url: "https://home.cern" },
+  { name: "Deloitte Digital", url: "https://www.deloittedigital.com" },
+  { name: "Elsevier", url: "https://www.elsevier.com" },
+  { name: "EY", url: "https://www.ey.com" },
+  { name: "Financial Times", url: "https://www.ft.com" },
+  { name: "Heathrow Airport", url: "https://www.heathrow.com" },
+  { name: "HelloFresh", url: "https://www.hellofresh.com" },
+  { name: "Lloyds Bank", url: "https://www.lloydsbank.com" },
+  { name: "Maersk", url: "https://www.maersk.com" },
+  { name: "McKinsey & Co", url: "https://www.mckinsey.com" },
+  { name: "NatWest", url: "https://www.natwest.com" },
+  { name: "Nestlé", url: "https://www.nestle.com" },
+  { name: "Pearson", url: "https://www.pearson.com" },
+  { name: "Sky", url: "https://www.sky.com" },
+  { name: "Vodafone", url: "https://www.vodafone.com" },
+  { name: "Volkswagen", url: "https://www.volkswagen.com" },
 ]
 
 const TIMELINE = [
@@ -232,7 +248,7 @@ export default function Page() {
                 {[
                   { num: '30', label: 'Years in technology' },
                   { num: '13', label: 'Certifications' },
-                  { num: '40+', label: 'Enterprise clients' },
+                  { num: '20+', label: 'Enterprise clients' },
                   { num: '£10m+', label: 'Programme budgets' },
                 ].map((s) => (
                   <div key={s.label} style={{ borderTop: '3px solid var(--black)', paddingTop: '1rem' }}>
@@ -304,7 +320,7 @@ export default function Page() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 reveal" style={{ gap: 0 }}>
             {CLIENTS.map((c) => (
-              <div key={c} className="client">{c}</div>
+              <a key={c.name} href={c.url} target="_blank" rel="noopener noreferrer" className="client">{c.name}</a>
             ))}
           </div>
         </div>
