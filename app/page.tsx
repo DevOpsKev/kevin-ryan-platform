@@ -48,7 +48,7 @@ const CASES = [
   { tag: "Architecture Review", client: "CERN", url: "https://home.cern", desc: "Kubernetes and CI/CD architectural review for the Large Hadron Collider control systems. Delivered recommendations that shipped to production infrastructure." },
   { tag: "AI Adoption", client: "NatWest", url: "https://www.natwest.com", desc: "Enterprise AI-assisted development pilot. Assessment framework across Java, Python, and Node.js. Board-level AI adoption recommendations in a tier-one financial institution." },
   { tag: "Platform Rebuild", client: "Financial Times", url: "https://www.ft.com", desc: "Platform rebuild during the period leading to Nikkei's £844M acquisition. Modernised how one of the world's leading publications delivers content during rapid digital transformation." },
-  { tag: "Digital Portfolio", client: "BBC Worldwide", url: "https://www.bbcstudios.com", desc: "£10m+ digital portfolio including BBC Good Food, Top Gear, and Global iPlayer. Agile programme management across product, engineering, editorial, and commercial teams." },
+  { tag: "Digital Portfolio", client: "BBC Worldwide", url: "https://www.bbc.com", desc: "£10m+ digital portfolio including BBC Good Food, Top Gear, and Global iPlayer. Agile programme management across product, engineering, editorial, and commercial teams." },
 ]
 
 const CLIENTS = [
