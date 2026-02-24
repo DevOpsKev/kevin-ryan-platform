@@ -232,7 +232,7 @@ export default function Page() {
                 {[
                   { num: '30', label: 'Years in technology' },
                   { num: '13', label: 'Certifications' },
-                  { num: '20+', label: 'Enterprise clients' },
+                  { num: '40+', label: 'Enterprise clients' },
                   { num: '£10m+', label: 'Programme budgets' },
                 ].map((s) => (
                   <div key={s.label} style={{ borderTop: '3px solid var(--black)', paddingTop: '1rem' }}>
