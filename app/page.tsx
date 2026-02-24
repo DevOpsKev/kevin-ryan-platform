@@ -249,7 +249,7 @@ export default function Page() {
               <div className="grid grid-cols-2 gap-8" style={{ marginTop: '3rem' }}>
                 {[
                   { num: '30', label: 'Years in technology' },
-                  { num: '13', label: 'Certifications' },
+                  { num: '14', label: 'Certifications' },
                   { num: '40+', label: 'Enterprise clients' },
                   { num: '£20m+', label: 'Programme budgets' },
                 ].map((s) => (
