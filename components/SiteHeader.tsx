@@ -37,13 +37,12 @@ export default function SiteHeader(): React.JSX.Element {
         <a
           href="#"
           style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '1.5rem',
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase' as const,
+            fontFamily: "'UnifrakturMaguntia', cursive",
+            fontSize: '1.8rem',
+            lineHeight: 1,
           }}
         >
-          Kevin<span style={{ color: 'var(--accent-dim)' }}>—</span>Ryan
+          Kevin<span style={{ color: 'var(--accent-dim)', marginLeft: '0.15em' }}>Ryan</span>
         </a>
 
         {/* Desktop nav */}
