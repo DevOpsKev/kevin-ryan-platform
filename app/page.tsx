@@ -119,7 +119,7 @@ export default function Page() {
                   </span>
                 ))}
               </div>
-              <h1 style={{ fontFamily: "'UnifrakturMaguntia', cursive", fontSize: 'clamp(7rem, 20vw, 12rem)', lineHeight: 0.9, marginBottom: '2rem' }}>
+              <h1 style={{ fontFamily: "'UnifrakturMaguntia', cursive", fontSize: 'clamp(4.5rem, 13vw, 12rem)', lineHeight: 0.9, marginBottom: '2rem' }}>
                 Kevin<br /><span style={{ color: 'var(--accent-dim)' }}>Ryan</span>
               </h1>
               <p style={{
