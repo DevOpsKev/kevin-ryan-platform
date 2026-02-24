@@ -2,19 +2,39 @@
 
 import React, { useState } from 'react'
 
-const NAV_ITEMS = [
+interface NavItem {
+  label: string
+  href: string
+  external?: boolean
+}
+
+const NAV_ITEMS: NavItem[] = [
   { label: 'About', href: '#about' },
   { label: 'Capabilities', href: '#capabilities' },
   { label: 'Delivery', href: '#delivery' },
   { label: 'Timeline', href: '#timeline' },
   { label: 'Writing', href: '#projects' },
   { label: 'Contact', href: '#contact' },
+  { label: 'CV', href: '/kevin-ryan-cv.pdf', external: true },
 ]
+
+const linkStyle = {
+  fontSize: '0.72rem',
+  fontWeight: 700,
+  letterSpacing: '0.14em',
+  textTransform: 'uppercase' as const,
+}
+
+const navLinkStyle = {
+  ...linkStyle,
+  position: 'relative' as const,
+  paddingBottom: '2px',
+}
 
 export default function SiteHeader(): React.JSX.Element {
   const [open, setOpen] = useState(false)
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     const target = document.querySelector(href)
     if (target) {
@@ -48,22 +68,27 @@ export default function SiteHeader(): React.JSX.Element {
         {/* Desktop nav */}
         <ul className="hidden md:flex items-center" style={{ gap: '2.5rem', listStyle: 'none' }}>
           {NAV_ITEMS.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                onClick={(e) => handleClick(e, item.href)}
-                className="nav-link"
-                style={{
-                  fontSize: '0.72rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.14em',
-                  textTransform: 'uppercase' as const,
-                  position: 'relative' as const,
-                  paddingBottom: '2px',
-                }}
-              >
-                {item.label}
-              </a>
+            <li key={item.label}>
+              {item.external ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-link"
+                  style={navLinkStyle}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <a
+                  href={item.href}
+                  onClick={(e) => scrollTo(e, item.href)}
+                  className="nav-link"
+                  style={navLinkStyle}
+                >
+                  {item.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -94,19 +119,25 @@ export default function SiteHeader(): React.JSX.Element {
           }}
         >
           {NAV_ITEMS.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                onClick={(e) => handleClick(e, item.href)}
-                style={{
-                  fontSize: '0.72rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.14em',
-                  textTransform: 'uppercase' as const,
-                }}
-              >
-                {item.label}
-              </a>
+            <li key={item.label}>
+              {item.external ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={linkStyle}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <a
+                  href={item.href}
+                  onClick={(e) => scrollTo(e, item.href)}
+                  style={linkStyle}
+                >
+                  {item.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
