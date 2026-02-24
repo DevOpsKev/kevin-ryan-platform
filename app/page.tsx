@@ -249,7 +249,7 @@ export default function Page() {
                   { num: '30', label: 'Years in technology' },
                   { num: '13', label: 'Certifications' },
                   { num: '40+', label: 'Enterprise clients' },
-                  { num: '£10m+', label: 'Programme budgets' },
+                  { num: '£20m+', label: 'Programme budgets' },
                 ].map((s) => (
                   <div key={s.label} style={{ borderTop: '3px solid var(--black)', paddingTop: '1rem' }}>
                     <div style={{ fontFamily: 'var(--font-display)', fontSize: '3.8rem', lineHeight: 1, marginBottom: '0.25rem' }}>{s.num}</div>
