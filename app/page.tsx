@@ -43,35 +43,35 @@ const CAPABILITIES = [
 ]
 
 const CASES = [
-  { tag: "Global Platform", client: "Nestlé", desc: "Built a global DevOps platform from zero. Distributed team across India, Spain, and the UK serving thousands of developers. Migrated Jenkins into AKS, Terraform IaC governance. Transferred capability for long-term sustainability." },
-  { tag: "CI/CD Transformation", client: "Dematic", desc: "First through the door. CI/CD transformation for a warehouse automation leader. GitLab and Azure-based platform. Reusable pipeline templates, Helm-based Kubernetes deployments.", stat: "98%", statLabel: "Reduction in time-to-solution" },
-  { tag: "Architecture Review", client: "CERN", desc: "Kubernetes and CI/CD architectural review for the Large Hadron Collider control systems. Delivered recommendations that shipped to production infrastructure." },
-  { tag: "AI Adoption", client: "NatWest", desc: "Enterprise AI-assisted development pilot. Assessment framework across Java, Python, and Node.js. Board-level AI adoption recommendations in a tier-one financial institution." },
-  { tag: "Platform Rebuild", client: "Financial Times", desc: "Platform rebuild during the period leading to Nikkei's £844M acquisition. Modernised how one of the world's leading publications delivers content during rapid digital transformation." },
-  { tag: "Digital Portfolio", client: "BBC Worldwide", desc: "£10m+ digital portfolio including BBC Good Food, Top Gear, and Global iPlayer. Agile programme management across product, engineering, editorial, and commercial teams." },
+  { tag: "Global Platform", client: "Nestlé", url: "https://www.nestle.com", desc: "Built a global DevOps platform from zero. Distributed team across India, Spain, and the UK serving thousands of developers. Migrated Jenkins into AKS, Terraform IaC governance. Transferred capability for long-term sustainability." },
+  { tag: "CI/CD Transformation", client: "Dematic", url: "https://www.dematic.com", desc: "First through the door. CI/CD transformation for a warehouse automation leader. GitLab and Azure-based platform. Reusable pipeline templates, Helm-based Kubernetes deployments.", stat: "98%", statLabel: "Reduction in time-to-solution" },
+  { tag: "Architecture Review", client: "CERN", url: "https://home.cern", desc: "Kubernetes and CI/CD architectural review for the Large Hadron Collider control systems. Delivered recommendations that shipped to production infrastructure." },
+  { tag: "AI Adoption", client: "NatWest", url: "https://www.natwest.com", desc: "Enterprise AI-assisted development pilot. Assessment framework across Java, Python, and Node.js. Board-level AI adoption recommendations in a tier-one financial institution." },
+  { tag: "Platform Rebuild", client: "Financial Times", url: "https://www.ft.com", desc: "Platform rebuild during the period leading to Nikkei's £844M acquisition. Modernised how one of the world's leading publications delivers content during rapid digital transformation." },
+  { tag: "Digital Portfolio", client: "BBC Worldwide", url: "https://www.bbcstudios.com", desc: "£10m+ digital portfolio including BBC Good Food, Top Gear, and Global iPlayer. Agile programme management across product, engineering, editorial, and commercial teams." },
 ]
 
 const CLIENTS = [
   { name: "Accenture", url: "https://www.accenture.com" },
   { name: "Barclays", url: "https://www.barclays.co.uk" },
-  { name: "BBC Worldwide", url: "https://www.bbcstudios.com" },
   { name: "CBRE", url: "https://www.cbre.com" },
-  { name: "CERN", url: "https://home.cern" },
   { name: "Deloitte Digital", url: "https://www.deloittedigital.com" },
   { name: "Elsevier", url: "https://www.elsevier.com" },
   { name: "EY", url: "https://www.ey.com" },
-  { name: "Financial Times", url: "https://www.ft.com" },
   { name: "Heathrow Airport", url: "https://www.heathrow.com" },
   { name: "HelloFresh", url: "https://www.hellofresh.com" },
+  { name: "Informa", url: "https://www.informa.com" },
+  { name: "Lantum", url: "https://www.lantum.com" },
+  { name: "Lely", url: "https://www.lely.com" },
   { name: "Lloyds Bank", url: "https://www.lloydsbank.com" },
   { name: "Maersk", url: "https://www.maersk.com" },
   { name: "McKinsey & Co", url: "https://www.mckinsey.com" },
-  { name: "NatWest", url: "https://www.natwest.com" },
-  { name: "Nestlé", url: "https://www.nestle.com" },
   { name: "Pearson", url: "https://www.pearson.com" },
   { name: "Sky", url: "https://www.sky.com" },
+  { name: "TU Delft", url: "https://www.tudelft.nl" },
   { name: "Vodafone", url: "https://www.vodafone.com" },
   { name: "Volkswagen", url: "https://www.volkswagen.com" },
+  { name: "WorldRemit", url: "https://www.worldremit.com" },
 ]
 
 const TIMELINE = [
@@ -192,6 +192,7 @@ export default function Page() {
                   color: 'var(--accent)', fontSize: '0.65rem', fontWeight: 700,
                   letterSpacing: '0.18em', textTransform: 'uppercase',
                   display: 'flex', justifyContent: 'space-between',
+                  flexWrap: 'wrap', gap: '0.5rem',
                 }}>
                   <span>Budapest / Dublin</span>
                   <span>&nbsp;</span>
@@ -297,13 +298,13 @@ export default function Page() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 reveal" style={{ gap: 0 }}>
             {CASES.map((c) => (
-              <div key={c.client} className="case">
+              <a key={c.client} href={c.url} target="_blank" rel="noopener noreferrer" className="case" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className="case__tag">{c.tag}</div>
                 <h3 className="case__client">{c.client}</h3>
                 <p className="case__desc">{c.desc}</p>
                 {c.stat && <div className="case__stat">{c.stat}</div>}
                 {c.statLabel && <div className="case__stat-label">{c.statLabel}</div>}
-              </div>
+              </a>
             ))}
           </div>
         </div>
