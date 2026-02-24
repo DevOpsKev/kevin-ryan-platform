@@ -194,6 +194,7 @@ export default function Page() {
                   display: 'flex', justifyContent: 'space-between',
                 }}>
                   <span>Budapest / Dublin</span>
+                  <span>&nbsp;</span>
                   <span>Available for contract</span>
                 </div>
               </div>
