@@ -185,7 +185,7 @@ The site targets modern browsers with ES2017+ support.
 
 ## Contact
 
-- Email: kevin@reporacers.com
+- Email: kevin@kevinryan.io
 - Phone: +44 7402 083261
 - GitHub: [@devopskev](https://github.com/devopskev)
 - LinkedIn: [/in/devopskev](https://linkedin.com/in/devopskev)

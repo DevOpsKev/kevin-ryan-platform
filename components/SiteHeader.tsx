@@ -13,6 +13,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Capabilities', href: '#capabilities' },
   { label: 'Delivery', href: '#delivery' },
   { label: 'Timeline', href: '#timeline' },
+  { label: 'SpecMCP', href: '#specmcp' },
   { label: 'Writing', href: '#projects' },
   { label: 'Contact', href: '#contact' },
   { label: 'CV', href: '/kevin-ryan-cv.pdf', external: true },
