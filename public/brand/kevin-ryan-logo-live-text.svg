@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 320" width="360" height="320">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;800;900&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- KEVIN - Black, uppercase, extra bold -->
+  <text
+    x="10" y="110"
+    font-family="'Work Sans', sans-serif"
+    font-weight="900"
+    font-size="108"
+    fill="#000000"
+    textLength="340"
+    lengthAdjust="spacing"
+  >KEVIN</text>
+
+  <!-- RYAN - Green, uppercase, extra bold, spaced to match -->
+  <text
+    x="10" y="215"
+    font-family="'Work Sans', sans-serif"
+    font-weight="900"
+    font-size="108"
+    fill="#16A34A"
+    textLength="340"
+    lengthAdjust="spacing"
+  >RYAN</text>
+
+  <!-- & associates - Black, lowercase, light weight, full width -->
+  <text
+    x="10" y="268"
+    font-family="'Work Sans', sans-serif"
+    font-weight="300"
+    font-size="36"
+    fill="#000000"
+    textLength="340"
+    lengthAdjust="spacing"
+  >&amp; associates</text>
+
+</svg>
