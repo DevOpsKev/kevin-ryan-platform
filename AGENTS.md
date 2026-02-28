@@ -7,6 +7,7 @@
 This is a static Next.js 16 portfolio site for Kevin Ryan (DevOps & AI Governance Consultant).
 
 **Stack:**
+
 - Next.js 16 (App Router)
 - React 19
 - TypeScript (strict mode)
@@ -34,7 +35,7 @@ pnpm lint       # Run ESLint
 
 ## Directory Structure
 
-```
+```text
 kevinryan-io/
 ├── app/                    # Next.js App Router pages
 ├── components/             # React components (one per file)
@@ -67,6 +68,10 @@ kevinryan-io/
 If a request conflicts with project constraints or specifications, flag the conflict rather than silently deviating. Ask for clarification.
 
 ## Pre-Commit Checklist
+
+> **Note:** Husky + lint-staged enforces most of these checks automatically at commit time
+> (ESLint, TypeScript type checking, markdownlint). The pre-push hook runs `pnpm build`.
+> This checklist remains as a manual reference for anything the hooks don't catch.
 
 Before suggesting code is complete:
 

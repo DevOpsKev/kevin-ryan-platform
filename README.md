@@ -18,8 +18,10 @@ Before you begin, ensure you have the following installed:
 
 - [Node.js](https://nodejs.org) (v20 or higher)
 - [pnpm](https://pnpm.io) (recommended package manager)
-- [pre-commit](https://pre-commit.com) (for git hooks)
 - [Tessl CLI](https://docs.tessl.io) (for agent skills management)
+- [yamllint](https://github.com/adrienverge/yamllint) (for YAML linting in git hooks)
+- [hadolint](https://github.com/hadolint/hadolint) (for Dockerfile linting in git hooks)
+- [tflint](https://github.com/terraform-linters/tflint) (for Terraform linting in git hooks — needed once infra/ directory is added)
 
 ### Installing pnpm
 
@@ -31,19 +33,6 @@ npm install -g pnpm
 
 ```bash
 npm install -g @tessl/cli
-```
-
-### Installing pre-commit
-
-```bash
-# macOS
-brew install pre-commit
-
-# Linux
-pip install pre-commit
-
-# Windows
-pip install pre-commit
 ```
 
 ## Getting Started
@@ -78,17 +67,13 @@ To verify installed tiles:
 tessl list
 ```
 
-### 4. Set up pre-commit hooks
+### 4. Git hooks (automatic)
 
-```bash
-pre-commit install
-```
+Git hooks are installed automatically by Husky when you run `pnpm install`. No additional setup required.
 
-This will configure git hooks to automatically run code quality checks before each commit:
-- Trailing whitespace removal
-- End-of-file fixing
-- YAML validation
-- Large file detection
+The pre-commit hook runs lint-staged (ESLint, TypeScript type checking, markdownlint, yamllint,
+hadolint, terraform fmt, tflint) on staged files only. The pre-push hook runs `pnpm build` to
+catch build failures before they reach CI.
 
 ### 5. Run the development server
 
@@ -122,7 +107,8 @@ Multi-stage build: Node.js builds the static export, then nginx serves the `out/
 
 ## Tessl Skills
 
-This project uses [Tessl](https://tessl.io) to manage context and skills for AI coding agents. Skills provide structured, versioned guidance so agents produce code that follows project conventions, framework best practices, and avoids common pitfalls.
+This project uses [Tessl](https://tessl.io) to manage context and skills for AI coding agents. Skills provide structured, versioned
+guidance so agents produce code that follows project conventions, framework best practices, and avoids common pitfalls.
 
 ### Installed Tiles
 
@@ -178,7 +164,7 @@ tessl install github:owner/repo --skill skill-name
 
 ## Project Structure
 
-```
+```text
 kevinryan-io/
 ├── app/                    # Next.js App Router
 │   ├── page.tsx           # Home page
@@ -193,10 +179,14 @@ kevinryan-io/
 │   └── linkedin_black_logo.png
 ├── .tessl/                # Tessl agent context (managed by Tessl CLI)
 │   └── tiles/             # Installed skills and documentation
+├── .husky/                # Git hooks (managed by Husky)
+│   ├── pre-commit         # Runs lint-staged on staged files
+│   └── pre-push           # Runs pnpm build
 ├── .github/
 │   └── workflows/
 │       └── nextjs.yml     # GitHub Pages deployment
-├── .pre-commit-config.yaml # Pre-commit hook configuration
+├── .markdownlint.json     # markdownlint configuration
+├── .yamllint.yml          # yamllint configuration
 ├── tessl.json             # Tessl tile manifest
 ├── next.config.ts         # Next.js configuration
 ├── tsconfig.json          # TypeScript configuration
@@ -220,6 +210,7 @@ The static files will be generated in the `out/` directory.
 The site is automatically deployed to GitHub Pages via GitHub Actions when changes are pushed to the `main` branch.
 
 The deployment workflow:
+
 1. Detects the package manager automatically
 2. Installs dependencies
 3. Builds the Next.js static site
@@ -231,15 +222,20 @@ Configuration is in `.github/workflows/nextjs.yml`.
 
 ### Code Quality
 
-Pre-commit hooks ensure code quality by:
-- Removing trailing whitespace
-- Fixing file endings
-- Validating YAML syntax
-- Preventing large files from being committed
+Husky + lint-staged enforce code quality automatically at commit time:
+
+- **TypeScript** (`*.ts`, `*.tsx`): ESLint with autofix + `tsc-files` type checking on staged files
+- **Markdown** (`*.md`): markdownlint for heading levels, line length, and structure
+- **YAML** (`*.yaml`, `*.yml`): yamllint for syntax and style
+- **Dockerfiles** (`Dockerfile*`): hadolint for best practices
+- **Terraform** (`*.tf`, `*.tfvars`): `terraform fmt` + tflint
+
+The pre-push hook runs `pnpm build` to catch build failures before they reach CI.
 
 ### Styling
 
 The project uses:
+
 - Tailwind CSS for utility classes
 - DaisyUI for pre-built components
 - Custom color scheme with primary/secondary gradients
@@ -248,6 +244,7 @@ The project uses:
 ### TypeScript
 
 Strict TypeScript is enabled with:
+
 - Type checking on build
 - Path aliases (`@/*` maps to project root)
 - React JSX compilation
@@ -257,19 +254,20 @@ Strict TypeScript is enabled with:
 ### Next.js Config
 
 The site uses static export mode (`output: 'export'`) for GitHub Pages deployment with:
+
 - Unoptimized images (for static hosting)
 - Trailing slashes enabled
 - React strict mode
 
-### Pre-commit Hooks
+### Git Hooks
 
-Configured hooks from `pre-commit-hooks`:
-- `trailing-whitespace` - Trims trailing whitespace
-- `end-of-file-fixer` - Ensures files end with newline
-- `check-yaml` - Validates YAML files
-- `check-added-large-files` - Prevents large files
+Managed by [Husky](https://typicode.github.io/husky/) + [lint-staged](https://github.com/lint-staged/lint-staged). Hooks are installed automatically via `pnpm install`.
+
+- **pre-commit**: Runs lint-staged on staged files (ESLint, tsc-files, markdownlint, yamllint, hadolint, terraform fmt, tflint)
+- **pre-push**: Runs `pnpm build` to verify the full build passes
 
 To skip hooks temporarily (not recommended):
+
 ```bash
 git commit --no-verify
 ```
