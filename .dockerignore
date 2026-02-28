@@ -1,0 +1,11 @@
+node_modules
+.git
+.github
+out
+.next
+.tessl
+*.md
+!README.md
+.env*
+.vscode
+.idea
