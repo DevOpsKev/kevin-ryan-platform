@@ -125,7 +125,7 @@ GitHub Pages is decommissioned. No fallback, no dual-running. The `.github/workf
 ### Risks
 
 - **Spot eviction with empty Cloudflare cache:** If the VM is evicted and Cloudflare's cache has expired, sites are down until the VM respawns. Mitigation: set aggressive cache TTLs for static assets (24h minimum, `s-maxage=86400`). For truly critical availability, a future ADR could add a secondary VM in a different region or size
-- **Spot capacity unavailable:** Azure may not have spot capacity in the chosen region/size. Mitigation: select a region with good spot availability history (UK South or West Europe); accept pay-as-you-go pricing as a temporary fallback if spot is unavailable
+- **Spot capacity unavailable:** Azure may not have spot capacity in the chosen region/size. Mitigation: select a region with good spot availability history (North Europe or West Europe); accept pay-as-you-go pricing as a temporary fallback if spot is unavailable
 - **K3s upgrade breaks Traefik:** K3s bundles Traefik; a K3s upgrade could introduce a breaking Traefik version. Mitigation: pin K3s channel to stable, test upgrades in a local k3d cluster before applying to production
 
 ## Agent Decisions
