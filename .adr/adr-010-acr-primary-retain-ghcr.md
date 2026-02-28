@@ -129,11 +129,12 @@ ADR-004 defined the image tagging strategy (git short SHA + `:latest`) and the p
 
 ## Agent Decisions
 
-*To be completed after Claude Code implementation.*
-
 | Decision | Rationale | Acceptable |
 |----------|-----------|------------|
-| *Pending* | *Pending* | *Pending* |
+| Systemd timer refreshes ACR credentials every 2 hours via `az acr login --expose-token` | K3s uses containerd, not Docker. The kubelet credential provider for ACR is not mature on K3s. A systemd timer writing credentials to `/etc/rancher/k3s/registries.yaml` and restarting K3s is the most reliable approach. ACR tokens expire after 3 hours; 2-hour refresh interval ensures continuity | Yes |
+| Username `00000000-0000-0000-0000-000000000000` for ACR token auth in registries.yaml | ACR access tokens use this zero-GUID as the username convention. The actual authentication is in the token (password field) obtained via managed identity | Yes |
+| K3s restart on credential refresh | Required for K3s to pick up updated registries.yaml. Brief restart (~5s) is acceptable for a single-node cluster serving cached static content via Cloudflare | Yes |
+| ACR `admin_enabled = false` | Managed Identity provides pull access. Admin credentials are a security anti-pattern and unnecessary when MI is configured | Yes |
 
 ## References
 
