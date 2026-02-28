@@ -98,6 +98,28 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the site.
 
+## Docker
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) (with Docker Compose)
+
+### Commands
+
+- `pnpm docker:build` — Build the production Docker image locally
+- `pnpm docker:up` — Build and start the container (add `-d` for detached mode)
+- `pnpm docker:down` — Stop and remove the container
+
+### Verify
+
+```bash
+curl http://localhost:8080/healthz   # expect: ok
+```
+
+### Architecture
+
+Multi-stage build: Node.js builds the static export, then nginx serves the `out/` directory. The final image runs as non-root on port 8080 with JSON structured access logs. Image size is under 50MB.
+
 ## Tessl Skills
 
 This project uses [Tessl](https://tessl.io) to manage context and skills for AI coding agents. Skills provide structured, versioned guidance so agents produce code that follows project conventions, framework best practices, and avoids common pitfalls.
