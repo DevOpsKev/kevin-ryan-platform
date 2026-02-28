@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Guidelines — Kevin Ryan &amp; Associates</title>
+<link rel="icon" href="favicon-dark.ico">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Bebas+Neue&family=Work+Sans:wght@300;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #A8E10C;
+  --accent-dim: #92C40A;
+  --black: #0A0A0A;
+  --white: #F5F3EF;
+  --dark: #111111;
+  --dark-mid: #1A1A1A;
+  --grey-100: #ECEAE5;
+  --grey-200: #D4D1CB;
+  --grey-400: #7A7772;
+  --grey-600: #55524E;
+  --grey-800: #2E2D2B;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+
+body {
+  font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: var(--black); }
+
+/* ---- Layout ---- */
+.container { max-width: 1000px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 4rem); }
+section { padding: 5rem 0; }
+section + section { border-top: 1px solid var(--grey-200); }
+
+/* ---- Typography ---- */
+.section-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--black);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-top: 0.15em;
+  margin-bottom: 1.5rem;
+}
+h3 {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--black);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+p, li {
+  font-size: 0.95rem;
+  color: var(--grey-600);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+.label {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey-400);
+  margin-bottom: 0.5rem;
+}
+code {
+  font-size: 0.85em;
+  background: var(--grey-100);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  color: var(--grey-800);
+}
+
+/* ---- Cover ---- */
+.cover {
+  background: var(--black);
+  padding: 6rem 0 5rem;
+  border-bottom: none;
+}
+.cover + section { border-top: none; }
+.cover .container { display: flex; flex-direction: column; gap: 3rem; }
+.cover-logo { width: clamp(180px, 30vw, 280px); }
+.cover-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.cover-meta { color: var(--grey-400); font-size: 0.8rem; margin-top: auto; }
+.cover-meta a { color: var(--accent); text-decoration: none; }
+
+/* ---- Nav ---- */
+.toc { list-style: none; counter-reset: toc; }
+.toc li {
+  counter-increment: toc;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--grey-200);
+}
+.toc li::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: var(--accent);
+  min-width: 2rem;
+}
+.toc a { color: var(--black); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+.toc a:hover { color: var(--accent); }
+
+/* ---- Logo grid ---- */
+.logo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.logo-box {
+  border-radius: 8px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  position: relative;
+}
+.logo-box img { max-width: 200px; width: 100%; }
+.logo-box .box-label {
+  position: absolute;
+  bottom: 0.75rem;
+  font-size: 0.65rem;
+  color: var(--grey-400);
+  text-align: center;
+}
+.logo-box--light { background: #fff; border: 1px solid var(--grey-200); }
+.logo-box--warm { background: var(--white); border: 1px solid var(--grey-200); }
+.logo-box--dark { background: var(--black); }
+.logo-box--dark .box-label { color: var(--grey-600); }
+.logo-box--grey { background: var(--grey-800); }
+.logo-box--grey .box-label { color: var(--grey-600); }
+
+/* ---- Monogram grid ---- */
+.mono-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.mono-box {
+  border-radius: 8px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.mono-box img { width: 60%; }
+.mono-box .box-label { position: absolute; bottom: 0.5rem; font-size: 0.6rem; color: var(--grey-400); }
+.mono-box--dark .box-label, .mono-box--grey .box-label { color: var(--grey-600); }
+
+/* ---- Colour swatches ---- */
+.swatch-row { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0 2rem; }
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 90px;
+}
+.swatch-block {
+  width: 70px;
+  height: 70px;
+  border-radius: 6px;
+}
+.swatch-block--bordered { border: 1px solid var(--grey-200); }
+.swatch-name { font-weight: 700; font-size: 0.72rem; color: var(--black); }
+.swatch-hex { font-size: 0.68rem; color: var(--grey-400); }
+.swatch-rgb { font-size: 0.68rem; color: var(--grey-400); }
+
+/* ---- Usage list ---- */
+.usage-list { list-style: none; margin: 1rem 0; }
+.usage-list li { padding: 0.5rem 0; border-bottom: 1px solid var(--grey-100); font-size: 0.88rem; }
+.usage-list li strong { color: var(--black); }
+
+/* ---- Typography specimens ---- */
+.specimen { margin: 1.5rem 0 2rem; }
+.specimen-display {
+  font-family: 'Bebas Neue', sans-serif;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.specimen-body { font-family: 'Archivo', sans-serif; }
+.specimen-logo { font-family: 'Work Sans', sans-serif; }
+.specimen-note { font-size: 0.8rem; color: var(--grey-400); margin-top: 0.5rem; }
+
+/* ---- Type scale table ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+}
+th {
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey-400);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--grey-200);
+}
+td {
+  padding: 0.5rem 0.75rem;
+  color: var(--grey-600);
+  border-bottom: 1px solid var(--grey-100);
+}
+td:first-child { font-weight: 700; color: var(--black); }
+
+/* ---- Spacing bars ---- */
+.spacing-row {
+  display: grid;
+  grid-template-columns: 140px 120px 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+.spacing-bar { height: 8px; background: var(--accent); border-radius: 2px; }
+.spacing-label { font-weight: 700; font-size: 0.85rem; color: var(--black); }
+.spacing-usage { font-size: 0.82rem; color: var(--grey-400); }
+
+/* ---- Principles ---- */
+.principles { list-style: none; margin: 1rem 0; }
+.principles li {
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  position: relative;
+  font-size: 0.88rem;
+  color: var(--grey-600);
+}
+.principles li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---- Do / Don't ---- */
+.rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 1.5rem; }
+.rules-col h3 { margin-top: 0; }
+.do-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.dont-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: #DC2626;
+  margin-bottom: 1rem;
+}
+.rules-list { list-style: none; }
+.rules-list li {
+  padding: 0.4rem 0 0.4rem 1.5rem;
+  position: relative;
+  font-size: 0.88rem;
+  color: var(--grey-600);
+  line-height: 1.5;
+}
+.rules-list--do li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.rules-list--dont li::before { content: '✗'; position: absolute; left: 0; color: #DC2626; font-weight: 700; }
+
+/* ---- App table ---- */
+.app-table { margin: 1rem 0; }
+.app-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--grey-100);
+  font-size: 0.85rem;
+}
+.app-row strong { color: var(--black); }
+.app-row span { color: var(--grey-400); }
+
+/* ---- Footer ---- */
+.footer {
+  border-top: 1px solid var(--grey-200);
+  padding: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--grey-400);
+}
+.footer a { color: var(--accent); text-decoration: none; }
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .logo-grid { grid-template-columns: 1fr; }
+  .mono-grid { grid-template-columns: repeat(2, 1fr); }
+  .rules-grid { grid-template-columns: 1fr; }
+  .spacing-row { grid-template-columns: 100px 100px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<section class="cover">
+  <div class="container">
+    <img src="kevin-ryan-logo-whitetext.svg" alt="Kevin Ryan &amp; Associates" class="cover-logo">
+    <div class="cover-title">BRAND<br>GUIDELINES</div>
+    <div class="cover-meta">
+      Visual Identity Guidelines<br>
+      Version 2.0 — February 2026<br>
+      <a href="https://kevinryan.io">kevinryan.io</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contents -->
+<section>
+  <div class="container">
+    <div class="section-number">00</div>
+    <div class="section-title">Contents</div>
+    <ol class="toc">
+      <li><a href="#logo">Primary Logo</a></li>
+      <li><a href="#variants">Logo Variants</a></li>
+      <li><a href="#monogram">KR Monogram</a></li>
+      <li><a href="#colour">Colour Palette</a></li>
+      <li><a href="#type">Typography</a></li>
+      <li><a href="#grid">Spacing &amp; Grid</a></li>
+      <li><a href="#rules">Usage Rules</a></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 01 Primary Logo -->
+<section id="logo">
+  <div class="container">
+    <div class="section-number">01</div>
+    <div class="section-title">Primary Logo</div>
+    <p>The primary logo uses <strong>Work Sans Black</strong> for KEVIN and RYAN, stacked to equal visual width using letter-spacing on RYAN. The lighter "& associates" underlines the full width. Work Sans is the only typeface used in the logo — it is distinct from the site body (Archivo) and display (Bebas Neue) fonts.</p>
+
+    <div class="logo-grid">
+      <div class="logo-box logo-box--light">
+        <img src="kevin-ryan-logo-outlined.svg" alt="Logo on light">
+        <span class="box-label">Primary — Light Background</span>
+      </div>
+      <div class="logo-box logo-box--dark">
+        <img src="kevin-ryan-logo-whitetext.svg" alt="Logo on dark">
+        <span class="box-label">Primary — Dark Background</span>
+      </div>
+    </div>
+
+    <h3>Clear Space</h3>
+    <p>Maintain clear space around the logo equal to the cap height of the letter K. No other graphic elements, text, or edge boundaries should intrude into this zone.</p>
+
+    <h3>Minimum Size</h3>
+    <p>The primary logo should not be reproduced smaller than 120px wide for digital or 30mm wide for print. Below this size, use the KR monogram instead.</p>
+  </div>
+</section>
+
+<!-- 02 Logo Variants -->
+<section id="variants">
+  <div class="container">
+    <div class="section-number">02</div>
+    <div class="section-title">Logo Variants</div>
+    <p>The logo is available in four configurations. Use the appropriate variant based on the background context. The lime green of RYAN never changes across any variant.</p>
+
+    <div class="logo-grid">
+      <div class="logo-box logo-box--light">
+        <img src="kevin-ryan-logo-outlined.svg" alt="Standard light">
+        <span class="box-label">Standard — Light Background</span>
+      </div>
+      <div class="logo-box logo-box--dark">
+        <img src="kevin-ryan-logo-whitetext.svg" alt="Reversed dark">
+        <span class="box-label">Reversed — Dark Background</span>
+      </div>
+      <div class="logo-box logo-box--warm">
+        <img src="kevin-ryan-logo-outlined.svg" alt="Standard warm">
+        <span class="box-label">Standard — Warm White (#F5F3EF)</span>
+      </div>
+      <div class="logo-box logo-box--grey">
+        <img src="kevin-ryan-logo-whitetext.svg" alt="Reversed grey">
+        <span class="box-label">Reversed — Dark Grey (#2E2D2B)</span>
+      </div>
+    </div>
+
+    <h3>Colour Rules</h3>
+    <p>KEVIN is always black (#0A0A0A) on light backgrounds, white on dark. RYAN is always lime #A8E10C regardless of background. "& associates" follows KEVIN. The lime must never be altered, lightened, darkened, or replaced.</p>
+
+    <h3>File Formats</h3>
+    <p>SVG (outlined paths) is the master format. PNG rasters are provided at 256, 512, 800, and 1200px. ICO files at 16/32/48px are provided for browser favicons. All files hosted at kevinryan.io/brand/.</p>
+  </div>
+</section>
+
+<!-- 03 KR Monogram -->
+<section id="monogram">
+  <div class="container">
+    <div class="section-number">03</div>
+    <div class="section-title">KR Monogram</div>
+    <p>The KR monogram is the compact form of the identity. Use it for app icons, social media avatars, favicons, and anywhere the full logo would be illegible at small sizes. Same colour rules apply.</p>
+
+    <div class="mono-grid">
+      <div class="mono-box logo-box--dark mono-box--dark" style="border-radius:8px">
+        <img src="kr-icon-dark.svg" alt="Monogram dark">
+        <span class="box-label">Dark</span>
+      </div>
+      <div class="mono-box logo-box--light" style="border-radius:8px">
+        <img src="kr-icon-light.svg" alt="Monogram light">
+        <span class="box-label">Light</span>
+      </div>
+      <div class="mono-box logo-box--warm" style="border-radius:8px">
+        <img src="kr-icon-light.svg" alt="Monogram warm">
+        <span class="box-label">Warm White</span>
+      </div>
+      <div class="mono-box logo-box--grey mono-box--grey" style="border-radius:8px">
+        <img src="kr-icon-dark.svg" alt="Monogram dark grey">
+        <span class="box-label">Dark Grey</span>
+      </div>
+    </div>
+
+    <h3>Sizing</h3>
+    <p>Legible from 16px (favicon) to 512px. Provided: 16/32/48px (favicon), 64/128/192/256/512px (app icons), 400/800px (social media).</p>
+
+    <h3>Application</h3>
+    <div class="app-table">
+      <div class="app-row"><strong>Browser favicon</strong><span>favicon-dark.ico or favicon-light.ico (16/32/48px)</span></div>
+      <div class="app-row"><strong>Social media</strong><span>kr-social-dark-400.png or 800.png</span></div>
+      <div class="app-row"><strong>Mobile app icon</strong><span>kr-icon-dark-192.png (Android) or 512.png (App Store)</span></div>
+      <div class="app-row"><strong>Slack / Teams</strong><span>kr-icon-dark-128.png</span></div>
+      <div class="app-row"><strong>Watermark</strong><span>kr-icon-transparent-256.png or 512.png</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 Colour Palette -->
+<section id="colour">
+  <div class="container">
+    <div class="section-number">04</div>
+    <div class="section-title">Colour Palette</div>
+    <p>The palette is taken directly from the kevinryan.io CSS custom properties. It uses warm neutrals and a single lime accent. The warm off-white (#F5F3EF) gives the site its distinctive warmth.</p>
+
+    <h3>Primary</h3>
+    <div class="swatch-row">
+      <div class="swatch">
+        <div class="swatch-block" style="background:#A8E10C"></div>
+        <div class="swatch-name">Lime</div>
+        <div class="swatch-hex">#A8E10C</div>
+        <div class="swatch-rgb">168, 225, 12</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#92C40A"></div>
+        <div class="swatch-name">Lime Dim</div>
+        <div class="swatch-hex">#92C40A</div>
+        <div class="swatch-rgb">146, 196, 10</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#0A0A0A"></div>
+        <div class="swatch-name">Black</div>
+        <div class="swatch-hex">#0A0A0A</div>
+        <div class="swatch-rgb">10, 10, 10</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block swatch-block--bordered" style="background:#F5F3EF"></div>
+        <div class="swatch-name">White</div>
+        <div class="swatch-hex">#F5F3EF</div>
+        <div class="swatch-rgb">245, 243, 239</div>
+      </div>
+    </div>
+
+    <h3>Neutrals</h3>
+    <div class="swatch-row">
+      <div class="swatch">
+        <div class="swatch-block" style="background:#111111"></div>
+        <div class="swatch-name">Dark</div>
+        <div class="swatch-hex">#111111</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#1A1A1A"></div>
+        <div class="swatch-name">Dark Mid</div>
+        <div class="swatch-hex">#1A1A1A</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#2E2D2B"></div>
+        <div class="swatch-name">Grey 800</div>
+        <div class="swatch-hex">#2E2D2B</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#55524E"></div>
+        <div class="swatch-name">Grey 600</div>
+        <div class="swatch-hex">#55524E</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#7A7772"></div>
+        <div class="swatch-name">Grey 400</div>
+        <div class="swatch-hex">#7A7772</div>
+      </div>
+    </div>
+    <div class="swatch-row">
+      <div class="swatch">
+        <div class="swatch-block swatch-block--bordered" style="background:#D4D1CB"></div>
+        <div class="swatch-name">Grey 200</div>
+        <div class="swatch-hex">#D4D1CB</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block swatch-block--bordered" style="background:#ECEAE5"></div>
+        <div class="swatch-name">Grey 100</div>
+        <div class="swatch-hex">#ECEAE5</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block swatch-block--bordered" style="background:#FFFFFF"></div>
+        <div class="swatch-name">Pure White</div>
+        <div class="swatch-hex">#FFFFFF</div>
+      </div>
+    </div>
+
+    <h3>Usage</h3>
+    <ul class="usage-list">
+      <li><strong>Lime #A8E10C</strong> — RYAN in logo, accent, links, interactive elements, section numbers, selection highlight.</li>
+      <li><strong>Black #0A0A0A</strong> — KEVIN in logo, headings, primary text, nav bar border, ticker background.</li>
+      <li><strong>White #F5F3EF</strong> — Page background (warm). The site does not use pure white as a background.</li>
+      <li><strong>Grey-600 #55524E</strong> — Body text, paragraph content, secondary information.</li>
+      <li><strong>Grey-400 #7A7772</strong> — Captions, metadata, subtitle labels, footer text.</li>
+      <li><strong>Grey-200 #D4D1CB</strong> — Borders, dividers, card separators.</li>
+      <li><strong>Grey-100 #ECEAE5</strong> — Alternating section backgrounds, image placeholder fills.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 05 Typography -->
+<section id="type">
+  <div class="container">
+    <div class="section-number">05</div>
+    <div class="section-title">Typography</div>
+    <p>The site uses three typefaces with distinct roles. Archivo for body text, Bebas Neue for display headings, and Work Sans exclusively for the logo mark. This separation gives the logo its own identity while the editorial feel comes from Archivo and Bebas Neue.</p>
+
+    <h3>Display — Bebas Neue</h3>
+    <div class="label">CSS variable: --font-display</div>
+    <div class="specimen">
+      <div class="specimen-display" style="font-size:clamp(2rem,5vw,3.2rem);color:var(--black)">EARLY TO EVERY WAVE</div>
+      <div class="specimen-display" style="font-size:clamp(1.2rem,3vw,1.8rem);color:var(--grey-600);margin-top:0.25rem">BREADTH IS DEPTH — EMBED. BUILD. TRANSFER.</div>
+      <p class="specimen-note">Section headings, numbers (01–09), capability titles, case study names. Always uppercase, letter-spacing 0.02em, line-height 0.88–0.92.</p>
+    </div>
+
+    <h3>Body — Archivo</h3>
+    <div class="label">CSS variable: --font-sans</div>
+    <div class="specimen">
+      <div class="specimen-body" style="font-size:1.3rem;font-weight:900;color:var(--black)">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk</div>
+      <div class="specimen-body" style="font-size:1.05rem;font-weight:700;color:var(--grey-600);margin-top:0.35rem">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm</div>
+      <div class="specimen-body" style="font-size:0.9rem;font-weight:400;color:var(--grey-400);margin-top:0.35rem">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt</div>
+      <p class="specimen-note">Body text, navigation, labels, buttons, metadata. Weights 400–900. Line-height 1.6.</p>
+    </div>
+
+    <h3>Logo — Work Sans</h3>
+    <div class="label">Logo mark only — not used in site content</div>
+    <div class="specimen">
+      <span class="specimen-logo" style="font-size:1.6rem;font-weight:900;color:var(--black)">KEVIN</span>
+      <span class="specimen-logo" style="font-size:1.6rem;font-weight:900;color:var(--accent);margin-left:0.5rem">RYAN</span>
+      <div class="specimen-logo" style="font-size:0.85rem;font-weight:300;color:var(--grey-600);margin-top:0.15rem">& associates</div>
+      <p class="specimen-note">Black (900) for KEVIN/RYAN. Light (300) for "& associates". Not used elsewhere on site.</p>
+    </div>
+
+    <h3>Type Scale</h3>
+    <table>
+      <thead>
+        <tr><th>Role</th><th>Font</th><th>Size</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Display XL</td><td>Bebas Neue</td><td>clamp(4.5rem, 13vw, 12rem)</td><td>Hero heading, section titles</td></tr>
+        <tr><td>Display LG</td><td>Bebas Neue</td><td>clamp(2.5rem, 7vw, 6rem)</td><td>Section headings</td></tr>
+        <tr><td>Section No.</td><td>Bebas Neue</td><td>clamp(3.5rem, 5.5vw, 5.5rem)</td><td>Section numbers (01–09)</td></tr>
+        <tr><td>Body</td><td>Archivo 400</td><td>1.05rem / lh 1.7</td><td>Paragraph text</td></tr>
+        <tr><td>Label</td><td>Archivo 700</td><td>0.7rem / ls 0.18em</td><td>Subtitles, tags, uppercase</td></tr>
+        <tr><td>Button</td><td>Archivo 800</td><td>0.72rem / ls 0.14em</td><td>CTAs, nav links, uppercase</td></tr>
+        <tr><td>Caption</td><td>Archivo 700</td><td>0.68rem / ls 0.12em</td><td>Stats labels, metadata</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Google Fonts</h3>
+    <p><strong>Archivo:</strong> fonts.google.com/specimen/Archivo — weights 400, 500, 600, 700, 800, 900</p>
+    <p><strong>Bebas Neue:</strong> fonts.google.com/specimen/Bebas+Neue — single weight</p>
+    <p><strong>Work Sans:</strong> fonts.google.com/specimen/Work+Sans — weights 300, 900 (logo only)</p>
+  </div>
+</section>
+
+<!-- 06 Spacing & Grid -->
+<section id="grid">
+  <div class="container">
+    <div class="section-number">06</div>
+    <div class="section-title">Spacing &amp; Grid</div>
+    <p>The layout uses an 8px base grid with a maximum content width of 1400px and fluid padding via <code>clamp(1.5rem, 5vw, 6rem)</code>. Section padding is 7rem (112px) vertically.</p>
+
+    <h3>Spacing Scale</h3>
+    <div style="margin:1rem 0 2rem">
+      <div class="spacing-row"><div class="spacing-bar" style="width:5px"></div><div class="spacing-label">4px (xs)</div><div class="spacing-usage">Tight inner padding, icon gaps</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:10px"></div><div class="spacing-label">8px (sm)</div><div class="spacing-usage">Compact elements, inline spacing</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:19px"></div><div class="spacing-label">16px (md)</div><div class="spacing-usage">Default component padding</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:29px"></div><div class="spacing-label">24px (lg)</div><div class="spacing-usage">Section inner padding</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:38px"></div><div class="spacing-label">32px (xl)</div><div class="spacing-usage">Card spacing, group separation</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:58px"></div><div class="spacing-label">48px (2xl)</div><div class="spacing-usage">Major section breaks</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:77px"></div><div class="spacing-label">64px (3xl)</div><div class="spacing-usage">Page section separation</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:134px"></div><div class="spacing-label">112px (4xl)</div><div class="spacing-usage">Section vertical padding (7rem)</div></div>
+    </div>
+
+    <h3>Layout Principles</h3>
+    <ul class="principles">
+      <li>Maximum content width: 1400px, centred with auto margins.</li>
+      <li>Container padding: <code>clamp(1.5rem, 5vw, 6rem)</code> — responsive fluid padding.</li>
+      <li>Section pattern: alternate white (#F5F3EF), grey (#ECEAE5), dark (#111111), black (#0A0A0A).</li>
+      <li>Hover pattern: accent lime fills on capability cards, client grid, case study backgrounds darken.</li>
+      <li>Borders: 2px solid black for nav and ticker; 1px solid grey-200 for card grids.</li>
+      <li>Grid: 12-column desktop via CSS Grid, single column mobile. Gap varies by context.</li>
+      <li>Section headers: number (Bebas Neue, lime) + subtitle (Archivo 700, uppercase) + heading (Bebas Neue).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 07 Usage Rules -->
+<section id="rules">
+  <div class="container">
+    <div class="section-number">07</div>
+    <div class="section-title">Usage Rules</div>
+    <p>These rules protect the integrity of the identity. When in doubt, refer to the master SVG files and this document.</p>
+
+    <div class="rules-grid">
+      <div class="rules-col">
+        <div class="do-title">DO</div>
+        <ul class="rules-list rules-list--do">
+          <li>Use outlined SVG files as the primary logo source — they render identically everywhere.</li>
+          <li>Maintain the minimum clear space (one cap-height K) around the logo at all times.</li>
+          <li>Use the KR monogram at sizes below 120px / 30mm where the full logo becomes illegible.</li>
+          <li>Keep the lime at exactly #A8E10C — no variations, no gradients, no opacity changes.</li>
+          <li>Use Bebas Neue for display headings, Archivo for body text, Work Sans for logo only.</li>
+          <li>Maintain the warm palette — use #F5F3EF not pure white for page backgrounds.</li>
+        </ul>
+      </div>
+      <div class="rules-col">
+        <div class="dont-title">DON'T</div>
+        <ul class="rules-list rules-list--dont">
+          <li>Alter the proportions, letter-spacing, or stacking order of the logo.</li>
+          <li>Change the lime to any other colour, including lighter or darker shades.</li>
+          <li>Place the logo on busy photographic backgrounds without a solid backing panel.</li>
+          <li>Use drop shadows, gradients, outlines, or any effects on the logo.</li>
+          <li>Recreate the logo in a different typeface — always use the supplied SVG assets.</li>
+          <li>Substitute Archivo or Bebas Neue with other typefaces, or use cool-toned greys.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="container">
+  <div class="footer">
+    <span><strong>Kevin Ryan &amp; Associates</strong> — <a href="https://kevinryan.io">kevinryan.io</a></span>
+    <span>Version 2.0 — February 2026</span>
+  </div>
+</div>
+
+</body>
+</html>

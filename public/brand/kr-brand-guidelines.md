@@ -1,8 +1,7 @@
 # Kevin Ryan & Associates — Brand Guidelines
 
-**Visual Identity Guidelines**
-Version 1.0 — February 2026
-kevinryan.io
+**Version 2.0 — February 2026**
+**kevinryan.io**
 
 ---
 
@@ -20,256 +19,179 @@ kevinryan.io
 
 ## 01 — Primary Logo
 
-The primary logo consists of **KEVIN** in black and **RYAN** in green, stacked to equal visual width using letter-spacing on RYAN. The lighter "& associates" underlines the full width of the name block. This is the default mark for all applications.
+The primary logo uses **Work Sans Black** for KEVIN and RYAN, stacked to equal visual width using letter-spacing on RYAN. The lighter "& associates" underlines the full width. Work Sans is the only typeface used in the logo — it is distinct from the site body (Archivo) and display (Bebas Neue) fonts.
 
-All logo files use outlined vector paths (no font dependencies) to ensure identical rendering across every platform and device.
+**Clear Space:** Maintain clear space around the logo equal to the cap height of the letter K. No other graphic elements, text, or edge boundaries should intrude into this zone.
 
-### Clear Space
+**Minimum Size:** The primary logo should not be reproduced smaller than 120px wide for digital or 30mm wide for print. Below this size, use the KR monogram instead.
 
-Maintain clear space around the logo equal to the cap height of the letter **K**. No other graphic elements, text, or edge boundaries should intrude into this zone.
+### Assets
 
-### Minimum Size
-
-The primary logo should not be reproduced smaller than **120px wide** for digital or **30mm wide** for print. Below this size, use the KR monogram instead.
-
-### Master Files
-
-| File | Format | Use |
-|------|--------|-----|
-| `kevin-ryan-logo-outlined.svg` | SVG (outlined paths) | Master — all production use |
-| `kevin-ryan-logo-dark.svg` | SVG (outlined paths) | Dark background variant |
-| `kevin-ryan-logo-live-text.svg` | SVG (live text) | Editable variant (requires Google Fonts) |
-| `logo-transparent-darktext.svg` | SVG (outlined paths) | Transparent background, dark text |
-| `logo-transparent-whitetext.svg` | SVG (outlined paths) | Transparent background, white text |
-
-PNG rasters are provided at 256, 512, 800, and 1200px for contexts that require bitmap images.
+| Variant | SVG | PNG sizes |
+|---|---|---|
+| Dark text on light bg | `kevin-ryan-logo-outlined.svg` | 256, 512, 800, 1200px |
+| White text on dark bg | `kevin-ryan-logo-whitetext.svg` | 256, 512, 800, 1200px |
+| Dark background | `kevin-ryan-logo-dark-bg.svg` | 512, 800, 1200px |
+| Live text (editable) | `kevin-ryan-logo-live-text.svg` | — |
 
 ---
 
 ## 02 — Logo Variants
 
-The logo is available in four configurations. Use the appropriate variant based on the background context. **The green of RYAN never changes across any variant.**
+The logo is available in four configurations. Use the appropriate variant based on the background context. The lime green of RYAN never changes across any variant.
 
-| Variant | KEVIN | RYAN | & associates | Background |
-|---------|-------|------|-------------|------------|
-| Standard | `#0A0A0A` (black) | `#A8E10C` (green) | `#0A0A0A` (black) | Light (`#FFFFFF` or `#F9FAFB`) |
-| Reversed | `#FFFFFF` (white) | `#A8E10C` (green) | `#FFFFFF` (white) | Dark (`#0A0A0A` or `#111111`) |
+**Colour Rules:** KEVIN is always black (#0A0A0A) on light backgrounds, white on dark. RYAN is always lime #A8E10C regardless of background. "& associates" follows KEVIN. The lime must never be altered, lightened, darkened, or replaced.
 
-### Colour Rules
-
-- KEVIN is always black on light backgrounds, white on dark backgrounds.
-- RYAN is always `#A8E10C` regardless of background.
-- "& associates" follows the same colour as KEVIN.
-- The green must never be altered, lightened, darkened, or replaced with another colour.
-
-### File Formats
-
-- **SVG** (outlined paths) is the master format for all logo files.
-- **PNG** rasters are provided at 256, 512, 800, and 1200px for bitmap contexts.
-- **ICO** files at 16/32/48px are provided for browser favicons.
+**File Formats:** SVG (outlined paths) is the master format. PNG rasters are provided at 256, 512, 800, and 1200px. ICO files at 16/32/48px are provided for browser favicons. All files hosted at kevinryan.io/brand/.
 
 ---
 
 ## 03 — KR Monogram
 
-The KR monogram is the compact form of the identity. Use it for app icons, social media avatars, favicons, and anywhere the full logo would be illegible at small sizes. The monogram follows the same colour rules as the primary logo.
+The KR monogram is the compact form of the identity. Use it for app icons, social media avatars, favicons, and anywhere the full logo would be illegible at small sizes. Same colour rules apply.
 
-### Sizing
+**Sizing:** Legible from 16px (favicon) to 512px. Provided: 16/32/48px (favicon), 64/128/192/256/512px (app icons), 400/800px (social media).
 
-The monogram is designed to be legible at all sizes from 16px (favicon) up to 512px (app stores).
+### Application
 
-Standard sizes provided: 16, 32, 48px (favicon), 64, 128, 192, 256, 512px (app icons), and 400, 800px (social media).
-
-### Application Guide
-
-| Context | File | Size |
-|---------|------|------|
-| Browser favicon | `favicon-dark.ico` or `favicon-light.ico` | 16/32/48px multi-resolution |
-| Social media avatar | `kr-social-dark-400.png` or `800.png` | 400 or 800px |
-| Mobile app icon | `kr-icon-dark-192.png` (Android) or `512.png` (App Store) | 192 or 512px |
-| Slack / Teams | `kr-icon-dark-128.png` | 128px |
-| Watermark / overlay | `kr-icon-transparent-256.png` or `512.png` | 256 or 512px |
+| Context | File |
+|---|---|
+| Browser favicon | `favicon-dark.ico` or `favicon-light.ico` (16/32/48px) |
+| Social media avatar | `kr-social-dark-400.png` or `800.png` |
+| Mobile app icon | `kr-icon-dark-192.png` (Android) or `512.png` (App Store) |
+| Slack / Teams | `kr-icon-dark-128.png` |
+| Watermark / overlay | `kr-icon-transparent-256.png` or `512.png` |
 
 ---
 
 ## 04 — Colour Palette
 
-The palette is derived from the kevinryan.io design system. It is minimal and high-contrast, rooted in Swiss International Style principles. Green is the single accent colour; everything else is a shade of black, gray, or white.
+The palette is taken directly from the kevinryan.io CSS custom properties. It uses warm neutrals and a single lime accent. The warm off-white (#F5F3EF) gives the site its distinctive warmth.
 
-### Primary Colours
+### Primary
 
-| Swatch | Name | Hex | RGB |
-|--------|------|-----|-----|
-| 🟩 | **Lime** | `#A8E10C` | 22, 163, 74 |
-| ⬛ | **Primary Black** | `#0A0A0A` | 10, 10, 10 |
-| ⬜ | **White** | `#FFFFFF` | 255, 255, 255 |
+| Name | Hex | RGB | CSS Variable |
+|---|---|---|---|
+| Lime | `#A8E10C` | 168, 225, 12 | `--accent` |
+| Lime Dim | `#92C40A` | 146, 196, 10 | `--accent-dim` |
+| Black | `#0A0A0A` | 10, 10, 10 | `--black` |
+| White | `#F5F3EF` | 245, 243, 239 | `--white` |
 
-### Neutral Colours
+### Neutrals
 
-| Swatch | Name | Hex | RGB |
-|--------|------|-----|-----|
-| ⬛ | Near Black | `#111111` | 17, 17, 17 |
-| 🔲 | Dark Gray | `#374151` | 55, 65, 81 |
-| 🔲 | Mid Gray | `#6B7280` | 107, 114, 128 |
-| 🔲 | Light Gray | `#E5E7EB` | 229, 231, 235 |
-| ⬜ | Off-White | `#F9FAFB` | 249, 250, 251 |
+| Name | Hex | RGB | CSS Variable |
+|---|---|---|---|
+| Dark | `#111111` | 17, 17, 17 | `--dark` |
+| Dark Mid | `#1A1A1A` | 26, 26, 26 | `--dark-mid` |
+| Grey 800 | `#2E2D2B` | 46, 45, 43 | `--grey-800` |
+| Grey 600 | `#55524E` | 85, 82, 78 | `--grey-600` |
+| Grey 400 | `#7A7772` | 122, 119, 114 | `--grey-400` |
+| Grey 200 | `#D4D1CB` | 212, 209, 203 | `--grey-200` |
+| Grey 100 | `#ECEAE5` | 236, 234, 229 | `--grey-100` |
+| Pure White | `#FFFFFF` | 255, 255, 255 | — |
 
-### Colour Usage
+### Usage
 
-| Colour | Usage |
-|--------|-------|
-| **Lime** `#A8E10C` | RYAN in logo, accent colour, links, interactive elements, section numbers, highlights |
-| **Primary Black** `#0A0A0A` | KEVIN in logo, headings, primary text on light backgrounds |
-| **Dark Gray** `#374151` | Body text, secondary content, paragraph text |
-| **Mid Gray** `#6B7280` | Captions, metadata, tertiary information, timestamps |
-| **Light Gray** `#E5E7EB` | Borders, dividers, subtle separators |
-| **Off-White** `#F9FAFB` | Alternating section backgrounds, cards, subtle surface differentiation |
-| **White** `#FFFFFF` | Primary background, clean open space |
-
-### CSS Custom Properties
-
-```css
-:root {
-  --color-green: #A8E10C;
-  --color-black: #0A0A0A;
-  --color-white: #FFFFFF;
-  --color-near-black: #111111;
-  --color-dark-gray: #374151;
-  --color-mid-gray: #6B7280;
-  --color-light-gray: #E5E7EB;
-  --color-off-white: #F9FAFB;
-}
-```
-
-### Tailwind Mapping
-
-These colours map to the Tailwind CSS palette used on kevinryan.io:
-
-| Brand Token | Tailwind Class |
-|-------------|---------------|
-| Lime | `green-600` |
-| Primary Black | `gray-950` / custom |
-| Dark Gray | `gray-700` |
-| Mid Gray | `gray-500` |
-| Light Gray | `gray-200` |
-| Off-White | `gray-50` |
+- **Lime #A8E10C** — RYAN in logo, accent, links, interactive elements, section numbers, selection highlight.
+- **Black #0A0A0A** — KEVIN in logo, headings, primary text, nav bar border, ticker background.
+- **White #F5F3EF** — Page background (warm). The site does not use pure white as a background.
+- **Grey-600 #55524E** — Body text, paragraph content, secondary information.
+- **Grey-400 #7A7772** — Captions, metadata, subtitle labels, footer text.
+- **Grey-200 #D4D1CB** — Borders, dividers, card separators.
+- **Grey-100 #ECEAE5** — Alternating section backgrounds, image placeholder fills.
 
 ---
 
 ## 05 — Typography
 
-**Work Sans** is the sole typeface for the Kevin Ryan & Associates identity. It is a Google Font available at [fonts.google.com/specimen/Work+Sans](https://fonts.google.com/specimen/Work+Sans) and can be referenced from anywhere online.
+The site uses three typefaces with distinct roles. Archivo for body text, Bebas Neue for display headings, and Work Sans exclusively for the logo mark. This separation gives the logo its own identity while the editorial feel comes from Archivo and Bebas Neue.
 
-### Google Fonts Import
+### Display — Bebas Neue
 
-```css
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700;900&display=swap');
-```
+CSS variable: `--font-display`
 
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700;900&display=swap" rel="stylesheet">
-```
+Section headings, numbers (01–09), capability titles, case study names. Always uppercase, letter-spacing 0.02em, line-height 0.88–0.92.
 
-### Weights
+### Body — Archivo
 
-| Weight | Name | Usage |
-|--------|------|-------|
-| **900** | Black | Logo (KEVIN, RYAN). Display headings. Hero text. |
-| **700** | Bold | Section headings. Emphasis. Labels. UI controls. |
-| **400** | Regular | Body text. Paragraph content. Navigation. |
-| **300** | Light | Logo ("& associates"). Captions. Metadata. Section numbers. |
+CSS variable: `--font-sans`
+
+Body text, navigation, labels, buttons, metadata. Weights 400–900. Line-height 1.6. Labels use weight 700, letter-spacing 0.14–0.18em, uppercase.
+
+### Logo — Work Sans
+
+Logo mark only — not used in site content. Black (900) for KEVIN/RYAN. Light (300) for "& associates".
 
 ### Type Scale
 
 | Role | Font | Size | Usage |
-|------|------|------|-------|
-| Display | Work Sans Black 900 | 48–64px | Cover titles, hero text |
-| Heading 1 | Work Sans Black 900 | 28–36px | Section headings |
-| Heading 2 | Work Sans Bold 700 | 20–24px | Sub-section headings |
-| Heading 3 | Work Sans Bold 700 | 16–18px | Card titles, labels |
-| Body | Work Sans Regular 400 | 14–16px | Paragraph text, navigation |
-| Caption | Work Sans Light 300 | 11–13px | Metadata, timestamps, fine print |
-| Micro | Work Sans Light 300 | 8–10px | Legal, footnotes, logo tagline |
+|---|---|---|---|
+| Display XL | Bebas Neue | clamp(4.5rem, 13vw, 12rem) | Hero heading, section titles |
+| Display LG | Bebas Neue | clamp(2.5rem, 7vw, 6rem) | Section headings |
+| Section No. | Bebas Neue | clamp(3.5rem, 5.5vw, 5.5rem) | Section numbers (01–09) |
+| Body | Archivo 400 | 1.05rem / line-height 1.7 | Paragraph text |
+| Label | Archivo 700 | 0.7rem / ls 0.18em | Subtitles, tags, uppercase |
+| Button | Archivo 800 | 0.72rem / ls 0.14em | CTAs, nav links, uppercase |
+| Caption | Archivo 700 | 0.68rem / ls 0.12em | Stats labels, metadata |
 
-### Line Height
+### Google Fonts
 
-- **Headings**: 1.2
-- **Body text**: 1.6
-- **Captions**: 1.4
+- **Archivo:** fonts.google.com/specimen/Archivo — weights 400, 500, 600, 700, 800, 900
+- **Bebas Neue:** fonts.google.com/specimen/Bebas+Neue — single weight
+- **Work Sans:** fonts.google.com/specimen/Work+Sans — weights 300, 900 (logo only)
 
 ---
 
 ## 06 — Spacing & Grid
 
-The layout system uses an **8px base grid**. All spacing, padding, and margins should be multiples of 8. This produces consistent vertical rhythm and alignment across all touchpoints.
+The layout uses an 8px base grid with a maximum content width of 1400px and fluid padding via clamp(1.5rem, 5vw, 6rem). Section padding is 7rem (112px) vertically.
 
 ### Spacing Scale
 
-| Value | Token | Usage |
-|-------|-------|-------|
-| 4px | `xs` | Tight inner padding, icon gaps |
-| 8px | `sm` | Compact elements, inline spacing |
-| 16px | `md` | Default component padding |
-| 24px | `lg` | Section inner padding |
-| 32px | `xl` | Card spacing, group separation |
-| 48px | `2xl` | Major section breaks |
-| 64px | `3xl` | Page section separation |
-| 96px | `4xl` | Hero spacing, cover padding |
+| Size | Token | Usage |
+|---|---|---|
+| 4px | xs | Tight inner padding, icon gaps |
+| 8px | sm | Compact elements, inline spacing |
+| 16px | md | Default component padding |
+| 24px | lg | Section inner padding |
+| 32px | xl | Card spacing, group separation |
+| 48px | 2xl | Major section breaks |
+| 64px | 3xl | Page section separation |
+| 112px | 4xl | Section vertical padding (7rem) |
 
 ### Layout Principles
 
-- Maximum content width: **1200px**. Centred with auto margins.
-- Section pattern: alternate between white (`#FFFFFF`) and off-white (`#F9FAFB`) backgrounds.
-- Dark sections (`#0A0A0A`) are used sparingly for emphasis — hero, footer, feature highlights.
-- Grid: **12-column** on desktop, single column on mobile. Gutter: 24px.
-- Section numbers (`01`, `02`, `03`…) in Work Sans Light, coloured green, positioned above section headings.
-- Border radius: **6px** for cards and containers, **4px** for buttons and small elements.
-
-### CSS Spacing Variables
-
-```css
-:root {
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
-  --space-3xl: 64px;
-  --space-4xl: 96px;
-  --max-width: 1200px;
-}
-```
+- Maximum content width: 1400px, centred with auto margins.
+- Container padding: clamp(1.5rem, 5vw, 6rem) — responsive fluid padding.
+- Section pattern: alternate white (#F5F3EF), grey (#ECEAE5), dark (#111111), black (#0A0A0A).
+- Hover pattern: accent lime fills on capability cards, client grid, case study backgrounds darken.
+- Borders: 2px solid black for nav and ticker; 1px solid grey-200 for card grids.
+- Grid: 12-column desktop via CSS Grid, single column mobile. Gap varies by context.
+- Section headers: number (Bebas Neue, lime) + subtitle (Archivo 700, uppercase) + heading (Bebas Neue).
 
 ---
 
 ## 07 — Usage Rules
-
-These rules protect the integrity of the identity. When in doubt, refer to the master SVG files and this document.
 
 ### Do
 
 - Use outlined SVG files as the primary logo source — they render identically everywhere.
 - Maintain the minimum clear space (one cap-height K) around the logo at all times.
 - Use the KR monogram at sizes below 120px / 30mm where the full logo becomes illegible.
-- Use the dark background variant when placing the logo on dark surfaces.
-- Reference Work Sans via Google Fonts for all web and digital applications.
-- Keep the green at exactly `#A8E10C` — no variations, no gradients, no opacity changes.
-- Use the alternating white / off-white section pattern for long-form page layouts.
+- Keep the lime at exactly #A8E10C — no variations, no gradients, no opacity changes.
+- Use Bebas Neue for display headings, Archivo for body text, Work Sans for logo only.
+- Maintain the warm palette — use #F5F3EF not pure white for page backgrounds.
 
 ### Don't
 
 - Alter the proportions, letter-spacing, or stacking order of the logo.
-- Change the green to any other colour, including lighter or darker shades.
+- Change the lime to any other colour, including lighter or darker shades.
 - Place the logo on busy photographic backgrounds without a solid backing panel.
 - Use drop shadows, gradients, outlines, or any effects on the logo.
 - Recreate the logo in a different typeface — always use the supplied SVG assets.
-- Use the full logo below minimum size — switch to the KR monogram instead.
-- Mix Work Sans with other sans-serif typefaces in the same layout.
+- Substitute Archivo or Bebas Neue with other typefaces, or use cool-toned greys.
 
 ---
 
-**Kevin Ryan & Associates**
-kevinryan.io — Version 1.0 — February 2026
+**Kevin Ryan & Associates** — kevinryan.io
+Version 2.0 — February 2026
