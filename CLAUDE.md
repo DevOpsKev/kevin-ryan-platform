@@ -1,15 +1,5 @@
 # CLAUDE.md
 
-## Context Location
-
-Before responding to any request, read the following files in order:
-
-1. `.specify/memory/constitution.md` — Non-negotiable project principles
-2. `.specify/memory/skills/*.md` — Technical skill guides
-3. `.specify/specs/` — Active feature specifications (if present)
-
-These files define the project's architectural constraints, technology stack, and coding standards. All suggestions MUST comply with the constitution.
-
 ## Project Summary
 
 This is a static Next.js 16 portfolio site for Kevin Ryan (DevOps & AI Governance Consultant).
@@ -47,20 +37,17 @@ kevinryan-io/
 ├── app/                    # Next.js App Router pages
 ├── components/             # React components (one per file)
 ├── public/                 # Static assets
-├── .specify/memory/        # Constitution and skills
 ├── .github/workflows/      # CI/CD
 └── out/                    # Build output (git-ignored)
 ```
 
 ## When Generating Code
 
-1. Check `constitution.md` for technology stack requirements
-2. Check relevant skill file in `.specify/memory/skills/`
-3. Follow TypeScript strict mode conventions
-4. Use Tailwind utilities for styling
-5. Ensure static export compatibility
-6. Include alt attributes on all images
-7. Keep components under 200 lines
+1. Follow TypeScript strict mode conventions
+2. Use Tailwind utilities for styling
+3. Ensure static export compatibility
+4. Include alt attributes on all images
+5. Keep components under 200 lines
 
 ## Prohibited Patterns
 
@@ -74,7 +61,7 @@ kevinryan-io/
 
 ## When Unclear
 
-If a request conflicts with the constitution or specifications, flag the conflict rather than silently deviating. Ask for clarification.
+If a request conflicts with project constraints or specifications, flag the conflict rather than silently deviating. Ask for clarification.
 
 ## Pre-Commit Checklist
 
