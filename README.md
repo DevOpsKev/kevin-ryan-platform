@@ -10,6 +10,7 @@ Professional portfolio website for Kevin Ryan - DevOps & Agile Coach, AI Adoptio
 - [Tailwind CSS 4](https://tailwindcss.com) - Utility-first CSS framework
 - [DaisyUI](https://daisyui.com) - Tailwind CSS component library
 - [Fitty](https://github.com/rikschennink/fitty) - Text fitting library
+- [Tessl](https://tessl.io) - Agent context and skills management
 
 ## Prerequisites
 
@@ -18,11 +19,18 @@ Before you begin, ensure you have the following installed:
 - [Node.js](https://nodejs.org) (v20 or higher)
 - [pnpm](https://pnpm.io) (recommended package manager)
 - [pre-commit](https://pre-commit.com) (for git hooks)
+- [Tessl CLI](https://docs.tessl.io) (for agent skills management)
 
 ### Installing pnpm
 
 ```bash
 npm install -g pnpm
+```
+
+### Installing Tessl CLI
+
+```bash
+npm install -g @tessl/cli
 ```
 
 ### Installing pre-commit
@@ -53,7 +61,24 @@ cd kevinryan-io
 pnpm install
 ```
 
-### 3. Set up pre-commit hooks
+### 3. Set up Tessl
+
+Initialize Tessl and sync agent skills:
+
+```bash
+tessl init --agent claude-code
+tessl install
+```
+
+This reads `tessl.json` and installs all configured tiles and skills into `.tessl/tiles/`. Skills are automatically loaded by coding agents when relevant to the current task.
+
+To verify installed tiles:
+
+```bash
+tessl list
+```
+
+### 4. Set up pre-commit hooks
 
 ```bash
 pre-commit install
@@ -65,13 +90,62 @@ This will configure git hooks to automatically run code quality checks before ea
 - YAML validation
 - Large file detection
 
-### 4. Run the development server
+### 5. Run the development server
 
 ```bash
 pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the site.
+
+## Tessl Skills
+
+This project uses [Tessl](https://tessl.io) to manage context and skills for AI coding agents. Skills provide structured, versioned guidance so agents produce code that follows project conventions, framework best practices, and avoids common pitfalls.
+
+### Installed Tiles
+
+| Tile | Version | Purpose |
+|------|---------|---------|
+| `tessl/npm-next` | 16.0.0 | Next.js 16 documentation and API context |
+| `tessl/npm-react` | 19.2.0 | React 19 documentation and API context |
+| `tessl/npm-react-dom` | 19.2.0 | React DOM 19 documentation and API context |
+| `vercel-labs/agent-skills` | e23951b | React and Next.js performance best practices from Vercel Engineering |
+| `tessl/npm-tailwindcss--typography` | 0.5.0 | Tailwind CSS Typography plugin documentation |
+| `tessl/npm-tailwindcss--forms` | 0.5.0 | Tailwind CSS Forms plugin documentation |
+| `secondsky/claude-skills` | 6ebd12c | Aceternity UI — animated React components for Next.js with Tailwind |
+| `microsoft/agent-skills` | — | Microsoft skill-creator with cloud-deploy patterns (AWS, GCP, Azure) |
+| `tessl/pypi-azure-mgmt-containerservice` | 39.1.0 | Azure Container Service SDK docs for AKS provisioning |
+
+### Custom Skills (Planned)
+
+The following skills are being authored for this project and will be published to the Tessl Registry:
+
+| Skill | Covers |
+|-------|--------|
+| `nextjs-docker` | Multi-stage Dockerfile for Next.js static export with pnpm, distroless runtime, .dockerignore patterns |
+| `azure-bicep-k3s` | Bicep modules for Azure VM + k3s bootstrap, ACR, NSG, managed identity, role assignments |
+| `k3s-deployment` | k3s cluster setup, Traefik ingress config, Kubernetes manifests for containerised Next.js apps |
+
+To scaffold a new skill:
+
+```bash
+tessl skill new
+```
+
+### Adding Skills
+
+Browse the [Tessl Registry](https://tessl.io/registry) to find additional skills, or install directly:
+
+```bash
+# Search the registry
+tessl search "keyword"
+
+# Install from registry
+tessl install tessl-labs/skill-name
+
+# Install from GitHub
+tessl install github:owner/repo --skill skill-name
+```
 
 ## Available Scripts
 
@@ -95,10 +169,13 @@ kevinryan-io/
 │   ├── kevin.jpg          # Profile photo
 │   ├── github_logo_black.png
 │   └── linkedin_black_logo.png
+├── .tessl/                # Tessl agent context (managed by Tessl CLI)
+│   └── tiles/             # Installed skills and documentation
 ├── .github/
 │   └── workflows/
 │       └── nextjs.yml     # GitHub Pages deployment
 ├── .pre-commit-config.yaml # Pre-commit hook configuration
+├── tessl.json             # Tessl tile manifest
 ├── next.config.ts         # Next.js configuration
 ├── tsconfig.json          # TypeScript configuration
 ├── postcss.config.mjs     # PostCSS configuration

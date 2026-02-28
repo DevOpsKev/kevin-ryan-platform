@@ -1,0 +1,50 @@
+{
+  "name": "project",
+  "dependencies": {
+    "tessl/npm-next": {
+      "version": "16.0.0"
+    },
+    "tessl/npm-react-dom": {
+      "version": "19.2.0"
+    },
+    "tessl/npm-react": {
+      "version": "19.2.0"
+    },
+    "vercel-labs/agent-skills": {
+      "version": "e23951b8cad2f4b1e7e176c5731127c1263fe86f",
+      "source": "https://github.com/vercel-labs/agent-skills",
+      "include": {
+        "skills": [
+          "vercel-react-best-practices"
+        ]
+      }
+    },
+    "tessl/npm-tailwindcss--typography": {
+      "version": "0.5.0"
+    },
+    "tessl/npm-tailwindcss--forms": {
+      "version": "0.5.0"
+    },
+    "secondsky/claude-skills": {
+      "version": "6ebd12ce868f83fcb95c226e4c12f136a6e9af4f",
+      "source": "https://github.com/secondsky/claude-skills",
+      "include": {
+        "skills": [
+          "aceternity-ui"
+        ]
+      }
+    },
+    "microsoft/agent-skills": {
+      "version": "b61408650daac3604ba6cfd84a82c08c7715fc13",
+      "source": "https://github.com/microsoft/agent-skills",
+      "include": {
+        "skills": [
+          "skill-creator"
+        ]
+      }
+    },
+    "tessl/pypi-azure-mgmt-containerservice": {
+      "version": "39.1.0"
+    }
+  }
+}
