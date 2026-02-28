@@ -1,0 +1,61 @@
+variable "location" {
+  description = "Azure region for all resources"
+  type        = string
+  default     = "northeurope"
+}
+
+variable "vm_size" {
+  description = "Azure VM SKU"
+  type        = string
+  default     = "Standard_B2ms"
+}
+
+variable "admin_username" {
+  description = "SSH admin username for the VM"
+  type        = string
+  default     = "azureuser"
+}
+
+variable "admin_ssh_public_key" {
+  description = "SSH public key for VM access"
+  type        = string
+}
+
+variable "admin_ip" {
+  description = "Admin IP address for SSH access (CIDR notation, e.g. 1.2.3.4/32)"
+  type        = string
+}
+
+variable "cloudflare_api_token" {
+  description = "Cloudflare API token"
+  type        = string
+  sensitive   = true
+}
+
+variable "cloudflare_zone_id" {
+  description = "Cloudflare zone ID for kevinryan.io"
+  type        = string
+}
+
+variable "domain" {
+  description = "Domain name"
+  type        = string
+  default     = "kevinryan.io"
+}
+
+variable "acr_name" {
+  description = "Globally unique name for Azure Container Registry"
+  type        = string
+}
+
+variable "github_repo" {
+  description = "GitHub repo for Flux bootstrap (owner/repo format)"
+  type        = string
+  default     = "DevOpsKev/kevinryan-io"
+}
+
+variable "github_token" {
+  description = "GitHub PAT for Flux bootstrap"
+  type        = string
+  sensitive   = true
+}

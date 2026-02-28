@@ -160,11 +160,12 @@ This avoids the complexity and fragility of the Terraform Kubernetes provider op
 
 ## Agent Decisions
 
-*To be completed after Claude Code implementation.*
-
 | Decision | Rationale | Acceptable |
 |----------|-----------|------------|
-| *Pending* | *Pending* | *Pending* |
+| Circular dependency resolved by constructing ACR login server from name variable (`<name>.azurecr.io`) | ACR login server is deterministic. Compute module receives the constructed string; registry module gets the VM principal ID after creation. No `depends_on` needed — clean plan with natural dependency graph | Yes |
+| Bootstrap uses `infra/bootstrap/` (flat, no `state-storage/` subdirectory) | Simpler path. ADR specified `bootstrap/state-storage/` as an example; a single `main.tf` in `bootstrap/` is sufficient for the one Storage Account + container | Yes |
+| Backend `storage_account_name` left as empty string, set via `-backend-config` at init time | Avoids hardcoding the bootstrap output. Documented in README bootstrap instructions | Yes |
+| Network module owns the resource group | Decouples resource group lifecycle from compute. All modules receive `resource_group_name` as input from network module output | Yes |
 
 ## References
 

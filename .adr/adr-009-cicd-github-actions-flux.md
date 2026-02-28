@@ -192,11 +192,13 @@ No long-lived Azure credentials anywhere. OIDC federation for GitHub Actions, Ma
 
 ## Agent Decisions
 
-*To be completed after Claude Code implementation.*
-
 | Decision | Rationale | Acceptable |
 |----------|-----------|------------|
-| *Pending* | *Pending* | *Pending* |
+| Flux bootstrap via cloud-init `runcmd` with `--token-auth` | Simplest bootstrap method for a single-node cluster. Token is passed as a sensitive Terraform variable into cloud-init template. Deploy key created automatically by Flux | Yes |
+| Deploy workflow uses `paths-ignore` with `k8s/**` to prevent infinite loop | Manifest commit only touches `k8s/` files, which are excluded from the deploy trigger. Verified in workflow YAML path filter | Yes |
+| Concurrency group `deploy-kevinryan-io` with `cancel-in-progress: false` | Serialises deployments to prevent manifest commit conflicts. Concurrent builds queue rather than cancel to avoid skipped deployments | Yes |
+| All GitHub Actions pinned to full commit SHA | Meets security requirement from task spec. Version comments added for maintainability | Yes |
+| Terraform variables passed via `TF_VAR_*` environment variables in CI | Cleaner than generating tfvars files in CI. Secrets come from GitHub Actions secrets | Yes |
 
 ## References
 

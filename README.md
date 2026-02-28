@@ -182,9 +182,17 @@ kevinryan-io/
 ├── .husky/                # Git hooks (managed by Husky)
 │   ├── pre-commit         # Runs lint-staged on staged files
 │   └── pre-push           # Runs pnpm build
+├── infra/                  # Terraform infrastructure-as-code
+│   ├── bootstrap/          # State storage (applied once)
+│   ├── modules/            # network, compute, registry, cloudflare
+│   ├── main.tf             # Root module wiring
+│   └── variables.tf        # Input variables
+├── k8s/                    # Kubernetes manifests (watched by Flux CD)
+│   └── kevinryan-io/       # App namespace, deployment, service, ingress
 ├── .github/
 │   └── workflows/
-│       └── nextjs.yml     # GitHub Pages deployment
+│       ├── deploy.yml      # Build → push ACR + GHCR → update manifest
+│       └── terraform.yml   # Plan on push to infra/, gated apply
 ├── .markdownlint.json     # markdownlint configuration
 ├── .yamllint.yml          # yamllint configuration
 ├── tessl.json             # Tessl tile manifest
@@ -205,18 +213,69 @@ pnpm build
 
 The static files will be generated in the `out/` directory.
 
+## Infrastructure
+
+The site runs as a containerised static site on K3s (lightweight Kubernetes) on an Azure Spot VM, with Cloudflare as the CDN and edge layer. See [ADR-005](.adr/adr-005-k3s-azure-spot-cloudflare-cdn.md) for the full architecture decision.
+
+```text
+Cloudflare (DNS + CDN + TLS)
+     │
+     │  HTTPS origin pull
+     ▼
+Azure Spot VM (B2ms, North Europe)
+├── K3s (Traefik Ingress)
+├── Flux CD (GitOps reconciliation)
+└── kevinryan-io (nginx container)
+```
+
+### Prerequisites for infrastructure
+
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+- [Terraform](https://developer.hashicorp.com/terraform/install) (>= 1.5)
+- [Flux CLI](https://fluxcd.io/flux/installation/)
+- Cloudflare API token with DNS edit permissions
+- GitHub PAT for Flux bootstrap
+
+### Bootstrap
+
+Infrastructure is provisioned in two stages:
+
+1. **State storage** (one-time): Creates the Azure Storage Account for Terraform state.
+
+    ```bash
+    cd infra/bootstrap
+    terraform init
+    terraform apply -var="storage_account_name=krtfstateXXXXX"
+    ```
+
+2. **Main infrastructure**: Provisions the VM, ACR, networking, and Cloudflare DNS.
+
+    ```bash
+    cd infra
+    cp terraform.tfvars.example terraform.tfvars
+    # Edit terraform.tfvars with real values
+    terraform init -backend-config="storage_account_name=<from step 1>"
+    terraform plan
+    terraform apply
+    ```
+
+### GitHub environment setup
+
+Create a `production` environment in the GitHub repo settings (Settings > Environments) with Kevin as a required reviewer. This gates Terraform apply in CI.
+
 ## Deployment
 
-The site is automatically deployed to GitHub Pages via GitHub Actions when changes are pushed to the `main` branch.
+The site deploys via GitOps using GitHub Actions and Flux CD:
 
-The deployment workflow:
+1. Push application code to `main`
+2. GitHub Actions builds the Docker image, pushes to ACR and GHCR with SHA tags
+3. GitHub Actions updates the image tag in `k8s/kevinryan-io/deployment.yaml` and commits
+4. Flux CD (running inside K3s) detects the manifest change and applies it to the cluster
+5. Kubernetes performs a rolling update
 
-1. Detects the package manager automatically
-2. Installs dependencies
-3. Builds the Next.js static site
-4. Deploys to GitHub Pages
+Infrastructure changes (pushes to `infra/`) trigger a separate workflow with a manual approval gate before `terraform apply`.
 
-Configuration is in `.github/workflows/nextjs.yml`.
+Configuration is in `.github/workflows/deploy.yml` and `.github/workflows/terraform.yml`.
 
 ## Development Guidelines
 

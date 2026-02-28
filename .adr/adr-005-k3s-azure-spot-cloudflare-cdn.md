@@ -130,11 +130,12 @@ GitHub Pages is decommissioned. No fallback, no dual-running. The `.github/workf
 
 ## Agent Decisions
 
-*To be completed after Claude Code implementation.*
-
 | Decision | Rationale | Acceptable |
 |----------|-----------|------------|
-| *Pending* | *Pending* | *Pending* |
+| HTTP between Cloudflare and origin (entryPoint: `web`) for MVP | TLS termination at Cloudflare is sufficient. Traefik ACME for Full Strict deferred to reduce initial complexity | Yes |
+| Standard SKU public IP with static allocation | Required for Spot VMs to retain IP after deallocation on eviction | Yes |
+| 30 GB OS disk with Standard_LRS | Minimum for Ubuntu 24.04 + K3s + container images. Premium not needed for this workload | Yes |
+| NSG SSH rule restricted to `admin_ip` variable | Temporary for initial setup and debugging. Can be removed once infrastructure is stable | Yes |
 
 ## References
 
