@@ -52,13 +52,13 @@ The logo is available in four configurations. Use the appropriate variant based 
 
 | Variant | KEVIN | RYAN | & associates | Background |
 |---------|-------|------|-------------|------------|
-| Standard | `#0A0A0A` (black) | `#16A34A` (green) | `#0A0A0A` (black) | Light (`#FFFFFF` or `#F9FAFB`) |
-| Reversed | `#FFFFFF` (white) | `#16A34A` (green) | `#FFFFFF` (white) | Dark (`#0A0A0A` or `#111111`) |
+| Standard | `#0A0A0A` (black) | `#A8E10C` (green) | `#0A0A0A` (black) | Light (`#FFFFFF` or `#F9FAFB`) |
+| Reversed | `#FFFFFF` (white) | `#A8E10C` (green) | `#FFFFFF` (white) | Dark (`#0A0A0A` or `#111111`) |
 
 ### Colour Rules
 
 - KEVIN is always black on light backgrounds, white on dark backgrounds.
-- RYAN is always `#16A34A` regardless of background.
+- RYAN is always `#A8E10C` regardless of background.
 - "& associates" follows the same colour as KEVIN.
 - The green must never be altered, lightened, darkened, or replaced with another colour.
 
@@ -100,7 +100,7 @@ The palette is derived from the kevinryan.io design system. It is minimal and hi
 
 | Swatch | Name | Hex | RGB |
 |--------|------|-----|-----|
-| 🟩 | **Ryan Green** | `#16A34A` | 22, 163, 74 |
+| 🟩 | **Lime** | `#A8E10C` | 22, 163, 74 |
 | ⬛ | **Primary Black** | `#0A0A0A` | 10, 10, 10 |
 | ⬜ | **White** | `#FFFFFF` | 255, 255, 255 |
 
@@ -118,7 +118,7 @@ The palette is derived from the kevinryan.io design system. It is minimal and hi
 
 | Colour | Usage |
 |--------|-------|
-| **Ryan Green** `#16A34A` | RYAN in logo, accent colour, links, interactive elements, section numbers, highlights |
+| **Lime** `#A8E10C` | RYAN in logo, accent colour, links, interactive elements, section numbers, highlights |
 | **Primary Black** `#0A0A0A` | KEVIN in logo, headings, primary text on light backgrounds |
 | **Dark Gray** `#374151` | Body text, secondary content, paragraph text |
 | **Mid Gray** `#6B7280` | Captions, metadata, tertiary information, timestamps |
@@ -130,7 +130,7 @@ The palette is derived from the kevinryan.io design system. It is minimal and hi
 
 ```css
 :root {
-  --color-green: #16A34A;
+  --color-green: #A8E10C;
   --color-black: #0A0A0A;
   --color-white: #FFFFFF;
   --color-near-black: #111111;
@@ -147,7 +147,7 @@ These colours map to the Tailwind CSS palette used on kevinryan.io:
 
 | Brand Token | Tailwind Class |
 |-------------|---------------|
-| Ryan Green | `green-600` |
+| Lime | `green-600` |
 | Primary Black | `gray-950` / custom |
 | Dark Gray | `gray-700` |
 | Mid Gray | `gray-500` |
@@ -256,7 +256,7 @@ These rules protect the integrity of the identity. When in doubt, refer to the m
 - Use the KR monogram at sizes below 120px / 30mm where the full logo becomes illegible.
 - Use the dark background variant when placing the logo on dark surfaces.
 - Reference Work Sans via Google Fonts for all web and digital applications.
-- Keep the green at exactly `#16A34A` — no variations, no gradients, no opacity changes.
+- Keep the green at exactly `#A8E10C` — no variations, no gradients, no opacity changes.
 - Use the alternating white / off-white section pattern for long-form page layouts.
 
 ### Don't

@@ -58,9 +58,11 @@ export default function SiteHeader(): React.JSX.Element {
         <a
           href="#"
           style={{
-            fontFamily: "'UnifrakturMaguntia', cursive",
+            fontFamily: "'Work Sans', sans-serif",
+            fontWeight: 900,
             fontSize: '1.8rem',
             lineHeight: 1,
+            textTransform: 'uppercase',
           }}
         >
           Kevin<span style={{ color: 'var(--accent-dim)', marginLeft: '0.15em' }}>Ryan</span>
