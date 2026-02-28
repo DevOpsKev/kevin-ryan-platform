@@ -10,6 +10,7 @@
     "docker:build": "docker build -t kevinryan-io:local .",
     "docker:up": "docker compose up --build",
     "docker:down": "docker compose down",
+    "lint:all": "eslint . && tsc --noEmit && markdownlint '**/*.md' --ignore node_modules && yamllint -s '**/*.yaml' '**/*.yml'",
     "prepare": "husky"
   },
   "dependencies": {
