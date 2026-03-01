@@ -91,4 +91,5 @@ module "github_oidc" {
   acr_id                     = module.registry.acr_id
   resource_group_id          = module.network.resource_group_id
   tfstate_storage_account_id = data.azurerm_storage_account.tfstate.id
+  tfstate_resource_group_id  = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/rg-kevinryan-tfstate"
 }
