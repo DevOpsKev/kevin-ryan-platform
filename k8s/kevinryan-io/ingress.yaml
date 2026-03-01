@@ -5,10 +5,12 @@ metadata:
   namespace: kevinryan-io
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`kevinryan.io`) || Host(`www.kevinryan.io`)
       kind: Rule
       services:
         - name: kevinryan-io
           port: 80
+  tls:
+    secretName: cloudflare-origin-tls
