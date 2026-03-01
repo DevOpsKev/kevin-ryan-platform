@@ -5,19 +5,20 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+COPY pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY sites/kevinryan-io/package.json ./sites/kevinryan-io/
+RUN cd sites/kevinryan-io && pnpm install --frozen-lockfile
 
-COPY . .
-RUN pnpm build
+COPY sites/kevinryan-io/ ./sites/kevinryan-io/
+RUN cd sites/kevinryan-io && pnpm build
 
 # Stage 2 — Serve
 FROM nginx:1.28.2-alpine
 
 LABEL org.opencontainers.image.source="https://github.com/DevOpsKev/kevinryan-io"
 
-COPY --from=build /app/out /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/sites/kevinryan-io/out /usr/share/nginx/html
+COPY sites/kevinryan-io/nginx.conf /etc/nginx/nginx.conf
 
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chown -R nginx:nginx /var/cache/nginx && \
