@@ -43,8 +43,7 @@
       "tsc-files --noEmit"
     ],
     "*.{tf,tfvars}": [
-      "terraform fmt -check",
-      "tflint"
+      "terraform fmt -check"
     ],
     "*.{yaml,yml}": [
       "yamllint -s"

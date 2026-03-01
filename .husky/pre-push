@@ -1,1 +1,2 @@
 pnpm build
+cd infra && tflint --recursive
