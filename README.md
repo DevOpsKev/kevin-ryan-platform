@@ -1,4 +1,4 @@
-# kevinryan.io
+# kevin-ryan-platform
 
 Multi-site platform monorepo for Kevin Ryan's web properties. Currently hosts [kevinryan.io](https://kevinryan.io) — a professional portfolio site. See [ADR-013](.adr/adr-013-monorepo-pnpm-workspaces.md) for the monorepo architecture decision.
 
@@ -40,8 +40,8 @@ npm install -g @tessl/cli
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/DevOpsKev/kevinryan-io.git
-cd kevinryan-io
+git clone https://github.com/DevOpsKev/kevin-ryan-platform.git
+cd kevin-ryan-platform
 ```
 
 ### 2. Install dependencies
