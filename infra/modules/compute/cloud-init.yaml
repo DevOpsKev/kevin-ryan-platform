@@ -1,4 +1,4 @@
-#cloud-config
+# cloud-config
 package_update: true
 package_upgrade: true
 
@@ -84,13 +84,16 @@ runcmd:
   - curl -s https://fluxcd.io/install.sh | bash
 
   # Bootstrap Flux (connects to GitHub repo, installs controllers, creates flux-system namespace)
+  # GITHUB_TOKEN env var is read automatically by flux CLI (--token flag is unreliable in cloud-init)
+  # --kubeconfig is explicit because cloud-init runs as root and K3s kubeconfig is non-default path
   - |
-    KUBECONFIG=/etc/rancher/k3s/k3s.yaml flux bootstrap github \
+    export GITHUB_TOKEN="${github_token}"
+    flux bootstrap github \
+      --kubeconfig=/etc/rancher/k3s/k3s.yaml \
       --owner=DevOpsKev \
       --repository=kevinryan-io \
       --branch=main \
       --path=k8s \
       --personal \
       --token-auth \
-      --token=${github_token} \
       --components=source-controller,kustomize-controller
