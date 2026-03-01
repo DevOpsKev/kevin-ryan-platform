@@ -20,6 +20,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 4.0"
     }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "~> 3.0"
+    }
     cloudflare = {
       source  = "cloudflare/cloudflare"
       version = "~> 4.0"
@@ -32,8 +36,17 @@ provider "azurerm" {
   resource_provider_registrations = "none"
 }
 
+provider "azuread" {}
+
 provider "cloudflare" {
   api_token = var.cloudflare_api_token
+}
+
+data "azurerm_client_config" "current" {}
+
+data "azurerm_storage_account" "tfstate" {
+  name                = "krtfstate2026"
+  resource_group_name = "rg-kevinryan-tfstate"
 }
 
 module "network" {
@@ -69,4 +82,13 @@ module "cloudflare" {
   source       = "./modules/cloudflare"
   zone_id      = var.cloudflare_zone_id
   vm_public_ip = module.network.public_ip_address
+}
+
+module "github_oidc" {
+  source                     = "./modules/github-oidc"
+  github_repo_owner          = var.github_repo_owner
+  github_repo_name           = var.github_repo_name
+  acr_id                     = module.registry.acr_id
+  resource_group_id          = module.network.resource_group_id
+  tfstate_storage_account_id = data.azurerm_storage_account.tfstate.id
 }
