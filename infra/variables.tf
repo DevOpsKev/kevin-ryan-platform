@@ -47,3 +47,15 @@ variable "github_token" {
   type        = string
   sensitive   = true
 }
+
+variable "github_repo_owner" {
+  description = "GitHub repository owner"
+  type        = string
+  default     = "DevOpsKev"
+}
+
+variable "github_repo_name" {
+  description = "GitHub repository name"
+  type        = string
+  default     = "kevinryan-io"
+}
