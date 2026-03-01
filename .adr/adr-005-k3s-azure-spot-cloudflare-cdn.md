@@ -1,6 +1,6 @@
 # ADR-005: Host on K3s with Azure Spot VM and Cloudflare CDN
 
-**Status:** Accepted
+**Status:** Accepted (updated 2026-03-01)
 **Date:** 2026-02-28
 **Decision Makers:** Human + AI
 **Prompted By:** Need to move off GitHub Pages to support multi-domain hosting (kevinryan.io, sddbook.com, aiimmigrants.com), run observability workloads alongside application containers, and demonstrate real Platform Engineering capability through the portfolio infrastructure itself
@@ -32,7 +32,11 @@ Budget is constrained: under £30/month for compute. Kevin is a solo operator, s
 
 ### Option A: K3s on Azure Spot VM + Cloudflare
 
-Single Azure Spot B2s/B2ms VM (2 vCPU, 4–8 GB RAM, Ubuntu 24.04 LTS) running K3s. Traefik (bundled with K3s) handles multi-domain ingress and TLS via Let's Encrypt. Cloudflare (free tier) provides DNS, CDN caching, DDoS protection, and TLS termination at the edge. ACR Basic tier stores images.
+Single Azure Spot VM (2 vCPU, 8 GB RAM, Ubuntu 24.04 LTS) running K3s. Traefik (bundled with K3s) handles multi-domain ingress and TLS via Cloudflare Origin Certificates. Cloudflare (free tier) provides DNS, CDN caching, DDoS protection, and TLS termination at the edge in Full (Strict) mode. ACR Basic tier stores images.
+
+**VM size note:** Originally specified Standard_B2ms (burstable), but spot capacity was unavailable in North Europe. Standard_D2s_v6 (general-purpose, same 2 vCPU / 8 GB RAM spec) is used instead.
+
+**Ubuntu image note:** The correct Azure Marketplace image reference is `Canonical / ubuntu-24_04-lts / server / latest`. The commonly referenced `0001-com-ubuntu-server-noble / 24_04-lts-gen2` SKU does not exist in North Europe.
 
 Estimated cost: £16–22/month (Spot VM £12–18 + ACR ~£4). Cloudflare free.
 
@@ -70,26 +74,28 @@ Cannot host multiple custom domains from a single infrastructure footprint, prov
 
 The architecture:
 
-```
+```bash
                     ┌─────────────────────────┐
                     │       Cloudflare         │
                     │  DNS · CDN · TLS · WAF   │
+                    │  SSL: Full (Strict)       │
                     │                          │
                     │  kevinryan.io            │
                     │  sddbook.com             │
                     │  aiimmigrants.com        │
                     └────────────┬─────────────┘
                                  │
-                                 │ HTTPS (origin pull)
+                                 │ HTTPS (origin pull, verified)
                                  │
                     ┌────────────▼─────────────┐
-                    │   Azure Spot VM (B2ms)    │
-                    │   Ubuntu 24.04 LTS        │
+                    │  Azure Spot VM (D2s_v6)   │
+                    │  Ubuntu 24.04 LTS         │
                     │                           │
                     │  ┌──────────────────────┐ │
                     │  │        K3s            │ │
                     │  │                       │ │
                     │  │  Traefik Ingress      │ │
+                    │  │  (websecure + TLS)    │ │
                     │  │    ├─ kevinryan.io    │ │
                     │  │    ├─ sddbook.com     │ │
                     │  │    └─ aiimmigrants.com│ │
@@ -110,16 +116,16 @@ GitHub Pages is decommissioned. No fallback, no dual-running. The `.github/workf
 
 ### Positive
 
-- Multi-domain routing handled natively by Traefik IngressRoutes with per-domain TLS certificates via Let's Encrypt
+- Multi-domain routing handled natively by Traefik IngressRoutes with per-domain TLS via Cloudflare Origin Certificates (15-year validity, Full Strict mode)
 - Real Kubernetes operational surface: kubectl, Helm, manifests, ingress config, resource limits, pod scheduling — all demonstrable to clients
 - Spot + Cloudflare creates genuine resilience: sites remain available via CDN cache during VM eviction and respawn
 - Cost target met: £16–22/month total
 - Extensible to dynamic workloads (specmcp.ai) without re-architecting
-- Complete IaC narrative: Bicep for VM provisioning, cloud-init for K3s bootstrap, Kubernetes manifests for workloads — aligns with planned `azure-bicep-k3s` Tessl skill
+- Complete IaC narrative: Terraform for VM provisioning, cloud-init for K3s + Flux bootstrap, Kubernetes manifests for workloads, GitHub Actions OIDC for CI/CD
 
 ### Negative
 
-- Operational overhead increases from zero (GitHub Pages) to 1–2 hours/month for OS patching, K3s upgrades, certificate rotation, and Traefik configuration
+- Operational overhead increases from zero (GitHub Pages) to 1–2 hours/month for OS patching, K3s upgrades, and Traefik configuration. Certificate rotation is not a concern — Cloudflare Origin Certificates have 15-year validity
 - No HA for the Kubernetes control plane — single-node K3s means etcd, API server, and scheduler all run on one machine. Acceptable for this workload class
 
 ### Risks
@@ -127,22 +133,33 @@ GitHub Pages is decommissioned. No fallback, no dual-running. The `.github/workf
 - **Spot eviction with empty Cloudflare cache:** If the VM is evicted and Cloudflare's cache has expired, sites are down until the VM respawns. Mitigation: set aggressive cache TTLs for static assets (24h minimum, `s-maxage=86400`). For truly critical availability, a future ADR could add a secondary VM in a different region or size
 - **Spot capacity unavailable:** Azure may not have spot capacity in the chosen region/size. Mitigation: select a region with good spot availability history (North Europe or West Europe); accept pay-as-you-go pricing as a temporary fallback if spot is unavailable
 - **K3s upgrade breaks Traefik:** K3s bundles Traefik; a K3s upgrade could introduce a breaking Traefik version. Mitigation: pin K3s channel to stable, test upgrades in a local k3d cluster before applying to production
+- **TLS secret lost on full rebuild:** The Cloudflare Origin Certificate is stored as a Kubernetes secret on the OS disk. Spot eviction (deallocate + start) preserves the disk and secret. A full `terraform destroy` + `apply` provisions a new disk — the secret must be recreated manually. Mitigation: automate via cloud-init secret injection or Azure Key Vault in a future iteration
 
 ## Agent Decisions
 
 | Decision | Rationale | Acceptable |
 |----------|-----------|------------|
-| HTTP between Cloudflare and origin (entryPoint: `web`) for MVP | TLS termination at Cloudflare is sufficient. Traefik ACME for Full Strict deferred to reduce initial complexity | Yes |
+| Standard_D2s_v6 instead of Standard_B2ms | B2ms spot capacity unavailable in North Europe. D2s_v6 is general-purpose with identical spec (2 vCPU, 8 GB RAM). Same price band for spot | Yes |
+| Ubuntu image: `Canonical / ubuntu-24_04-lts / server / latest` | The commonly referenced `0001-com-ubuntu-server-noble / 24_04-lts-gen2` SKU does not exist in North Europe. Correct offer/SKU discovered via `az vm image list` | Yes |
+| Cloudflare Origin Certificate instead of Let's Encrypt ACME | 15-year validity, no renewal automation needed, no persistent storage for certs, simpler than ACME HTTP-01 challenge through Cloudflare proxy. Only trusted by Cloudflare — acceptable since all traffic is proxied | Yes |
+| Cloudflare SSL mode: Full (Strict) | Origin cert enables verified TLS between Cloudflare and Traefik. Eliminates unencrypted traffic between edge and origin | Yes |
+| TLS secret created manually on cluster | Cloudflare Origin Certificate stored as K8s TLS secret. Must be recreated after full VM rebuild (not spot eviction — OS disk survives deallocation). Automation via cloud-init or Key Vault deferred | Yes |
+| `lifecycle { ignore_changes = [custom_data] }` on VM | Prevents Terraform from rebuilding the VM when cloud-init template inputs change (e.g. PAT rotation). Cloud-init is a first-boot concern; Flux owns cluster state after that | Yes |
+| Flux bootstrap via `GITHUB_TOKEN` env var, not `--token` flag | The `--token` flag was unreliable in cloud-init YAML block scalars. `export GITHUB_TOKEN` in the same shell block is read automatically by flux CLI | Yes |
 | Standard SKU public IP with static allocation | Required for Spot VMs to retain IP after deallocation on eviction | Yes |
 | 30 GB OS disk with Standard_LRS | Minimum for Ubuntu 24.04 + K3s + container images. Premium not needed for this workload | Yes |
 | NSG SSH rule restricted to `admin_ip` variable | Temporary for initial setup and debugging. Can be removed once infrastructure is stable | Yes |
+| `resource_provider_registrations = "none"` in azurerm provider | Fresh Azure subscriptions hang on auto-registration of hundreds of providers. Required providers registered manually via `az provider register` | Yes |
 
 ## References
 
 - [ADR-001: Containerise with nginx:alpine](adr-001-containerize-with-nginx-alpine.md)
 - [ADR-002: Private images via GHCR](adr-002-private-images-via-ghcr.md)
 - [ADR-004: Push images to GHCR with SHA tagging](adr-004-ghcr-push-with-sha-tagging.md)
+- [ADR-009: CI/CD with GitHub Actions and Flux CD](adr-009-cicd-github-actions-flux.md)
+- [ADR-010: ACR as primary registry, retain GHCR](adr-010-acr-primary-retain-ghcr.md)
 - [K3s documentation](https://docs.k3s.io/)
 - [Azure Spot VMs](https://learn.microsoft.com/en-us/azure/virtual-machines/spot-vms)
 - [Cloudflare CDN](https://developers.cloudflare.com/cache/)
+- [Cloudflare Origin Certificates](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/)
 - [Traefik IngressRoute](https://doc.traefik.io/traefik/routing/providers/kubernetes-crd/)

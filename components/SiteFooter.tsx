@@ -25,7 +25,7 @@ export default function SiteFooter(): React.JSX.Element {
             textTransform: 'uppercase',
           }}
         >
-          Budapest · Dublin · <a href="https://devopskev.github.io/professional-hq/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--grey-800)', textDecoration: 'none' }}>HQ - deployed by flux</a>
+          Budapest · Dublin · <a href="https://devopskev.github.io/professional-hq/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--grey-800)', textDecoration: 'none' }}>HQ</a>
         </span>
       </div>
     </footer>
