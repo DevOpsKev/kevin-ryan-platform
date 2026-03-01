@@ -56,4 +56,8 @@ resource "azurerm_linux_virtual_machine" "main" {
     acr_name         = var.acr_name
     github_token     = var.github_token
   }))
+
+  lifecycle {
+    ignore_changes = [custom_data]
+  }
 }
