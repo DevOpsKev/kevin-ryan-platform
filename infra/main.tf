@@ -10,7 +10,7 @@ terraform {
 
   backend "azurerm" {
     resource_group_name  = "rg-kevinryan-tfstate"
-    storage_account_name = "" # Set from bootstrap output via -backend-config or env
+    storage_account_name = "krtfstate2026" # Set from bootstrap output via -backend-config or env
     container_name       = "tfstate"
     key                  = "kevinryan-io.tfstate"
   }
