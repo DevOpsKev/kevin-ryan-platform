@@ -23,6 +23,11 @@ variable "tfstate_storage_account_id" {
   type        = string
 }
 
+variable "tfstate_resource_group_id" {
+  description = "Resource ID of the Terraform state resource group"
+  type        = string
+}
+
 resource "azuread_application" "github_actions" {
   display_name = "github-actions-kevinryan-io"
 }
@@ -62,6 +67,13 @@ resource "azurerm_role_assignment" "rg_contributor" {
 resource "azurerm_role_assignment" "tfstate_blob" {
   scope                = var.tfstate_storage_account_id
   role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = azuread_service_principal.github_actions.object_id
+}
+
+# Reader on tfstate resource group (terraform init needs to read storage account properties)
+resource "azurerm_role_assignment" "tfstate_reader" {
+  scope                = var.tfstate_resource_group_id
+  role_definition_name = "Reader"
   principal_id         = azuread_service_principal.github_actions.object_id
 }
 
