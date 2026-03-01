@@ -50,12 +50,6 @@ variable "acr_name" {
   type        = string
 }
 
-variable "github_repo" {
-  description = "GitHub repo for Flux bootstrap (owner/repo)"
-  type        = string
-  default     = "DevOpsKev/kevinryan-io"
-}
-
 variable "github_token" {
   description = "GitHub PAT for Flux bootstrap"
   type        = string
