@@ -18,6 +18,9 @@ export default function SiteFooter(): React.JSX.Element {
         }}
       >
         <span>© {new Date().getFullYear()} Kevin Ryan. All rights reserved.</span>
+        <span style={{ fontFamily: 'monospace', fontSize: '0.65rem', opacity: 0.5 }}>
+          {process.env.NEXT_PUBLIC_COMMIT_SHA}
+        </span>
         <span
           style={{
             fontFamily: 'var(--font-display)',
