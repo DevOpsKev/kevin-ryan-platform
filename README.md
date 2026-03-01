@@ -1,6 +1,6 @@
 # kevinryan.io
 
-Professional portfolio website for Kevin Ryan - DevOps & Agile Coach, AI Adoption & Governance Specialist, and Author.
+Multi-site platform monorepo for Kevin Ryan's web properties. Currently hosts [kevinryan.io](https://kevinryan.io) — a professional portfolio site. See [ADR-013](.adr/adr-013-monorepo-pnpm-workspaces.md) for the monorepo architecture decision.
 
 ## Tech Stack
 
@@ -78,7 +78,7 @@ catch build failures before they reach CI.
 ### 5. Run the development server
 
 ```bash
-pnpm dev
+pnpm dev:kevinryan-io
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the site.
@@ -91,9 +91,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the s
 
 ### Commands
 
-- `pnpm docker:build` — Build the production Docker image locally
-- `pnpm docker:up` — Build and start the container (add `-d` for detached mode)
-- `pnpm docker:down` — Stop and remove the container
+```bash
+cd sites/kevinryan-io
+pnpm docker:build    # Build the production Docker image locally
+pnpm docker:up       # Build and start the container
+pnpm docker:down     # Stop and remove the container
+```
 
 ### Verify
 
@@ -157,31 +160,36 @@ tessl install github:owner/repo --skill skill-name
 
 ## Available Scripts
 
-- `pnpm dev` - Start the development server on http://localhost:3000
-- `pnpm build` - Build the production-ready static site
-- `pnpm start` - Start the production server (after building)
-- `pnpm lint` - Run ESLint to check code quality
+### Workspace root
+
+- `pnpm build` — Build all sites
+- `pnpm lint` — Lint all sites
+- `pnpm dev:kevinryan-io` — Start kevinryan.io dev server
+
+### Site-level (from `sites/kevinryan-io/`)
+
+- `pnpm dev` — Start the development server
+- `pnpm build` — Build the static site
+- `pnpm lint` — Run ESLint
+
+### Or from repo root using filters
+
+- `pnpm --filter kevinryan-io dev`
+- `pnpm --filter kevinryan-io build`
 
 ## Project Structure
 
 ```text
 kevinryan-io/
-├── app/                    # Next.js App Router
-│   ├── page.tsx           # Home page
-│   ├── layout.tsx         # Root layout
-│   ├── globals.css        # Global styles
-│   └── favicon.ico        # Site favicon
-├── components/            # React components
-│   └── SiteHeader.tsx     # Header component
-├── public/                # Static assets
-│   ├── kevin.jpg          # Profile photo
-│   ├── github_logo_black.png
-│   └── linkedin_black_logo.png
-├── .tessl/                # Tessl agent context (managed by Tessl CLI)
-│   └── tiles/             # Installed skills and documentation
-├── .husky/                # Git hooks (managed by Husky)
-│   ├── pre-commit         # Runs lint-staged on staged files
-│   └── pre-push           # Runs pnpm build
+├── .adr/                   # Architecture Decision Records
+├── .github/
+│   └── workflows/
+│       ├── deploy.yml      # Build → push ACR + GHCR → update manifest
+│       └── terraform.yml   # Plan on push to infra/, gated apply
+├── .husky/                 # Git hooks (managed by Husky)
+│   ├── pre-commit          # Runs lint-staged on staged files
+│   └── pre-push            # Runs pnpm build (all sites)
+├── .tessl/                 # Tessl agent context (managed by Tessl CLI)
 ├── infra/                  # Terraform infrastructure-as-code
 │   ├── bootstrap/          # State storage (applied once)
 │   ├── modules/            # network, compute, registry, cloudflare
@@ -189,29 +197,36 @@ kevinryan-io/
 │   └── variables.tf        # Input variables
 ├── k8s/                    # Kubernetes manifests (watched by Flux CD)
 │   └── kevinryan-io/       # App namespace, deployment, service, ingress
-├── .github/
-│   └── workflows/
-│       ├── deploy.yml      # Build → push ACR + GHCR → update manifest
-│       └── terraform.yml   # Plan on push to infra/, gated apply
-├── .markdownlint.json     # markdownlint configuration
-├── .yamllint.yml          # yamllint configuration
-├── tessl.json             # Tessl tile manifest
-├── next.config.ts         # Next.js configuration
-├── tsconfig.json          # TypeScript configuration
-├── postcss.config.mjs     # PostCSS configuration
-├── eslint.config.mjs      # ESLint configuration
-└── package.json           # Project dependencies
+├── sites/
+│   └── kevinryan-io/       # kevinryan.io Next.js app
+│       ├── app/            # Next.js App Router pages
+│       ├── components/     # React components (one per file)
+│       ├── hooks/          # Custom React hooks
+│       ├── lib/            # Shared utilities
+│       ├── public/         # Static assets
+│       ├── Dockerfile      # Multi-stage Docker build
+│       ├── nginx.conf      # nginx configuration
+│       ├── docker-compose.yml
+│       ├── next.config.ts  # Next.js configuration
+│       ├── tsconfig.json   # TypeScript configuration
+│       ├── eslint.config.mjs
+│       ├── postcss.config.mjs
+│       └── package.json    # Site dependencies
+├── pnpm-workspace.yaml     # Workspace configuration
+├── AGENTS.md               # Agent rules and conventions
+├── CLAUDE.md               # Claude Code instructions
+├── tessl.json              # Tessl tile manifest
+└── package.json            # Workspace root
 ```
 
 ## Building for Production
 
-This project is configured to export as a static site:
-
 ```bash
-pnpm build
+pnpm build                              # Build all sites
+pnpm --filter kevinryan-io build        # Build kevinryan.io only
 ```
 
-The static files will be generated in the `out/` directory.
+Static files are generated in `sites/kevinryan-io/out/`.
 
 ## Infrastructure
 
@@ -312,7 +327,7 @@ Strict TypeScript is enabled with:
 
 ### Next.js Config
 
-The site uses static export mode (`output: 'export'`) for GitHub Pages deployment with:
+Configuration lives at `sites/kevinryan-io/next.config.ts`. The site uses static export mode (`output: 'export'`) for GitHub Pages deployment with:
 
 - Unoptimized images (for static hosting)
 - Trailing slashes enabled
@@ -323,7 +338,7 @@ The site uses static export mode (`output: 'export'`) for GitHub Pages deploymen
 Managed by [Husky](https://typicode.github.io/husky/) + [lint-staged](https://github.com/lint-staged/lint-staged). Hooks are installed automatically via `pnpm install`.
 
 - **pre-commit**: Runs lint-staged on staged files (ESLint, tsc-files, markdownlint, yamllint, hadolint, terraform fmt, tflint)
-- **pre-push**: Runs `pnpm build` to verify the full build passes
+- **pre-push**: Runs `pnpm build` which delegates to all workspace sites via `--filter`
 
 To skip hooks temporarily (not recommended):
 

@@ -1,5 +1,5 @@
 packages:
-  - .
+  - 'sites/*'
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
