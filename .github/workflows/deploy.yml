@@ -3,12 +3,8 @@ name: Build and Deploy
 on:
   push:
     branches: ["main"]
-    paths-ignore:
-      - "infra/**"
-      - "k8s/**"
-      - "docs/**"
-      - ".adr/**"
-      - "**.md"
+    paths:
+      - "sites/kevinryan-io/**"
 
 permissions:
   contents: write
@@ -53,7 +49,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
         with:
-          context: .
+          context: sites/kevinryan-io
           push: true
           tags: |
             ghcr.io/devopskev/kevinryan-io:${{ steps.vars.outputs.SHA }}

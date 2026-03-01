@@ -7,6 +7,21 @@ settings:
 importers:
 
   .:
+    devDependencies:
+      husky:
+        specifier: ^9.1.7
+        version: 9.1.7
+      lint-staged:
+        specifier: ^16.3.0
+        version: 16.3.0
+      markdownlint-cli:
+        specifier: ^0.47.0
+        version: 0.47.0
+      tsc-files:
+        specifier: ^1.1.4
+        version: 1.1.4(typescript@5.9.3)
+
+  sites/kevinryan-io:
     dependencies:
       fitty:
         specifier: ^2.4.2
@@ -48,24 +63,12 @@ importers:
       eslint-config-next:
         specifier: 16.1.4
         version: 16.1.4(@typescript-eslint/parser@8.53.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
-      husky:
-        specifier: ^9.1.7
-        version: 9.1.7
-      lint-staged:
-        specifier: ^16.3.0
-        version: 16.3.0
-      markdownlint-cli:
-        specifier: ^0.47.0
-        version: 0.47.0
       postcss:
         specifier: ^8.5.6
         version: 8.5.6
       tailwindcss:
         specifier: ^4
         version: 4.1.18
-      tsc-files:
-        specifier: ^1.1.4
-        version: 1.1.4(typescript@5.9.3)
       typescript:
         specifier: ^5
         version: 5.9.3

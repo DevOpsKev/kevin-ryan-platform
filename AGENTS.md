@@ -27,22 +27,31 @@ This is a static Next.js 16 portfolio site for Kevin Ryan (DevOps & AI Governanc
 ## Build Commands
 
 ```bash
-pnpm install    # Install dependencies
-pnpm dev        # Development server at localhost:3000
-pnpm build      # Production build (static export to out/)
-pnpm lint       # Run ESLint
+pnpm install              # Install all workspace dependencies
+pnpm dev:kevinryan-io     # Dev server for kevinryan.io at localhost:3000
+pnpm build                # Build all sites
+pnpm --filter kevinryan-io build   # Build specific site
+pnpm --filter kevinryan-io lint    # Lint specific site
 ```
 
 ## Directory Structure
 
 ```text
 kevinryan-io/
-├── app/                    # Next.js App Router pages
-├── components/             # React components (one per file)
-├── public/                 # Static assets
-├── .tessl/                 # Tessl agent context (managed by Tessl CLI)
-├── .github/workflows/      # CI/CD
-└── out/                    # Build output (git-ignored)
+├── .github/workflows/      # CI/CD (shared)
+├── infra/                  # Terraform (shared across all sites)
+├── k8s/                    # Kubernetes manifests (per-site subdirs)
+│   └── kevinryan-io/
+├── sites/                  # Individual site packages
+│   └── kevinryan-io/       # kevinryan.io Next.js app
+│       ├── app/            # Next.js App Router pages
+│       ├── components/     # React components (one per file)
+│       ├── hooks/          # Custom React hooks
+│       ├── lib/            # Shared utilities
+│       ├── public/         # Static assets
+│       ├── Dockerfile
+│       └── nginx.conf
+└── pnpm-workspace.yaml
 ```
 
 ## When Generating Code
