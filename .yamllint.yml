@@ -5,3 +5,5 @@ rules:
   truthy:
     check-keys: false
   document-start: disable
+  comments:
+    require-starting-space: false
