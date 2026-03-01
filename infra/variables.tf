@@ -37,21 +37,9 @@ variable "cloudflare_zone_id" {
   type        = string
 }
 
-variable "domain" {
-  description = "Domain name"
-  type        = string
-  default     = "kevinryan.io"
-}
-
 variable "acr_name" {
   description = "Globally unique name for Azure Container Registry"
   type        = string
-}
-
-variable "github_repo" {
-  description = "GitHub repo for Flux bootstrap (owner/repo format)"
-  type        = string
-  default     = "DevOpsKev/kevinryan-io"
 }
 
 variable "github_token" {

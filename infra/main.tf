@@ -54,7 +54,6 @@ module "compute" {
   admin_ssh_public_key = var.admin_ssh_public_key
   acr_login_server     = "${var.acr_name}.azurecr.io"
   acr_name             = var.acr_name
-  github_repo          = var.github_repo
   github_token         = var.github_token
 }
 
@@ -69,6 +68,5 @@ module "registry" {
 module "cloudflare" {
   source       = "./modules/cloudflare"
   zone_id      = var.cloudflare_zone_id
-  domain       = var.domain
   vm_public_ip = module.network.public_ip_address
 }
