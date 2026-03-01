@@ -10,15 +10,20 @@ WORKDIR /app
 
 COPY pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY sites/kevinryan-io/package.json ./sites/kevinryan-io/
-RUN cd sites/kevinryan-io && pnpm install --frozen-lockfile
 
+WORKDIR /app/sites/kevinryan-io
+RUN pnpm install --frozen-lockfile
+
+WORKDIR /app
 COPY sites/kevinryan-io/ ./sites/kevinryan-io/
-RUN cd sites/kevinryan-io && pnpm build
+
+WORKDIR /app/sites/kevinryan-io
+RUN pnpm build
 
 # Stage 2 — Serve
 FROM nginx:1.28.2-alpine
 
-LABEL org.opencontainers.image.source="https://github.com/DevOpsKev/kevinryan-io"
+LABEL org.opencontainers.image.source="https://github.com/DevOpsKev/kevin-ryan-platform"
 
 COPY --from=build /app/sites/kevinryan-io/out /usr/share/nginx/html
 COPY sites/kevinryan-io/nginx.conf /etc/nginx/nginx.conf
