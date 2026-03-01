@@ -4,6 +4,9 @@ set -e
 # Node dependencies
 pnpm install
 
+# Remove stale Yarn apt repo (breaks apt-get update in Codespaces)
+sudo rm -f /etc/apt/sources.list.d/yarn.list
+
 # Azure CLI
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
