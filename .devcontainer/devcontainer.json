@@ -1,11 +1,5 @@
 {
   "name": "kevinryan-io",
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {
-    "ghcr.io/devcontainers/features/azure-cli:1": {},
-    "ghcr.io/devcontainers/features/terraform:1": {},
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-  },
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "customizations": {
     "vscode": {
