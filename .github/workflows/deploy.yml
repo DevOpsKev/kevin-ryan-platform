@@ -52,6 +52,8 @@ jobs:
           context: .
           file: sites/kevinryan-io/Dockerfile
           push: true
+          build-args: |
+            COMMIT_SHA=${{ steps.vars.outputs.SHA }}
           tags: |
             ghcr.io/devopskev/kevinryan-io:${{ steps.vars.outputs.SHA }}
             ghcr.io/devopskev/kevinryan-io:latest

@@ -1,6 +1,9 @@
 # Stage 1 — Build
 FROM node:22.22.0-alpine3.23 AS build
 
+ARG COMMIT_SHA=dev
+ENV NEXT_PUBLIC_COMMIT_SHA=${COMMIT_SHA}
+
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app

@@ -3,6 +3,8 @@ services:
     build:
       context: ../..
       dockerfile: sites/kevinryan-io/Dockerfile
+      args:
+        COMMIT_SHA: local
     container_name: kevinryan-io
     ports:
       - "8080:8080"
