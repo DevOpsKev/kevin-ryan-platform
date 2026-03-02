@@ -21,6 +21,15 @@ resource "cloudflare_record" "www" {
   ttl     = 1
 }
 
+resource "cloudflare_record" "brand" {
+  zone_id = var.zone_id
+  name    = "brand"
+  content = var.vm_public_ip
+  type    = "A"
+  proxied = true
+  ttl     = 1
+}
+
 resource "cloudflare_ruleset" "cache" {
   zone_id     = var.zone_id
   name        = "Cache rules for kevinryan.io"
@@ -40,7 +49,7 @@ resource "cloudflare_ruleset" "cache" {
         disable_stale_while_updating = false
       }
     }
-    expression  = "(http.host eq \"kevinryan.io\")"
+    expression  = "(http.host eq \"kevinryan.io\") or (http.host eq \"brand.kevinryan.io\")"
     description = "Serve stale content on origin failure"
     enabled     = true
   }
