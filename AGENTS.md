@@ -4,7 +4,10 @@
 
 ## Project Summary
 
-This is a static Next.js 16 portfolio site for Kevin Ryan (DevOps & AI Governance Consultant).
+This is a monorepo hosting multiple sites for Kevin Ryan (DevOps & AI Governance Consultant):
+
+- **kevinryan.io** — static Next.js 16 portfolio site
+- **brand.kevinryan.io** — static HTML brand guidelines site (no build step, no Node.js tooling)
 
 **Stack:**
 
@@ -37,22 +40,32 @@ pnpm --filter kevinryan-io lint    # Lint specific site
 ## Directory Structure
 
 ```text
-kevinryan-io/
+kevin-ryan-platform/
 ├── .github/workflows/      # CI/CD (shared)
 ├── infra/                  # Terraform (shared across all sites)
 ├── k8s/                    # Kubernetes manifests (per-site subdirs)
-│   └── kevinryan-io/
+│   ├── kevinryan-io/
+│   └── brand-kevinryan-io/
 ├── sites/                  # Individual site packages
-│   └── kevinryan-io/       # kevinryan.io Next.js app
-│       ├── app/            # Next.js App Router pages
-│       ├── components/     # React components (one per file)
-│       ├── hooks/          # Custom React hooks
-│       ├── lib/            # Shared utilities
-│       ├── public/         # Static assets
+│   ├── kevinryan-io/       # kevinryan.io Next.js app
+│   │   ├── app/            # Next.js App Router pages
+│   │   ├── components/     # React components (one per file)
+│   │   ├── hooks/          # Custom React hooks
+│   │   ├── lib/            # Shared utilities
+│   │   ├── public/         # Static assets
+│   │   ├── Dockerfile
+│   │   └── nginx.conf
+│   └── brand-kevinryan-io/ # brand.kevinryan.io — static HTML, no build step
+│       ├── public/         # Static assets (index.html, SVGs, PNGs, PDFs)
 │       ├── Dockerfile
-│       └── nginx.conf
+│       ├── nginx.conf
+│       └── docker-compose.yml
 └── pnpm-workspace.yaml
 ```
+
+> **Note:** `brand-kevinryan-io` is a pure static HTML site with no build step.
+> TypeScript, Next.js, Tailwind, ESLint, and related conventions do **not** apply to it.
+> The root `build` and `lint` scripts use `--if-present` to skip this package automatically.
 
 ## When Generating Code
 
