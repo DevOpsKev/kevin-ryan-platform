@@ -91,9 +91,9 @@ runcmd:
     flux bootstrap github \
       --kubeconfig=/etc/rancher/k3s/k3s.yaml \
       --owner=DevOpsKev \
-      --repository=kevinryan-io \
+      --repository=kevin-ryan-platform \
       --branch=main \
-      --path=k8s \
+      --path=k8s/kevinryan-io \
       --personal \
       --token-auth \
       --components=source-controller,kustomize-controller

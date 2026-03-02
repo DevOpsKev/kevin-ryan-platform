@@ -23,6 +23,7 @@ resource "azurerm_public_ip" "main" {
   resource_group_name = azurerm_resource_group.main.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  zones               = ["1"]
 }
 
 resource "azurerm_network_security_group" "main" {
