@@ -57,5 +57,5 @@ variable "github_repo_owner" {
 variable "github_repo_name" {
   description = "GitHub repository name"
   type        = string
-  default     = "kevinryan-io"
+  default     = "kevin-ryan-platform"
 }
