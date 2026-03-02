@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: brand-kevinryan-io
+  namespace: brand-kevinryan-io
+spec:
+  selector:
+    app: brand-kevinryan-io
+  ports:
+    - port: 80
+      targetPort: 8080

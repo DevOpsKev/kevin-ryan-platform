@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: brand-kevinryan-io
+  namespace: brand-kevinryan-io
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`brand.kevinryan.io`)
+      kind: Rule
+      services:
+        - name: brand-kevinryan-io
+          port: 80
+  tls:
+    secretName: cloudflare-origin-tls

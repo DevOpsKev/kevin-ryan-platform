@@ -2,8 +2,8 @@
   "name": "kevinryan-platform",
   "private": true,
   "scripts": {
-    "build": "pnpm --filter './sites/*' build",
-    "lint": "pnpm --filter './sites/*' lint",
+    "build": "pnpm --filter './sites/*' --if-present build",
+    "lint": "pnpm --filter './sites/*' --if-present lint",
     "dev:kevinryan-io": "pnpm --filter kevinryan-io dev",
     "prepare": "husky"
   },
