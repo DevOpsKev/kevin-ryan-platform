@@ -21,6 +21,8 @@ importers:
         specifier: ^1.1.4
         version: 1.1.4(typescript@5.9.3)
 
+  sites/brand-kevinryan-io: {}
+
   sites/kevinryan-io:
     dependencies:
       fitty:

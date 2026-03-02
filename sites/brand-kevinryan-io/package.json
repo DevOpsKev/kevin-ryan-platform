@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "docker:build": "docker build -t brand-kevinryan-io:local -f Dockerfile ../..",
-    "docker:up": "docker compose up --build",
+    "docker:build": "docker build --no-cache -t brand-kevinryan-io:local -f Dockerfile ../..",
+    "docker:up": "docker compose up --build --no-cache",
     "docker:down": "docker compose down"
   }
 }

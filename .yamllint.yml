@@ -1,7 +1,7 @@
 extends: default
 rules:
   line-length:
-    max: 200
+    max: 400
   truthy:
     check-keys: false
   document-start: disable

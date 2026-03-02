@@ -315,6 +315,73 @@ td:first-child { font-weight: 700; color: var(--black); }
 }
 .footer a { color: var(--accent); text-decoration: none; }
 
+/* ---- Asset library ---- */
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2.5rem;
+}
+.asset-card {
+  border: 1px solid var(--grey-200);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.asset-preview {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.asset-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.asset-preview--light { background: #fff; }
+.asset-preview--warm { background: var(--white); }
+.asset-preview--dark { background: var(--black); }
+.asset-preview--grey { background: var(--grey-800); }
+.asset-preview--checker {
+  background-image:
+    linear-gradient(45deg, var(--grey-200) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--grey-200) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--grey-200) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--grey-200) 75%);
+  background-size: 12px 12px;
+  background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+  background-color: #fff;
+}
+.asset-info {
+  padding: 0.6rem 0.75rem;
+  border-top: 1px solid var(--grey-200);
+  background: var(--grey-100);
+}
+.asset-name {
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: var(--black);
+  word-break: break-all;
+}
+.asset-url {
+  font-size: 0.62rem;
+  color: var(--grey-400);
+  word-break: break-all;
+  margin-top: 0.2rem;
+  line-height: 1.4;
+}
+.asset-url a {
+  color: var(--accent-dim);
+  text-decoration: none;
+}
+.asset-url a:hover { text-decoration: underline; }
+.asset-sizes {
+  font-size: 0.65rem;
+  color: var(--grey-400);
+  margin-top: 0.15rem;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 640px) {
   .logo-grid { grid-template-columns: 1fr; }
@@ -352,6 +419,7 @@ td:first-child { font-weight: 700; color: var(--black); }
       <li><a href="#type">Typography</a></li>
       <li><a href="#grid">Spacing &amp; Grid</a></li>
       <li><a href="#rules">Usage Rules</a></li>
+      <li><a href="#assets">Asset Library</a></li>
     </ol>
   </div>
 </section>
@@ -667,6 +735,466 @@ td:first-child { font-weight: 700; color: var(--black); }
           <li>Recreate the logo in a different typeface — always use the supplied SVG assets.</li>
           <li>Substitute Archivo or Bebas Neue with other typefaces, or use cool-toned greys.</li>
         </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 Asset Library -->
+<section id="assets">
+  <div class="container">
+    <div class="section-number">08</div>
+    <div class="section-title">Asset Library</div>
+    <p>Every asset below is served from <strong>brand.kevinryan.io</strong>. Click any URL to open the file directly. SVG master files are the canonical source — use PNGs only where SVG is not supported.</p>
+
+    <h3>Logo — SVG Masters</h3>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="kevin-ryan-logo-outlined.svg" alt="Logo outlined SVG">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kevin-ryan-logo-outlined.svg</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kevin-ryan-logo-outlined.svg">brand.kevinryan.io/kevin-ryan-logo-outlined.svg</a></div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="kevin-ryan-logo-whitetext.svg" alt="Logo white text SVG">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kevin-ryan-logo-whitetext.svg</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kevin-ryan-logo-whitetext.svg">brand.kevinryan.io/kevin-ryan-logo-whitetext.svg</a></div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--light">
+          <img src="kevin-ryan-logo-dark-bg.svg" alt="Logo dark background SVG">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kevin-ryan-logo-dark-bg.svg</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kevin-ryan-logo-dark-bg.svg">brand.kevinryan.io/kevin-ryan-logo-dark-bg.svg</a></div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="kevin-ryan-logo-live-text.svg" alt="Logo live text SVG">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kevin-ryan-logo-live-text.svg</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kevin-ryan-logo-live-text.svg">brand.kevinryan.io/kevin-ryan-logo-live-text.svg</a></div>
+          <div class="asset-sizes">Editable text — requires Work Sans font</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Logo — Dark Text PNGs (Light Backgrounds)</h3>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="logo-darktext-256.png" alt="Logo dark text 256px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">logo-darktext-256.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/logo-darktext-256.png">brand.kevinryan.io/logo-darktext-256.png</a></div>
+          <div class="asset-sizes">256px wide</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="logo-darktext-512.png" alt="Logo dark text 512px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">logo-darktext-512.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/logo-darktext-512.png">brand.kevinryan.io/logo-darktext-512.png</a></div>
+          <div class="asset-sizes">512px wide</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="logo-darktext-800.png" alt="Logo dark text 800px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">logo-darktext-800.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/logo-darktext-800.png">brand.kevinryan.io/logo-darktext-800.png</a></div>
+          <div class="asset-sizes">800px wide</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="logo-darktext-1200.png" alt="Logo dark text 1200px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">logo-darktext-1200.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/logo-darktext-1200.png">brand.kevinryan.io/logo-darktext-1200.png</a></div>
+          <div class="asset-sizes">1200px wide</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Logo — White Text PNGs (Dark Backgrounds)</h3>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="logo-whitetext-256.png" alt="Logo white text 256px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">logo-whitetext-256.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/logo-whitetext-256.png">brand.kevinryan.io/logo-whitetext-256.png</a></div>
+          <div class="asset-sizes">256px wide</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="logo-whitetext-512.png" alt="Logo white text 512px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">logo-whitetext-512.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/logo-whitetext-512.png">brand.kevinryan.io/logo-whitetext-512.png</a></div>
+          <div class="asset-sizes">512px wide</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="logo-whitetext-800.png" alt="Logo white text 800px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">logo-whitetext-800.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/logo-whitetext-800.png">brand.kevinryan.io/logo-whitetext-800.png</a></div>
+          <div class="asset-sizes">800px wide</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="logo-whitetext-1200.png" alt="Logo white text 1200px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">logo-whitetext-1200.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/logo-whitetext-1200.png">brand.kevinryan.io/logo-whitetext-1200.png</a></div>
+          <div class="asset-sizes">1200px wide</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Logo — Dark Background PNGs (Self-contained)</h3>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--grey">
+          <img src="logo-dark-bg-512.png" alt="Logo dark bg 512px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">logo-dark-bg-512.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/logo-dark-bg-512.png">brand.kevinryan.io/logo-dark-bg-512.png</a></div>
+          <div class="asset-sizes">512px wide</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--grey">
+          <img src="logo-dark-bg-800.png" alt="Logo dark bg 800px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">logo-dark-bg-800.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/logo-dark-bg-800.png">brand.kevinryan.io/logo-dark-bg-800.png</a></div>
+          <div class="asset-sizes">800px wide</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--grey">
+          <img src="logo-dark-bg-1200.png" alt="Logo dark bg 1200px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">logo-dark-bg-1200.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/logo-dark-bg-1200.png">brand.kevinryan.io/logo-dark-bg-1200.png</a></div>
+          <div class="asset-sizes">1200px wide</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Monogram — SVG Masters</h3>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="kr-icon-dark.svg" alt="Monogram dark SVG">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-dark.svg</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-dark.svg">brand.kevinryan.io/kr-icon-dark.svg</a></div>
+          <div class="asset-sizes">For dark backgrounds</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="kr-icon-light.svg" alt="Monogram light SVG">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-light.svg</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-light.svg">brand.kevinryan.io/kr-icon-light.svg</a></div>
+          <div class="asset-sizes">For light backgrounds</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--checker">
+          <img src="kr-icon-transparent.svg" alt="Monogram transparent SVG">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-transparent.svg</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-transparent.svg">brand.kevinryan.io/kr-icon-transparent.svg</a></div>
+          <div class="asset-sizes">Transparent — watermarks, overlays</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Monogram — Dark PNGs (For Dark Backgrounds)</h3>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="kr-icon-dark-64.png" alt="Monogram dark 64px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-dark-64.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-dark-64.png">brand.kevinryan.io/kr-icon-dark-64.png</a></div>
+          <div class="asset-sizes">64 × 64px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="kr-icon-dark-128.png" alt="Monogram dark 128px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-dark-128.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-dark-128.png">brand.kevinryan.io/kr-icon-dark-128.png</a></div>
+          <div class="asset-sizes">128 × 128px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="kr-icon-dark-192.png" alt="Monogram dark 192px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-dark-192.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-dark-192.png">brand.kevinryan.io/kr-icon-dark-192.png</a></div>
+          <div class="asset-sizes">192 × 192px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="kr-icon-dark-256.png" alt="Monogram dark 256px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-dark-256.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-dark-256.png">brand.kevinryan.io/kr-icon-dark-256.png</a></div>
+          <div class="asset-sizes">256 × 256px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="kr-icon-dark-512.png" alt="Monogram dark 512px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-dark-512.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-dark-512.png">brand.kevinryan.io/kr-icon-dark-512.png</a></div>
+          <div class="asset-sizes">512 × 512px</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Monogram — Light PNGs (For Light Backgrounds)</h3>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="kr-icon-light-64.png" alt="Monogram light 64px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-light-64.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-light-64.png">brand.kevinryan.io/kr-icon-light-64.png</a></div>
+          <div class="asset-sizes">64 × 64px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="kr-icon-light-128.png" alt="Monogram light 128px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-light-128.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-light-128.png">brand.kevinryan.io/kr-icon-light-128.png</a></div>
+          <div class="asset-sizes">128 × 128px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="kr-icon-light-192.png" alt="Monogram light 192px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-light-192.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-light-192.png">brand.kevinryan.io/kr-icon-light-192.png</a></div>
+          <div class="asset-sizes">192 × 192px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="kr-icon-light-256.png" alt="Monogram light 256px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-light-256.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-light-256.png">brand.kevinryan.io/kr-icon-light-256.png</a></div>
+          <div class="asset-sizes">256 × 256px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="kr-icon-light-512.png" alt="Monogram light 512px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-light-512.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-light-512.png">brand.kevinryan.io/kr-icon-light-512.png</a></div>
+          <div class="asset-sizes">512 × 512px</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Monogram — Transparent PNGs (Watermarks &amp; Overlays)</h3>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--checker">
+          <img src="kr-icon-transparent-64.png" alt="Monogram transparent 64px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-transparent-64.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-transparent-64.png">brand.kevinryan.io/kr-icon-transparent-64.png</a></div>
+          <div class="asset-sizes">64 × 64px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--checker">
+          <img src="kr-icon-transparent-128.png" alt="Monogram transparent 128px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-transparent-128.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-transparent-128.png">brand.kevinryan.io/kr-icon-transparent-128.png</a></div>
+          <div class="asset-sizes">128 × 128px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--checker">
+          <img src="kr-icon-transparent-192.png" alt="Monogram transparent 192px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-transparent-192.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-transparent-192.png">brand.kevinryan.io/kr-icon-transparent-192.png</a></div>
+          <div class="asset-sizes">192 × 192px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--checker">
+          <img src="kr-icon-transparent-256.png" alt="Monogram transparent 256px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-transparent-256.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-transparent-256.png">brand.kevinryan.io/kr-icon-transparent-256.png</a></div>
+          <div class="asset-sizes">256 × 256px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--checker">
+          <img src="kr-icon-transparent-512.png" alt="Monogram transparent 512px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-icon-transparent-512.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-icon-transparent-512.png">brand.kevinryan.io/kr-icon-transparent-512.png</a></div>
+          <div class="asset-sizes">512 × 512px</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Social Media</h3>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="kr-social-dark-400.png" alt="Social dark 400px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-social-dark-400.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-social-dark-400.png">brand.kevinryan.io/kr-social-dark-400.png</a></div>
+          <div class="asset-sizes">400 × 400px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="kr-social-dark-800.png" alt="Social dark 800px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-social-dark-800.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-social-dark-800.png">brand.kevinryan.io/kr-social-dark-800.png</a></div>
+          <div class="asset-sizes">800 × 800px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="kr-social-light-400.png" alt="Social light 400px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-social-light-400.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-social-light-400.png">brand.kevinryan.io/kr-social-light-400.png</a></div>
+          <div class="asset-sizes">400 × 400px</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="kr-social-light-800.png" alt="Social light 800px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-social-light-800.png</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-social-light-800.png">brand.kevinryan.io/kr-social-light-800.png</a></div>
+          <div class="asset-sizes">800 × 800px</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Favicons</h3>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--dark">
+          <img src="favicon-dark.ico" alt="Favicon dark" style="image-rendering:pixelated;width:48px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">favicon-dark.ico</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/favicon-dark.ico">brand.kevinryan.io/favicon-dark.ico</a></div>
+          <div class="asset-sizes">16 / 32 / 48px — dark backgrounds</div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--warm">
+          <img src="favicon-light.ico" alt="Favicon light" style="image-rendering:pixelated;width:48px">
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">favicon-light.ico</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/favicon-light.ico">brand.kevinryan.io/favicon-light.ico</a></div>
+          <div class="asset-sizes">16 / 32 / 48px — light backgrounds</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Documents</h3>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--light" style="flex-direction:column;gap:0.25rem">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--accent);line-height:1">PDF</div>
+          <div style="font-size:0.65rem;color:var(--grey-400)">Brand Guidelines</div>
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-brand-guidelines.pdf</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-brand-guidelines.pdf">brand.kevinryan.io/kr-brand-guidelines.pdf</a></div>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview asset-preview--light" style="flex-direction:column;gap:0.25rem">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--accent);line-height:1">MD</div>
+          <div style="font-size:0.65rem;color:var(--grey-400)">Brand Guidelines</div>
+        </div>
+        <div class="asset-info">
+          <div class="asset-name">kr-brand-guidelines.md</div>
+          <div class="asset-url"><a href="https://brand.kevinryan.io/kr-brand-guidelines.md">brand.kevinryan.io/kr-brand-guidelines.md</a></div>
+        </div>
       </div>
     </div>
   </div>
