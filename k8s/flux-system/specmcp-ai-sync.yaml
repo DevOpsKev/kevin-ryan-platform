@@ -3,7 +3,7 @@ kind: Kustomization
 metadata:
   name: specmcp-ai
   namespace: flux-system
-  spec:
+spec:
   interval: 10m0s
   path: ./k8s/specmcp-ai
   prune: true
