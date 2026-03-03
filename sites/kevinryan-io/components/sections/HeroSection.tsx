@@ -80,7 +80,7 @@ export default function HeroSection() {
 
               <h1 style={{ marginBottom: '0.5rem' }}>
                 <img
-                  src="/brand/kevin-ryan-logo-outlined.svg"
+                  src="./kevin-ryan-logo-outlined.svg"
                   alt="Kevin Ryan & Associates"
                   style={{ width: 'clamp(280px, 45vw, 540px)', height: 'auto' }}
                 />
