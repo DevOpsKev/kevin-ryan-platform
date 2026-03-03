@@ -1,0 +1,10 @@
+{
+  "name": "specmcp-ai",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "docker:build": "docker build --no-cache -t specmcp-ai:local -f Dockerfile ../..",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
+  }
+}
