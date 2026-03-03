@@ -21,18 +21,29 @@ resource "cloudflare_record" "www" {
   ttl     = 1
 }
 
-resource "cloudflare_record" "brand" {
+resource "cloudflare_record" "subdomains" {
+  for_each = toset(var.subdomains)
+
   zone_id = var.zone_id
-  name    = "brand"
+  name    = each.key
   content = var.vm_public_ip
   type    = "A"
   proxied = true
   ttl     = 1
 }
 
+locals {
+  subdomain_expressions = [for s in var.subdomains : "(http.host eq \"${s}.${var.domain}\")"]
+  all_expressions = concat(
+    ["(http.host eq \"${var.domain}\")", "(http.host eq \"www.${var.domain}\")"],
+    local.subdomain_expressions
+  )
+  cache_expression = join(" or ", local.all_expressions)
+}
+
 resource "cloudflare_ruleset" "cache" {
   zone_id     = var.zone_id
-  name        = "Cache rules for kevinryan.io"
+  name        = "Cache rules for ${var.domain}"
   description = "Cache static site and serve stale on origin failure"
   kind        = "zone"
   phase       = "http_request_cache_settings"
@@ -49,7 +60,7 @@ resource "cloudflare_ruleset" "cache" {
         disable_stale_while_updating = false
       }
     }
-    expression  = "(http.host eq \"kevinryan.io\") or (http.host eq \"brand.kevinryan.io\")"
+    expression  = local.cache_expression
     description = "Serve stale content on origin failure"
     enabled     = true
   }
