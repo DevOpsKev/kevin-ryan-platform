@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sddbook.com</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #e0e0e0;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .title {
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .commit {
+      position: fixed;
+      bottom: 1rem;
+      font-size: 0.75rem;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <span class="title">sddbook.com</span>
+  <span class="commit">{{COMMIT_SHA}}</span>
+</body>
+</html>
