@@ -93,7 +93,7 @@ runcmd:
       --owner=DevOpsKev \
       --repository=kevin-ryan-platform \
       --branch=main \
-      --path=k8s/kevinryan-io \
+      --path=k8s/flux-system \
       --personal \
       --token-auth \
       --components=source-controller,kustomize-controller

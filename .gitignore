@@ -51,5 +51,3 @@ infra/bootstrap/*.tfstate.backup
 *.tfvars
 !*.tfvars.example
 
-# Flux system (managed by flux bootstrap, not hand-edited)
-k8s/flux-system/
