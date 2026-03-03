@@ -1,46 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sddbook.com</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spec Driven Development — AI Native Software Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;900&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="b0e47a12-d133-43c3-9c25-e7a7f53c5d32"></script>
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --red: #e63926;
+      --red-dark: #c42f1f;
+      --black: #1a1a1a;
+      --grey-bg: #DADADA;
+      --off-white: #F8F4ED;
+      --text: #444;
+      --text-light: #666;
+      --text-muted: #777;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'Inter', sans-serif;
+      --slab: 'Alfa Slab One', serif;
     }
 
-    html, body {
-      height: 100%;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #0a0a0a;
-      color: #e0e0e0;
-      font-family: monospace;
+      background: var(--grey-bg);
+      min-height: 100vh;
+      font-family: var(--sans);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === HERO === */
+    .hero {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      padding: 4rem 1.5rem 3rem;
     }
 
-    .title {
-      font-size: 2rem;
-      letter-spacing: 0.05em;
+    .hero-inner {
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
     }
 
-    .commit {
-      position: fixed;
-      bottom: 1rem;
+    .mockup {
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .mockup img {
+      width: calc(100% + 2px);
+      margin: -1px;
+      height: auto;
+      display: block;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-family: var(--slab);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--black);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-weight: 900;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .download-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .download-btn {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--sans);
+      font-weight: 900;
+      font-size: 1.1rem;
+      text-decoration: none;
+      padding: 1rem 2.5rem;
+      letter-spacing: 0.02em;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .download-btn:hover {
+      background: var(--red-dark);
+      transform: translateY(-2px);
+    }
+
+    .download-btn.secondary {
+      background: var(--black);
+    }
+
+    .download-btn.secondary:hover {
+      background: #333;
+      transform: translateY(-2px);
+    }
+
+    /* === SECTIONS === */
+    .section {
+      padding: 4.5rem 1.5rem;
+    }
+
+    .section-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .section-alt {
+      background: var(--off-white);
+    }
+
+    .section-dark {
+      background: var(--black);
+      color: #bbb;
+    }
+
+    .section-dark h2 {
+      color: #fff;
+    }
+
+    .section-dark a {
+      color: var(--red);
+    }
+
+    h2 {
+      font-family: var(--slab);
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      color: var(--black);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .red-rule {
+      width: 48px;
+      height: 3px;
+      background: var(--red);
+      margin-bottom: 2rem;
+    }
+
+    .section p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* === THESIS === */
+    .thesis-quote {
+      font-family: var(--slab);
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      color: var(--black);
+      line-height: 1.4;
+      border-left: 3px solid var(--red);
+      padding-left: 1.25rem;
+      margin: 2rem 0;
+    }
+
+    /* === WHO IS THIS FOR === */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (min-width: 540px) {
+      .audience-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .audience-item {
+      border-left: 3px solid var(--red);
+      padding-left: 1.25rem;
+    }
+
+    .audience-item strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--black);
+      margin-bottom: 0.25rem;
+    }
+
+    .audience-item span {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* === HOW IT'S BUILT === */
+    .mcp-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    @media (min-width: 540px) {
+      .mcp-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .mcp-item {
+      border-top: 2px solid var(--red);
+      padding-top: 1rem;
+    }
+
+    .mcp-item code {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #fff;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .mcp-item span {
+      font-size: 0.9rem;
+      color: #999;
+      line-height: 1.5;
+    }
+
+    .pipeline {
+      margin-top: 2rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 2;
+    }
+
+    .pipeline .step {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .pipeline .step-num {
+      color: var(--red);
+      font-weight: 400;
+      flex-shrink: 0;
+    }
+
+    .pipeline .step-text {
+      color: #999;
+    }
+
+    .pipeline .arrow {
+      color: #555;
+      padding: 0.25rem 0;
+      padding-left: 1.75rem;
+    }
+
+    .build-note {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #333;
+      font-size: 0.95rem;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    /* === INSTALL SKILL === */
+    .terminal {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+
+    .terminal-bar {
+      background: #161b22;
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid #30363d;
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #30363d;
+    }
+
+    .terminal-dot.red { background: #f85149; }
+    .terminal-dot.yellow { background: #d29922; }
+    .terminal-dot.green { background: #3fb950; }
+
+    .terminal-bar span {
+      font-family: var(--mono);
       font-size: 0.75rem;
-      color: #444;
+      color: #484f58;
+      margin-left: 0.5rem;
+    }
+
+    .terminal-body {
+      padding: 1.25rem 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 2;
+      color: #c9d1d9;
+      overflow-x: auto;
+    }
+
+    .terminal-body .prompt {
+      color: #3fb950;
+      user-select: none;
+    }
+
+    .terminal-body .cmd {
+      color: #c9d1d9;
+    }
+
+    .terminal-body .comment {
+      color: #484f58;
+    }
+
+    .terminal-body .output {
+      color: #8b949e;
+    }
+
+    .terminal-body .highlight {
+      color: #58a6ff;
+    }
+
+    .install-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--black);
+      color: #fff;
+      font-family: var(--sans);
+      font-weight: 900;
+      font-size: 1rem;
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      letter-spacing: 0.02em;
+      transition: background 0.2s ease, transform 0.2s ease;
+      margin-top: 0.5rem;
+    }
+
+    .install-cta:hover {
+      background: #333;
+      transform: translateY(-2px);
+    }
+
+    .install-cta img {
+      height: 18px;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    /* === ABOUT === */
+    .credentials {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid #d0cbc4;
+    }
+
+    .about-links {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .about-links a {
+      color: var(--red);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .about-links a:hover {
+      color: var(--red-dark);
+      text-decoration: underline;
+    }
+
+    /* === FOOTER === */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--red);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <span class="title">sddbook.com</span>
-  <span class="commit">{{COMMIT_SHA}}</span>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="mockup">
+        <img src="sdd-book-mockup.png" alt="Spec Driven Development book cover mockup">
+      </div>
+      <div class="hero-content">
+        <h1>Spec Driven Development</h1>
+        <p class="subtitle">AI Native Software Engineering</p>
+        <p class="tagline">Move beyond ad-hoc prompting to structured workflows where the spec is the source of truth and code follows.</p>
+        <div class="download-buttons">
+          <a href="https://sddbook.blob.core.windows.net/downloads/spec-driven-development.epub" class="download-btn">Download EPUB</a>
+          <a href="https://sddbook.blob.core.windows.net/downloads/spec-driven-development.pdf" target="_blank" class="download-btn secondary">Download PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT THIS BOOK IS -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="red-rule"></div>
+      <h2>The specification is the artifact</h2>
+      <p class="thesis-quote">Code is a side effect.</p>
+      <p>SDD inverts traditional software development when working with AI coding agents. Instead of think, code, document — you specify, generate, validate. The specification is the primary work product. Generated code is a derived output that can be regenerated, revised, or discarded.</p>
+      <p>This is not prompt engineering. Prompts are tactical. SDD is a professional methodology — an architectural pattern that makes specifications executable and enforceable. It draws on BDD, TDD, and contract-first development while addressing the new challenges of AI-assisted generation.</p>
+      <p>If your experience of AI coding has been vague prompts producing mediocre code, over-detailed prompts still producing wrong code, and occasional successes you cannot replicate — this book provides the systematic approach you're looking for.</p>
+    </div>
+  </section>
+
+  <!-- WHO IS THIS FOR -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="red-rule"></div>
+      <h2>Who is this for</h2>
+      <p>Professional software developers already using AI coding tools who want a repeatable system, not tips and tricks. Assume three or more years of development experience and a healthy scepticism of AI hype.</p>
+      <div class="audience-grid">
+        <div class="audience-item">
+          <strong>Software Engineers</strong>
+          <span>Frustrated by inconsistent results from ad-hoc prompting. You want a methodology that produces auditable, repeatable output.</span>
+        </div>
+        <div class="audience-item">
+          <strong>Tech Leads &amp; Architects</strong>
+          <span>Evaluating how AI agents affect team workflows. You need to govern AI-generated code across teams without slowing delivery.</span>
+        </div>
+        <div class="audience-item">
+          <strong>Engineering Managers</strong>
+          <span>Building operating models for AI-native development. You need deterministic validation of non-deterministic generation.</span>
+        </div>
+        <div class="audience-item">
+          <strong>Platform Engineers</strong>
+          <span>Integrating AI-assisted workflows into existing CI/CD, version control, and review pipelines at scale.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW THIS BOOK IS BUILT -->
+  <section class="section section-dark">
+    <div class="section-inner">
+      <div class="red-rule"></div>
+      <h2>How this book is built</h2>
+      <p>This book is written using its own methodology. Content, editorial voice, and brand identity are governed by specifications served to the AI agent via Model Context Protocol servers at authoring time.</p>
+
+      <div class="mcp-grid">
+        <div class="mcp-item">
+          <code>.spec</code>
+          <span>Book briefs, chapter outlines, editorial rules, and content specifications. The source of truth for what gets written.</span>
+        </div>
+        <div class="mcp-item">
+          <code>.skills</code>
+          <span>Relevant capabilities and tooling context. Ensures the AI agent has the right knowledge to execute against the spec.</span>
+        </div>
+        <div class="mcp-item">
+          <code>.brand</code>
+          <span>Tone, voice, and positioning rules. Keeps every generated word on message — professional, grounded, never hypey.</span>
+        </div>
+      </div>
+
+      <p>Every chapter begins with the same workflow the book teaches. The <code style="font-family: var(--mono); font-size: 0.9em; color: #fff;">.spec</code> server loads the book brief, chapter outline, and editorial constraints. The <code style="font-family: var(--mono); font-size: 0.9em; color: #fff;">.skills</code> server provides the agent with relevant capabilities. The <code style="font-family: var(--mono); font-size: 0.9em; color: #fff;">.brand</code> server enforces tone, voice, and positioning rules. The AI agent writes against these specifications — not from a blank prompt.</p>
+      <p>The output is validated against the spec before it's committed. Does it match the chapter's declared scope? Does the voice hold? Does it contradict anything established elsewhere? This is the specify–generate–validate loop the book describes, applied to its own prose.</p>
+      <p>On merge to main, the publication pipeline takes over. It determines a build reference — a version tag or commit SHA — and injects it into the cover SVG and the copyright page of every format. The cover, the PDF, and the EPUB are rendered, validated, and deployed to Azure Blob Storage. No manual intervention between commit and publication.</p>
+      <p>Pick up any copy and you know exactly what state of the repository produced it. That's not decoration. It's traceability — the same principle the book advocates for production software. Non-deterministic generation, deterministic validation, automated deployment. The book's methodology applied to its own creation.</p>
+
+      <div class="pipeline">
+        <div class="step"><span class="step-num">01</span><span class="step-text">MCP servers load spec, skills, and brand context</span></div>
+        <div class="arrow">↓</div>
+        <div class="step"><span class="step-num">02</span><span class="step-text">Content authored against specification constraints</span></div>
+        <div class="arrow">↓</div>
+        <div class="step"><span class="step-num">03</span><span class="step-text">Output validated against spec, brand, and editorial rules</span></div>
+        <div class="arrow">↓</div>
+        <div class="step"><span class="step-num">04</span><span class="step-text">Merge to main triggers build pipeline</span></div>
+        <div class="arrow">↓</div>
+        <div class="step"><span class="step-num">05</span><span class="step-text">Build ref determined (version tag or commit SHA)</span></div>
+        <div class="arrow">↓</div>
+        <div class="step"><span class="step-num">06</span><span class="step-text">Build ref injected into cover &amp; copyright content</span></div>
+        <div class="arrow">↓</div>
+        <div class="step"><span class="step-num">07</span><span class="step-text">Artifacts rendered and validated against spec</span></div>
+        <div class="arrow">↓</div>
+        <div class="step"><span class="step-num">08</span><span class="step-text">Deploy to Azure Blob Storage</span></div>
+      </div>
+
+      <div class="build-note">
+        The specification is the artifact. The book is a side effect. Form follows function.
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALL THE SKILL -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="red-rule"></div>
+      <h2>Install the methodology</h2>
+      <p>The book teaches the methodology. The skill makes your agent follow it. Install it and your AI coding agent starts working with specifications, decision gates, and provenance — the same workflow described in every chapter.</p>
+      <p>Published on the <a href="https://tessl.io/registry/kevin-ryan-io/spec-driven-development" target="_blank" rel="noopener" style="color: var(--red); text-decoration: none;">Tessl Registry</a> as a versioned, evaluated skill. One command to install. No configuration. Works with Claude Code, Cursor, Windsurf, and any MCP-compatible agent.</p>
+
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span>terminal</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="comment"># initialise tessl in your project</span></div>
+          <div><span class="prompt">$ </span><span class="cmd">tessl init</span></div>
+          <div>&nbsp;</div>
+          <div><span class="comment"># install the skill</span></div>
+          <div><span class="prompt">$ </span><span class="cmd">tessl install kevin-ryan-io/spec-driven-development</span></div>
+          <div>&nbsp;</div>
+          <div><span class="comment"># your agent now follows SDD</span></div>
+          <div><span class="prompt">$ </span><span class="cmd">claude</span></div>
+          <div><span class="output">› Execute spec REST API for User Subscriptions</span></div>
+        </div>
+      </div>
+
+      <p>The skill includes the complete two-loop workflow, the step 6 decision gate, spec format requirements, the four types of context, provenance tracking, and a reference library of practitioner-discovered principles and anti-patterns. Everything in the book, distilled into structured context your agent can act on.</p>
+
+      <a href="https://tessl.io/registry/kevin-ryan-io/spec-driven-development" target="_blank" rel="noopener" class="install-cta">
+        <img src="tessl-logo.png" alt="Tessl">
+        View on Tessl Registry
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT THE AUTHOR -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="red-rule"></div>
+      <h2>About the author</h2>
+      <p>Kevin Ryan has spent thirty years in software engineering, starting with code and moving through architecture, agile adoption, DevOps, and platform engineering. He adopted XP, TDD, and continuous integration in the late 1990s, agile and Scrum in the early 2000s, and infrastructure as code and DORA metrics as they emerged — each time before the practices became mainstream.</p>
+      <p>He has delivered platform engineering and CI/CD programmes for CERN, Nestlé, BBC Worldwide, the Financial Times, and Dematic, among others. At a leading UK bank, he led the enterprise AI-assisted development pilot and delivered board-level recommendations on AI adoption.</p>
+      <p>His previous book, <a href="https://aiimmigrants.com" style="color: var(--red); text-decoration: none;">AI Immigrants: The Bloody Algos Are Here!</a>, examined the cultural, economic, and moral upheaval of intelligent machines.</p>
+      <p>He is based between London and Budapest.</p>
+      <div class="about-links">
+        <a href="https://kevinryan.io">kevinryan.io</a>
+        <a href="https://www.linkedin.com/in/devopskev/">LinkedIn</a>
+        <a href="https://github.com/DevOpsKev">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 <a href="https://kevinryan.io">Kevin Ryan</a>. Licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.</p>
+    <p style="margin-top: 0.5rem; font-family: monospace; font-size: 0.7rem; opacity: 0.5;">{{COMMIT_SHA}}</p>
+  </footer>
+
 </body>
 </html>
