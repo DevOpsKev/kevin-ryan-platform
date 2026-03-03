@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aiimmigrants-com
+  namespace: aiimmigrants-com
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aiimmigrants-com
+  template:
+    metadata:
+      labels:
+        app: aiimmigrants-com
+    spec:
+      containers:
+        - name: aiimmigrants-com
+          image: kevinryanacr.azurecr.io/aiimmigrants-com:latest
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 5m
+              memory: 8Mi
+            limits:
+              cpu: 50m
+              memory: 32Mi

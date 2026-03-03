@@ -12,5 +12,4 @@ spec:
       services:
         - name: kevinryan-io
           port: 80
-  tls:
-    secretName: cloudflare-origin-tls
+  tls: {}

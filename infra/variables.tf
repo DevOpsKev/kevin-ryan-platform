@@ -59,3 +59,8 @@ variable "github_repo_name" {
   type        = string
   default     = "kevin-ryan-platform"
 }
+
+variable "cloudflare_zone_id_aiimmigrants" {
+  description = "Cloudflare zone ID for aiimmigrants.com"
+  type        = string
+}
