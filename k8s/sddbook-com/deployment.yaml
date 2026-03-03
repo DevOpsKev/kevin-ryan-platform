@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: sddbook-com
-          image: kevinryanacr.azurecr.io/sddbook-com:dev
+          image: kevinryanacr.azurecr.io/sddbook-com:4b3ce2e
           ports:
             - containerPort: 8080
           livenessProbe:
