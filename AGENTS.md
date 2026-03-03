@@ -8,6 +8,7 @@ This is a monorepo hosting multiple sites for Kevin Ryan (DevOps & AI Governance
 
 - **kevinryan.io** — static Next.js 16 portfolio site
 - **brand.kevinryan.io** — static HTML brand guidelines site (no build step, no Node.js tooling)
+- **aiimmigrants.com** — static HTML holding page (no build step, no Node.js tooling)
 
 **Stack:**
 
@@ -49,9 +50,11 @@ kevin-ryan-platform/
 │   │   ├── gotk-sync.yaml
 │   │   ├── kustomization.yaml
 │   │   ├── kevinryan-io-sync.yaml
-│   │   └── brand-kevinryan-io-sync.yaml
+│   │   ├── brand-kevinryan-io-sync.yaml
+│   │   └── aiimmigrants-com-sync.yaml
 │   ├── kevinryan-io/       # Plain manifests only (no flux-system)
-│   └── brand-kevinryan-io/ # Plain manifests only
+│   ├── brand-kevinryan-io/ # Plain manifests only
+│   └── aiimmigrants-com/   # Plain manifests only
 ├── sites/                  # Individual site packages
 │   ├── kevinryan-io/       # kevinryan.io Next.js app
 │   │   ├── app/            # Next.js App Router pages
@@ -61,8 +64,13 @@ kevin-ryan-platform/
 │   │   ├── public/         # Static assets
 │   │   ├── Dockerfile
 │   │   └── nginx.conf
-│   └── brand-kevinryan-io/ # brand.kevinryan.io — static HTML, no build step
-│       ├── public/         # Static assets (index.html, SVGs, PNGs, PDFs)
+│   ├── brand-kevinryan-io/ # brand.kevinryan.io — static HTML, no build step
+│   │   ├── public/         # Static assets (index.html, SVGs, PNGs, PDFs)
+│   │   ├── Dockerfile
+│   │   ├── nginx.conf
+│   │   └── docker-compose.yml
+│   └── aiimmigrants-com/   # aiimmigrants.com — static HTML, no build step
+│       ├── public/         # Static assets (index.html)
 │       ├── Dockerfile
 │       ├── nginx.conf
 │       └── docker-compose.yml
@@ -77,9 +85,9 @@ To onboard a new site into Flux CD:
 2. Create `k8s/flux-system/<site-name>-sync.yaml` — a `Kustomization` CR pointing `spec.path` at `./k8s/<site-name>`.
 3. Add `<site-name>-sync.yaml` to the `resources` list in `k8s/flux-system/kustomization.yaml`.
 
-> **Note:** `brand-kevinryan-io` is a pure static HTML site with no build step.
-> TypeScript, Next.js, Tailwind, ESLint, and related conventions do **not** apply to it.
-> The root `build` and `lint` scripts use `--if-present` to skip this package automatically.
+> **Note:** `brand-kevinryan-io` and `aiimmigrants-com` are pure static HTML sites with no build step.
+> TypeScript, Next.js, Tailwind, ESLint, and related conventions do **not** apply to them.
+> The root `build` and `lint` scripts use `--if-present` to skip these packages automatically.
 
 ## When Generating Code
 

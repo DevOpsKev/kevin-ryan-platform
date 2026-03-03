@@ -84,6 +84,13 @@ module "cloudflare" {
   vm_public_ip = module.network.public_ip_address
 }
 
+module "cloudflare_aiimmigrants" {
+  source       = "./modules/cloudflare-simple"
+  zone_id      = var.cloudflare_zone_id_aiimmigrants
+  vm_public_ip = module.network.public_ip_address
+  domain       = "aiimmigrants.com"
+}
+
 module "github_oidc" {
   source                     = "./modules/github-oidc"
   github_repo_owner          = var.github_repo_owner

@@ -1,0 +1,10 @@
+{
+  "name": "aiimmigrants-com",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "docker:build": "docker build --no-cache -t aiimmigrants-com:local -f Dockerfile ../..",
+    "docker:up": "docker compose up --build --no-cache",
+    "docker:down": "docker compose down"
+  }
+}
