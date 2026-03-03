@@ -64,3 +64,8 @@ variable "cloudflare_zone_id_aiimmigrants" {
   description = "Cloudflare zone ID for aiimmigrants.com"
   type        = string
 }
+
+variable "cloudflare_zone_id_specmcp" {
+  description = "Cloudflare zone ID for specmcp.ai"
+  type        = string
+}
