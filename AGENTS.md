@@ -43,9 +43,15 @@ pnpm --filter kevinryan-io lint    # Lint specific site
 kevin-ryan-platform/
 ├── .github/workflows/      # CI/CD (shared)
 ├── infra/                  # Terraform (shared across all sites)
-├── k8s/                    # Kubernetes manifests (per-site subdirs)
-│   ├── kevinryan-io/
-│   └── brand-kevinryan-io/
+├── k8s/                    # Kubernetes manifests
+│   ├── flux-system/        # Flux CD entry point (peer to site dirs)
+│   │   ├── gotk-components.yaml
+│   │   ├── gotk-sync.yaml
+│   │   ├── kustomization.yaml
+│   │   ├── kevinryan-io-sync.yaml
+│   │   └── brand-kevinryan-io-sync.yaml
+│   ├── kevinryan-io/       # Plain manifests only (no flux-system)
+│   └── brand-kevinryan-io/ # Plain manifests only
 ├── sites/                  # Individual site packages
 │   ├── kevinryan-io/       # kevinryan.io Next.js app
 │   │   ├── app/            # Next.js App Router pages
@@ -62,6 +68,14 @@ kevin-ryan-platform/
 │       └── docker-compose.yml
 └── pnpm-workspace.yaml
 ```
+
+### Adding a new site
+
+To onboard a new site into Flux CD:
+
+1. Add plain Kubernetes manifests under `k8s/<site-name>/`.
+2. Create `k8s/flux-system/<site-name>-sync.yaml` — a `Kustomization` CR pointing `spec.path` at `./k8s/<site-name>`.
+3. Add `<site-name>-sync.yaml` to the `resources` list in `k8s/flux-system/kustomization.yaml`.
 
 > **Note:** `brand-kevinryan-io` is a pure static HTML site with no build step.
 > TypeScript, Next.js, Tailwind, ESLint, and related conventions do **not** apply to it.
