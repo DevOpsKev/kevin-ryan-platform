@@ -1,0 +1,10 @@
+{
+  "name": "sddbook-com",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "docker:build": "docker build --no-cache -t sddbook-com:local -f Dockerfile ../..",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
+  }
+}

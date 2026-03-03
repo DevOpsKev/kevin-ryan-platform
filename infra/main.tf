@@ -100,6 +100,13 @@ module "cloudflare_specmcp" {
   domain       = "specmcp.ai"
 }
 
+module "cloudflare_sddbook" {
+  source       = "./modules/cloudflare"
+  zone_id      = var.cloudflare_zone_id_sddbook
+  vm_public_ip = module.network.public_ip_address
+  domain       = "sddbook.com"
+}
+
 module "github_oidc" {
   source                     = "./modules/github-oidc"
   github_repo_owner          = var.github_repo_owner

@@ -1,0 +1,13 @@
+services:
+  web:
+    build:
+      context: ../..
+      dockerfile: sites/sddbook-com/Dockerfile
+    container_name: sddbook-com
+    ports:
+      - "8084:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
