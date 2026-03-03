@@ -1,32 +1,973 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SpecMCP</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      height: 100%;
-      background: #0a0a0a;
-      color: #e0e0e0;
-      font-family: 'Courier New', Courier, monospace;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    h1 { font-size: 2.5rem; letter-spacing: 0.1em; }
-    footer {
-      position: fixed;
-      bottom: 1rem;
-      font-size: 0.7rem;
-      color: #444;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>specmcp.ai — Your specs, always in context</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --surface: #111115;
+    --surface-2: #1a1a20;
+    --border: #2a2a33;
+    --text: #e8e8ed;
+    --text-muted: #8888a0;
+    --accent: #6ee7b7;
+    --accent-dim: #6ee7b720;
+    --accent-glow: #6ee7b740;
+    --orange: #f59e0b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* Ambient glow */
+  .glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .glow-1 { background: var(--accent); top: -200px; right: -100px; }
+  .glow-2 { background: #4f46e5; bottom: -200px; left: -100px; opacity: 0.08; }
+
+  /* Nav */
+  nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 48px;
+    animation: fadeDown 0.8s ease both;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--accent), #4ade80);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #0a0a0c;
+    font-weight: 700;
+  }
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 48px 60px;
+    text-align: center;
+    animation: fadeUp 0.9s ease both;
+    animation-delay: 0.15s;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-glow);
+    padding: 6px 16px;
+    border-radius: 24px;
+    margin-bottom: 32px;
+    letter-spacing: 0.3px;
+  }
+  .hero-tag .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+  h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+  }
+  h1 .highlight {
+    background: linear-gradient(135deg, var(--accent), #4ade80);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto 44px;
+  }
+
+  /* Email signup */
+  .signup-form {
+    display: flex;
+    gap: 10px;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .signup-form input {
+    flex: 1;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .signup-form input::placeholder { color: var(--text-muted); }
+  .signup-form input:focus { border-color: var(--accent); }
+  .signup-form button {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--accent), #4ade80);
+    color: #0a0a0c;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s;
+    white-space: nowrap;
+  }
+  .signup-form button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px var(--accent-glow);
+  }
+
+  /* Terminal mockup */
+  .terminal-section {
+    position: relative;
+    z-index: 10;
+    max-width: 680px;
+    margin: 60px auto 0;
+    padding: 0 48px;
+    animation: fadeUp 0.9s ease both;
+    animation-delay: 0.35s;
+  }
+  .terminal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 80px var(--accent-dim);
+  }
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 18px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .terminal-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .terminal-dot:nth-child(1) { background: #ef4444; }
+  .terminal-dot:nth-child(2) { background: #f59e0b; }
+  .terminal-dot:nth-child(3) { background: #22c55e; }
+  .terminal-title {
+    flex: 1;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-right: 36px;
+  }
+  .terminal-body {
+    padding: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    line-height: 1.85;
+  }
+  .t-comment { color: #555568; }
+  .t-key { color: var(--accent); }
+  .t-method { color: #818cf8; }
+  .t-string { color: #fbbf24; }
+  .t-muted { color: var(--text-muted); }
+  .t-line {
+    opacity: 0;
+    animation: typeLine 0.4s ease forwards;
+  }
+  .t-line:nth-child(1) { animation-delay: 0.8s; }
+  .t-line:nth-child(2) { animation-delay: 1.1s; }
+  .t-line:nth-child(3) { animation-delay: 1.4s; }
+  .t-line:nth-child(4) { animation-delay: 1.7s; }
+  .t-line:nth-child(5) { animation-delay: 2.0s; }
+  .t-line:nth-child(6) { animation-delay: 2.3s; }
+  .t-line:nth-child(7) { animation-delay: 2.6s; }
+
+  /* Features */
+  .features {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 120px auto 0;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .feature {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 28px;
+    transition: border-color 0.25s, transform 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .feature:nth-child(1) { animation-delay: 0.5s; }
+  .feature:nth-child(2) { animation-delay: 0.65s; }
+  .feature:nth-child(3) { animation-delay: 0.8s; }
+  .feature:hover {
+    border-color: var(--accent-glow);
+    transform: translateY(-3px);
+  }
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-glow);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .feature h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+  .feature p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  /* Pillars */
+  .pillars {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 120px auto 0;
+    padding: 0 48px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    animation-delay: 0.9s;
+  }
+  .pillars h2 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    line-height: 1.2;
+    margin-bottom: 48px;
+  }
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    text-align: left;
+  }
+  .pillar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 28px;
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .pillar:hover {
+    border-color: var(--accent-glow);
+    transform: translateY(-3px);
+  }
+  .pillar-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+  }
+  .pillar h3 {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+  }
+  .pillar p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  /* Use cases */
+  .usecases {
+    position: relative;
+    z-index: 10;
+    max-width: 680px;
+    margin: 100px auto 0;
+    padding: 0 48px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    animation-delay: 1s;
+  }
+  .usecases h2 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    margin-bottom: 14px;
+  }
+  .usecases > p {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  .usecase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    text-align: left;
+  }
+  .usecase {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .usecase-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .usecase h4 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .usecase p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* Investor / Business Case */
+  .investor {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 140px auto 0;
+    padding: 0 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    animation-delay: 1.1s;
+  }
+  .investor-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .investor-header .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--orange);
+    background: #f59e0b12;
+    border: 1px solid #f59e0b25;
+    padding: 5px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .investor-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .investor-header h2 .highlight-orange {
+    background: linear-gradient(135deg, var(--orange), #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .investor-header > p {
+    color: var(--text-muted);
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Big stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .stat-card:hover {
+    border-color: #f59e0b40;
+    transform: translateY(-2px);
+  }
+  .stat-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, var(--orange), #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Company evidence table */
+  .evidence-table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .evidence-table-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 24px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+  }
+  .evidence-table-header .pulse-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+  .evidence-row {
+    display: grid;
+    grid-template-columns: 120px 80px 1fr;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    transition: background 0.15s;
+  }
+  .evidence-row:last-child { border-bottom: none; }
+  .evidence-row:hover { background: var(--surface-2); }
+  .evidence-company {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: -0.2px;
+  }
+  .evidence-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--orange);
+  }
+  .evidence-quote {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.45;
+    font-style: italic;
+  }
+
+  /* Convergence callout */
+  .convergence-callout {
+    background: linear-gradient(135deg, #f59e0b08, #f59e0b04);
+    border: 1px solid #f59e0b20;
+    border-radius: 14px;
+    padding: 36px 32px;
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+  .convergence-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: #f59e0b15;
+    border: 1px solid #f59e0b30;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+  .convergence-callout h3 {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+  }
+  .convergence-callout p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  /* Bottom CTA */
+  .investor-cta {
+    text-align: center;
+    padding: 40px 0 0;
+    border-top: 1px solid var(--border);
+  }
+  .investor-cta p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .investor-cta .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--orange), #fbbf24);
+    color: #0a0a0c;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .investor-cta .cta-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px #f59e0b30;
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 100px 48px 48px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    animation-delay: 1.2s;
+  }
+  footer p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  @keyframes typeLine {
+    from { opacity: 0; transform: translateX(-6px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .hero { padding: 60px 24px 40px; }
+    .hero p { font-size: 17px; }
+    .signup-form { flex-direction: column; }
+    .terminal-section { padding: 0 24px; }
+    .terminal-body { padding: 18px; font-size: 12px; }
+    .features { grid-template-columns: 1fr; padding: 0 24px; margin-top: 80px; }
+    .pillars { padding: 0 24px; margin-top: 80px; }
+    .pillars h2 { font-size: 26px; }
+    .pillar-grid { grid-template-columns: 1fr; }
+    .investor { padding: 0 24px; margin-top: 80px; }
+    .investor-header h2 { font-size: 26px; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .evidence-row { grid-template-columns: 90px 65px 1fr; padding: 14px 16px; }
+    .evidence-row .evidence-quote { font-size: 12px; }
+    .convergence-callout { flex-direction: column; gap: 16px; padding: 24px; }
+    .usecases { padding: 0 24px; }
+    .usecase-grid { grid-template-columns: 1fr; }
+    footer { padding: 60px 24px 36px; }
+  }
+</style>
 </head>
 <body>
-  <h1>SpecMCP</h1>
-  <footer>{{COMMIT_SHA}}</footer>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<nav>
+  <div class="logo">
+    <div class="logo-icon">S</div>
+    specmcp.ai
+  </div>
+  <div class="badge">COMING SOON</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">
+    <span class="dot"></span>
+    Model Context Protocol
+  </div>
+  <h1>Your specs,<br>always <span class="highlight">in context</span></h1>
+  <p>A managed MCP server for your product specs, API docs, and architecture decisions. Give your AI tools the context they actually need.</p>
+  <form class="signup-form" onsubmit="handleSubmit(event)">
+    <input type="email" placeholder="you@company.com" required>
+    <button type="submit">Get Early Access</button>
+  </form>
+</section>
+
+<div class="terminal-section">
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="terminal-dot"></div>
+      <div class="terminal-dot"></div>
+      <div class="terminal-dot"></div>
+      <div class="terminal-title">claude — mcp</div>
+    </div>
+    <div class="terminal-body">
+      <div class="t-line"><span class="t-comment">// Your AI assistant calls specmcp</span></div>
+      <div class="t-line"><span class="t-method">tool_call</span> <span class="t-muted">→</span> <span class="t-key">get_spec</span>(<span class="t-string">"auth-service-v2"</span>)</div>
+      <div class="t-line">&nbsp;</div>
+      <div class="t-line"><span class="t-comment">// Instantly gets the full spec</span></div>
+      <div class="t-line"><span class="t-muted">{</span> <span class="t-key">name</span>: <span class="t-string">"Auth Service v2"</span>,</div>
+      <div class="t-line">&nbsp; <span class="t-key">endpoints</span>: <span class="t-muted">[...],</span> <span class="t-key">schemas</span>: <span class="t-muted">[...],</span></div>
+      <div class="t-line">&nbsp; <span class="t-key">decisions</span>: <span class="t-muted">[...] }</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="features">
+  <div class="feature">
+    <div class="feature-icon">📄</div>
+    <h3>Upload & Sync</h3>
+    <p>Import specs from markdown, Notion, Confluence, or GitHub. Keep them in sync automatically.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">🔌</div>
+    <h3>MCP Native</h3>
+    <p>Works instantly with Claude, Cursor, Windsurf, and any MCP-compatible AI tool. Zero config.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">👥</div>
+    <h3>Team Ready</h3>
+    <p>Shared spec libraries with access controls. Everyone's AI tools pull from the same source of truth.</p>
+  </div>
+</div>
+
+<section class="pillars">
+  <h2>Specs are infrastructure.<br>Treat them that way.</h2>
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <h3>Stop Spec Drift</h3>
+      <p>Specs rot in wikis and docs. When your AI tools pull from a stale spec, they build the wrong thing. specmcp keeps one canonical version — versioned, diffable, and always current.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <h3>Shared Enterprise Specs</h3>
+      <p>Publish org-wide design guidelines, API standards, and architecture patterns as shared specs. Every team's AI tools inherit your guardrails automatically.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <h3>Agentic Provenance</h3>
+      <p>Know exactly which spec version an AI agent used when it generated code or made a decision. Full traceability from spec to output, every time.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">04</div>
+      <h3>Audit Everything</h3>
+      <p>Who read what spec, when, and from which tool. Complete audit logs for compliance, debugging, and understanding how AI agents interact with your specifications.</p>
+    </div>
+  </div>
+</section>
+
+<section class="usecases">
+  <h2>Built for how you work</h2>
+  <p>Give every AI interaction the context it needs to get things right the first time.</p>
+  <div class="usecase-grid">
+    <div class="usecase">
+      <div class="usecase-label">Solo Dev</div>
+      <h4>Side projects & freelance</h4>
+      <p>Store your project specs and architecture decisions. Your AI pair programmer always knows the plan.</p>
+    </div>
+    <div class="usecase">
+      <div class="usecase-label">Startup</div>
+      <h4>Move fast, stay aligned</h4>
+      <p>Keep product specs, API contracts, and design docs accessible to every team member's AI tools.</p>
+    </div>
+    <div class="usecase">
+      <div class="usecase-label">Enterprise</div>
+      <h4>Specs at scale</h4>
+      <p>Centralize specifications across teams with granular access controls and audit logging.</p>
+    </div>
+    <div class="usecase">
+      <div class="usecase-label">Agency</div>
+      <h4>Client-ready context</h4>
+      <p>Organize specs per client. Onboard AI tools to any project in seconds, not hours.</p>
+    </div>
+  </div>
+</section>
+
+<section class="investor">
+  <div class="investor-header">
+    <div class="section-tag">Market Validation</div>
+    <h2>The business case is <span class="highlight-orange">already proven</span></h2>
+    <p>Between November 2025 and February 2026, every major technology company shifted from code-centric to specification-centric development. specmcp is the infrastructure layer for this transition.</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-number">70–100%</div>
+      <div class="stat-label">AI-generated code at leading tech companies</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">3×</div>
+      <div class="stat-label">code output at NVIDIA with flat bug rates</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">55%</div>
+      <div class="stat-label">drop in new grad hiring at top 15 tech firms since 2019</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">50+</div>
+      <div class="stat-label">features shipped at Spotify while devs stopped writing code</div>
+    </div>
+  </div>
+
+  <div class="evidence-table">
+    <div class="evidence-table-header">
+      <span class="pulse-dot"></span>
+      Industry adoption — Feb 2026
+    </div>
+    <div class="evidence-row">
+      <span class="evidence-company">Anthropic</span>
+      <span class="evidence-pct">70–90%</span>
+      <span class="evidence-quote">Claude Code team at 100% — no manual edits for 2+ months</span>
+    </div>
+    <div class="evidence-row">
+      <span class="evidence-company">OpenAI</span>
+      <span class="evidence-pct">100%</span>
+      <span class="evidence-quote">Engineers no longer write code; GPT-5.3 helped create itself</span>
+    </div>
+    <div class="evidence-row">
+      <span class="evidence-company">Spotify</span>
+      <span class="evidence-pct">100%</span>
+      <span class="evidence-quote">Top devs haven't written a line since December 2025</span>
+    </div>
+    <div class="evidence-row">
+      <span class="evidence-company">NVIDIA</span>
+      <span class="evidence-pct">3× out</span>
+      <span class="evidence-quote">30,000 engineers on AI tools, tripled output</span>
+    </div>
+    <div class="evidence-row">
+      <span class="evidence-company">Google</span>
+      <span class="evidence-pct">25%+</span>
+      <span class="evidence-quote">AI-generated code reviewed and accepted by engineers</span>
+    </div>
+    <div class="evidence-row">
+      <span class="evidence-company">Meta</span>
+      <span class="evidence-pct">50%</span>
+      <span class="evidence-quote">Targeting 50%+ AI development by mid-2026</span>
+    </div>
+    <div class="evidence-row">
+      <span class="evidence-company">Microsoft</span>
+      <span class="evidence-pct">20–30%</span>
+      <span class="evidence-quote">Targeting 60% by end of 2026 via Copilot</span>
+    </div>
+  </div>
+
+  <div class="convergence-callout">
+    <div class="convergence-icon">⟐</div>
+    <div>
+      <h3>The inversion is already here</h3>
+      <p>Engineers now spend 80% of their time on specification and review — exactly the inverse of the old model. The companies that have moved furthest (Anthropic, OpenAI, Spotify) are the ones that treat specification as the engineering discipline and code as a generated artefact. specmcp is the managed infrastructure that makes this workflow reliable, versioned, and team-ready.</p>
+    </div>
+  </div>
+
+  <div class="investor-cta">
+    <p>Specs are the new source code. The tooling layer is wide open.</p>
+    <a href="mailto:investors@specmcp.ai" class="cta-btn">Talk to Us ↗</a>
+  </div>
+</section>
+
+<footer>
+  <p>specmcp.ai — Launching 2026</p>
+  <p style="margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; opacity: 0.35;">{{COMMIT_SHA}}</p>
+</footer>
+
+<script>
+// ← Replace with your Formspree form ID (e.g. "xpzvqkla")
+const FORMSPREE_ID = "xpqjkvjl";
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  const input = e.target.querySelector('input');
+  const button = e.target.querySelector('button');
+  const email = input.value.trim();
+
+  // Validate email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  if (!emailRegex.test(email)) {
+    input.style.borderColor = '#ef4444';
+    input.setAttribute('placeholder', 'Enter a valid email');
+    input.value = '';
+    setTimeout(() => {
+      input.style.borderColor = '';
+      input.setAttribute('placeholder', 'you@company.com');
+    }, 2500);
+    return;
+  }
+
+  // Block disposable/free email domains (optional — remove if you want to allow them)
+  const blocked = ['mailinator.com', 'guerrillamail.com', 'tempmail.com', 'throwaway.email', 'yopmail.com'];
+  const domain = email.split('@')[1].toLowerCase();
+  if (blocked.includes(domain)) {
+    input.style.borderColor = '#ef4444';
+    input.value = '';
+    input.setAttribute('placeholder', 'Please use a work email');
+    setTimeout(() => {
+      input.style.borderColor = '';
+      input.setAttribute('placeholder', 'you@company.com');
+    }, 2500);
+    return;
+  }
+
+  // Loading state
+  button.disabled = true;
+  button.textContent = 'Submitting…';
+
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+
+    if (!res.ok) throw new Error('Submission failed');
+
+    // Success state
+    button.textContent = '✓ You\'re on the list';
+    button.style.background = 'var(--surface-2)';
+    button.style.color = 'var(--accent)';
+    button.style.border = '1px solid var(--accent-glow)';
+    button.style.pointerEvents = 'none';
+    input.style.display = 'none';
+  } catch (err) {
+    // Error state
+    button.textContent = 'Something went wrong — retry?';
+    button.style.background = '#ef444420';
+    button.style.color = '#ef4444';
+    button.style.border = '1px solid #ef444440';
+    button.disabled = false;
+
+    // Reset after 3s
+    setTimeout(() => {
+      button.textContent = 'Get Early Access';
+      button.style.background = '';
+      button.style.color = '';
+      button.style.border = '';
+    }, 3000);
+  }
+}
+</script>
+
 </body>
 </html>
