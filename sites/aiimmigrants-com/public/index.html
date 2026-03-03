@@ -113,11 +113,17 @@
       display: inline-block;
       font-family: var(--sans);
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       text-decoration: none;
-      padding: 0.9rem 2.2rem;
+      padding: 0.85rem 2rem;
       letter-spacing: 0.03em;
+      border-radius: 2rem;
+      border: none;
       transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
     .btn-primary {
@@ -126,34 +132,27 @@
     }
 
     .btn-primary:hover {
-      background: var(--rust);
-      transform: translateY(-2px);
+      background: var(--steel-light);
     }
 
-    .btn-secondary {
-      background: transparent;
-      color: var(--off-black);
-      border: 1px solid #999;
+
+
+    .btn-amazon {
+      background: #FF9900;
+      color: #0f1111;
     }
 
-    .btn-secondary:hover {
-      border-color: var(--off-black);
-      transform: translateY(-2px);
+    .btn-amazon:hover {
+      background: #FFB340;
     }
 
     .btn-spotify {
       background: #1DB954;
       color: #000;
-      border: none;
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 0.8rem 2rem;
-      border-radius: 2rem;
     }
 
     .btn-spotify:hover {
       background: #1ed760;
-      transform: translateY(-2px);
     }
 
     /* === SECTIONS === */
@@ -362,7 +361,10 @@
       <p class="synopsis">Artificial intelligence isn't just another technology — it's a new kind of immigrant. One that doesn't sleep, doesn't eat, and learns faster than we do. This book asks the question no algorithm can answer: who owns the future?</p>
       <div class="download-row">
         <a href="https://aiibook.blob.core.windows.net/downloads/ai-immigrants.epub" class="btn btn-primary">Download Free EPUB</a>
-        <a href="https://aiibook.blob.core.windows.net/downloads/ai-immigrants.pdf" class="btn btn-secondary">Download Free PDF</a>
+        <a href="https://aiibook.blob.core.windows.net/downloads/ai-immigrants.pdf" class="btn btn-primary">Download Free PDF</a>
+      </div>
+      <div class="download-row">
+        <a href="https://www.amazon.com/AI-Immigrants-Bloody-Algos-Here/dp/B0GQNDDDG8" class="btn btn-amazon">Buy Paperback on Amazon</a>
       </div>
       <div class="download-row">
         <a href="https://open.spotify.com/show/4kmEP6R0vaa5mXVnltwJ0j?si=dc85edc5df984df2" class="btn btn-spotify">Listen on Spotify</a>
