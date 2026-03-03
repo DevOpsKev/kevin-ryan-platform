@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docker:build": "docker build --no-cache -t aiimmigrants-com:local -f Dockerfile ../..",
-    "docker:up": "docker compose up --build --no-cache",
+    "docker:up": "docker compose up --build",
     "docker:down": "docker compose down"
   }
 }
