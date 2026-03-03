@@ -15,8 +15,8 @@
     "tsc-files": "^1.1.4"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
+    "sites/kevinryan-io/**/*.{ts,tsx}": [
+      "eslint --fix -c sites/kevinryan-io/eslint.config.mjs",
       "tsc-files --noEmit"
     ],
     "*.{tf,tfvars}": [
