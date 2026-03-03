@@ -57,6 +57,8 @@ jobs:
             ghcr.io/devopskev/brand-kevinryan-io:latest
             ${{ secrets.ACR_LOGIN_SERVER }}/brand-kevinryan-io:${{ steps.vars.outputs.SHA }}
             ${{ secrets.ACR_LOGIN_SERVER }}/brand-kevinryan-io:latest
+          build-args: |
+            COMMIT_SHA=${{ steps.vars.outputs.SHA }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
