@@ -1,0 +1,10 @@
+{
+  "name": "distributedequity-org",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "docker:build": "docker build --no-cache -t distributedequity-org:local -f Dockerfile ../..",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
+  }
+}
