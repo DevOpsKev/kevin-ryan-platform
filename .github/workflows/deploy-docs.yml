@@ -5,6 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "sites/docs-kevinryan-io/**"
+      - "docs/**"
 
 permissions:
   contents: write
