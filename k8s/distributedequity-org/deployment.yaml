@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: distributedequity-org
-          image: kevinryanacr.azurecr.io/distributedequity-org:dev
+          image: kevinryanacr.azurecr.io/distributedequity-org:5dba0d5
           ports:
             - containerPort: 8080
           livenessProbe:
