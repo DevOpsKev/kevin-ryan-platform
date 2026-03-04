@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: distributedequity-org
+  namespace: distributedequity-org
+spec:
+  selector:
+    app: distributedequity-org
+  ports:
+    - port: 80
+      targetPort: 8080

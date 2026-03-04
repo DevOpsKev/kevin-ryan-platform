@@ -107,6 +107,13 @@ module "cloudflare_sddbook" {
   domain       = "sddbook.com"
 }
 
+module "cloudflare_distributedequity" {
+  source       = "./modules/cloudflare"
+  zone_id      = var.cloudflare_zone_id_distributedequity
+  vm_public_ip = module.network.public_ip_address
+  domain       = "distributedequity.org"
+}
+
 module "github_oidc" {
   source                     = "./modules/github-oidc"
   github_repo_owner          = var.github_repo_owner
