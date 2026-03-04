@@ -1,8 +1,6 @@
 ---
-title: ADR-012: Developer secret management with 1Password CLI
+title: "ADR-012: Developer secret management with 1Password CLI"
 ---
-
-# ADR-012: Developer secret management with 1Password CLI
 
 **Status:** Accepted
 **Date:** 2026-03-01

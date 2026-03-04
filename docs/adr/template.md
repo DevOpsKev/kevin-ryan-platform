@@ -1,3 +1,7 @@
+---
+title: "ADR Template"
+---
+
 <!--
   ADR File Naming Convention
   ──────────────────────────
@@ -13,12 +17,6 @@
   - Superseded ADRs remain in place with status updated
   - This template lives at adr-000-template.md
 -->
-
----
-title: [Title]
----
-
-# ADR-000: [Title]
 
 **Status:** Proposed | Accepted | Superseded | Deprecated
 **Date:** YYYY-MM-DD

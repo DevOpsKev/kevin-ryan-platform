@@ -1,7 +1,6 @@
 ---
-title: ADR-007: PostgreSQL on Azure Database Flexible Server
+title: "ADR-007: PostgreSQL on Azure Database Flexible Server"
 ---
-# ADR-007: PostgreSQL on Azure Database Flexible Server
 
 **Status:** Accepted
 **Date:** 2026-02-28

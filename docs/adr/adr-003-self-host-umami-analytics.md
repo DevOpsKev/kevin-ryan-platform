@@ -1,8 +1,6 @@
 ---
-title: ADR-003: Self-host Umami analytics on k3s
+title: "ADR-003: Self-host Umami analytics on k3s"
 ---
-
-# ADR-003: Self-host Umami analytics on k3s
 
 **Status:** Accepted
 **Date:** 2026-02-28
