@@ -83,7 +83,7 @@ module "cloudflare" {
   zone_id      = var.cloudflare_zone_id
   vm_public_ip = module.network.public_ip_address
   domain       = "kevinryan.io"
-  subdomains   = ["brand"]
+  subdomains   = ["brand", "docs"]
 }
 
 module "cloudflare_aiimmigrants" {
