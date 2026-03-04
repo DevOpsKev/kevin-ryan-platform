@@ -1,0 +1,8 @@
+---
+const sha = import.meta.env.PUBLIC_COMMIT_SHA || 'dev';
+---
+<footer class="sl-footer">
+  <div style="text-align: center; padding: 1rem; font-family: var(--sl-font-mono); font-size: 0.7rem; opacity: 0.5;">
+    {sha}
+  </div>
+</footer>
