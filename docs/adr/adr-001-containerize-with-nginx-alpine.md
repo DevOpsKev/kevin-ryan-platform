@@ -2,8 +2,6 @@
 title: "ADR-001: Containerize with nginx:alpine"
 ---
 
-# ADR-001: Containerize with nginx:alpine
-
 **Status:** Accepted
 **Date:** 2026-02-28
 **Decision Makers:** Human + Claude (claude.ai) + Claude Code (agent)

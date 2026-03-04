@@ -1,8 +1,6 @@
 ---
-title: ADR-004: Push images to GHCR with git SHA tagging
+title: "ADR-004: Push images to GHCR with git SHA tagging"
 ---
-
-# ADR-004: Push images to GHCR with git SHA tagging
 
 **Status:** Accepted
 **Date:** 2026-02-28

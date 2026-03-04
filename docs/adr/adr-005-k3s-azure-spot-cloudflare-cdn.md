@@ -1,8 +1,6 @@
 ---
-title: ADR-005: Host on K3s with Azure Spot VM and Cloudflare CDN
+title: "ADR-005: Host on K3s with Azure Spot VM and Cloudflare CDN"
 ---
-
-# ADR-005: Host on K3s with Azure Spot VM and Cloudflare CDN
 
 **Status:** Accepted (updated 2026-03-01)
 **Date:** 2026-02-28

@@ -1,8 +1,6 @@
 ---
-title: ADR-011: Git hooks with Husky and lint-staged
+title: "ADR-011: Git hooks with Husky and lint-staged"
 ---
-
-# ADR-011: Git hooks with Husky and lint-staged
 
 **Status:** Accepted
 **Date:** 2026-02-28
@@ -92,6 +90,7 @@ The pre-push hook runs checks that are too slow for every commit but must pass b
 ### Package changes
 
 **Add (devDependencies):**
+
 - `husky` — Git hook management
 - `lint-staged` — Run linters on staged files
 - `tsc-files` — Staged-only TypeScript type checking
@@ -101,10 +100,12 @@ The pre-push hook runs checks that are too slow for every commit but must pass b
 - `tflint` — installed as a binary (system dependency, documented in README)
 
 **Remove:**
+
 - `.pre-commit-config.yaml`
 - `pre-commit` from prerequisites in README
 
 **Add to `package.json`:**
+
 ```json
 {
   "scripts": {
@@ -121,7 +122,8 @@ The pre-push hook runs checks that are too slow for every commit but must pass b
 ```
 
 **Add `.husky/` directory (committed to Git):**
-```
+
+```text
 .husky/
 ├── pre-commit    # npx lint-staged
 └── pre-push      # pnpm build

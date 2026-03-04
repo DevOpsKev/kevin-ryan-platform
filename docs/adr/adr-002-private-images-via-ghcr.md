@@ -1,8 +1,6 @@
 ---
-title: ADR-002: Private images via GHCR
+title: "ADR-002: Private images via GHCR"
 ---
-
-# ADR-002: Private images via GHCR
 
 **Status:** Accepted
 **Date:** 2026-02-28
@@ -42,7 +40,9 @@ The GitHub Action builds the image, exports it as a tarball with `docker save`, 
 
 **Store private container images in GitHub Container Registry (GHCR).**
 
-The GitHub Action builds and pushes the image to `ghcr.io/devopskev/kevinryan-io:<tag>`. Images are private by default on GHCR, which matches the private repository. Container registry storage and bandwidth are currently free on all GitHub plans, and GitHub has committed to providing at least one month's notice before introducing charges. Even when pricing takes effect, the GitHub Pro plan's 2GB storage and 10GB transfer quota comfortably accommodates this use case — the nginx image is under 50MB, meaning 40+ tagged versions could exist before approaching the storage limit. Data transfer from GitHub Actions using `GITHUB_TOKEN` does not count against the transfer quota, so CI pushes are effectively free.
+The GitHub Action builds and pushes the image to `ghcr.io/devopskev/kevinryan-io:<tag>`. Images are private by default on GHCR, which matches the private repository. Container registry storage and bandwidth are currently free on all GitHub plans, and GitHub has committed to providing at least one month's notice before introducing charges.
+Even when pricing takes effect, the GitHub Pro plan's 2GB storage and 10GB transfer quota comfortably accommodates this use case — the nginx image is under 50MB, meaning 40+ tagged versions could exist before approaching the storage limit.
+Data transfer from GitHub Actions using `GITHUB_TOKEN` does not count against the transfer quota, so CI pushes are effectively free.
 
 This eliminates the need to provision, configure, and pay for a separate registry. The k3s cluster authenticates to GHCR via an `imagePullSecret` containing a personal access token with `read:packages` scope.
 

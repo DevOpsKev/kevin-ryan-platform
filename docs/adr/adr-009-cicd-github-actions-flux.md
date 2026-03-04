@@ -1,8 +1,6 @@
 ---
-title: ADR-009: CI/CD with GitHub Actions and Flux CD
+title: "ADR-009: CI/CD with GitHub Actions and Flux CD"
 ---
-
-# ADR-009: CI/CD with GitHub Actions and Flux CD
 
 **Status:** Accepted
 **Date:** 2026-02-28
@@ -67,7 +65,7 @@ Adds two more Flux controllers (image-reflector-controller, image-automation-con
 
 ### Application pipeline
 
-```
+```text
   Push to main
        │
        ▼
@@ -99,6 +97,7 @@ Adds two more Flux controllers (image-reflector-controller, image-automation-con
 **Trigger:** Push to `main` (path filter: exclude `infra/`, `docs/`, `*.md`).
 
 **Steps:**
+
 1. Checkout repo.
 2. Authenticate to ACR via OIDC (Azure AD workload identity federation — no long-lived secrets).
 3. Build Docker image (multi-stage, from ADR-001 Dockerfile).
@@ -113,7 +112,7 @@ Flux detects the manifest commit and applies the updated deployment. Kubernetes 
 
 ### Infrastructure pipeline
 
-```
+```text
   Push to infra/
        │
        ▼
@@ -132,6 +131,7 @@ Flux detects the manifest commit and applies the updated deployment. Kubernetes 
 **Trigger:** Push to `main` (path filter: `infra/**`).
 
 **Steps:**
+
 1. Checkout repo.
 2. Authenticate to Azure via OIDC (workload identity federation).
 3. Authenticate to Cloudflare via API token (GitHub secret).

@@ -1,8 +1,6 @@
 ---
-title: ADR-008: Infrastructure-as-Code with Terraform
+title: "ADR-008: Infrastructure-as-Code with Terraform"
 ---
-
-# ADR-008: Infrastructure-as-Code with Terraform
 
 **Status:** Accepted
 **Date:** 2026-02-28
@@ -97,7 +95,7 @@ Terraform manages the following resources in a single configuration:
 
 ### Module structure
 
-```
+```text
 infra/
 ├── main.tf              # Provider config, backend, module calls
 ├── variables.tf         # Input variables (region, VM size, domain list)

@@ -1,8 +1,6 @@
 ---
-title: ADR-006: Observability with Grafana, Loki, and Promtail
+title: "ADR-006: Observability with Grafana, Loki, and Promtail"
 ---
-
-# ADR-006: Observability with Grafana, Loki, and Promtail
 
 **Status:** Accepted
 **Date:** 2026-02-28
@@ -68,7 +66,7 @@ Removes the operational surface — same objection as Azure Container Apps in AD
 
 The architecture within the K3s cluster:
 
-```
+```text
   ┌─────────────────────────────────────────────────────┐
   │                    K3s Node                          │
   │                                                     │
