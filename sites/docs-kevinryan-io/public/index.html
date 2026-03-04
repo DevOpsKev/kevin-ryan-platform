@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>docs.kevinryan.io</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #0a0a0a;
+  color: #f5f5f5;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  letter-spacing: 0.04em;
+  font-weight: 400;
+}
+
+.sha {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: #444;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+</style>
+</head>
+<body>
+  <span class="title">docs.kevinryan.io</span>
+  <span class="sha">{{COMMIT_SHA}}</span>
+</body>
+</html>
