@@ -1,3 +1,7 @@
+---
+title: ADR-014: Migrate from Azure Spot VM to On-Demand B2s
+---
+
 # ADR-014: Migrate from Azure Spot VM to On-Demand B2s
 
 **Status:** Accepted

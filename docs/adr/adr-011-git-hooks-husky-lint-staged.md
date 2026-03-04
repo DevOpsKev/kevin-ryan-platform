@@ -1,3 +1,7 @@
+---
+title: ADR-011: Git hooks with Husky and lint-staged
+---
+
 # ADR-011: Git hooks with Husky and lint-staged
 
 **Status:** Accepted

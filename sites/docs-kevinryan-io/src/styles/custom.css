@@ -1,45 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap');
 
+/* Force dark mode only */
 :root {
-  /* Accent — lime */
+  color-scheme: dark;
+}
+
+starlight-theme-select {
+  display: none;
+}
+
+/* Accent — brand lime */
+:root[data-theme='dark'] {
   --sl-color-accent-low: #1a2600;
   --sl-color-accent: #A8E10C;
-  --sl-color-accent-high: #d4f080;
+  --sl-color-accent-high: #c8f04c;
 
-  /* Background — warm whites, not pure white */
-  --sl-color-bg: #F5F3EF;
-  --sl-color-bg-nav: #ECEAE5;
-  --sl-color-bg-sidebar: #ECEAE5;
+  --sl-color-bg: #0A0A0A;
+  --sl-color-bg-nav: #111111;
+  --sl-color-bg-sidebar: #111111;
+}
 
-  /* Text */
-  --sl-color-text: #55524E;
-  --sl-color-text-accent: #A8E10C;
-  --sl-color-white: #F5F3EF;
-  --sl-color-gray-1: #ECEAE5;
-  --sl-color-gray-2: #D4D1CB;
-  --sl-color-gray-3: #7A7772;
-  --sl-color-gray-4: #55524E;
-  --sl-color-gray-5: #2E2D2B;
-  --sl-color-gray-6: #1A1A1A;
-  --sl-color-black: #0A0A0A;
-
-  /* Typography */
+/* Typography */
+:root {
   --sl-font: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
   --sl-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --__sl-font-size-base: 1.05rem;
   --sl-line-height: 1.7;
 }
 
-/* Dark mode overrides */
-:root[data-theme='dark'] {
-  --sl-color-bg: #0A0A0A;
-  --sl-color-bg-nav: #111111;
-  --sl-color-bg-sidebar: #111111;
-  --sl-color-text: #D4D1CB;
-  --sl-color-white: #F5F3EF;
-}
-
-/* Headings in Bebas Neue — Swiss style: uppercase, tight leading */
+/* Headings — Bebas Neue, Swiss style */
 h1,
 h2,
 h3 {
@@ -48,14 +37,16 @@ h3 {
   text-transform: uppercase;
 }
 
-/* Body text uses brand grey, not black */
-.sl-markdown-content {
-  color: var(--sl-color-gray-4);
-}
-
-/* Swiss International Style — sharp edges, 8px grid, minimal decoration */
+/* Swiss International Style — sharp edges, minimal decoration */
 .card,
 [class*='card'] {
   border-radius: 0;
-  border: 1px solid #D4D1CB;
+}
+
+/* Site title in brand display font */
+.site-title {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 1.4rem;
 }

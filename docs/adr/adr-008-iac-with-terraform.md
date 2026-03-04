@@ -1,3 +1,7 @@
+---
+title: ADR-008: Infrastructure-as-Code with Terraform
+---
+
 # ADR-008: Infrastructure-as-Code with Terraform
 
 **Status:** Accepted

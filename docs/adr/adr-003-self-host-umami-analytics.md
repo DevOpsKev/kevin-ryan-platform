@@ -1,18 +1,6 @@
-<!--
-  ADR File Naming Convention
-  ──────────────────────────
-  Filename:  adr-NNN-short-kebab-title.md
-
-  Rules:
-  - NNN is a zero-padded three-digit sequence starting at 001
-  - short-kebab-title is lowercase, hyphen-separated, max 5 words
-  - Title should describe the decision, not the topic
-    ✓ adr-001-containerize-with-nginx-alpine.md
-    ✗ adr-001-docker.md
-  - Never reuse a number, even if the ADR is deprecated
-  - Superseded ADRs remain in place with status updated
-  - This template lives at adr-000-template.md
--->
+---
+title: ADR-003: Self-host Umami analytics on k3s
+---
 
 # ADR-003: Self-host Umami analytics on k3s
 

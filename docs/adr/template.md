@@ -14,6 +14,10 @@
   - This template lives at adr-000-template.md
 -->
 
+---
+title: [Title]
+---
+
 # ADR-000: [Title]
 
 **Status:** Proposed | Accepted | Superseded | Deprecated

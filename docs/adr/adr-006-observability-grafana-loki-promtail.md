@@ -1,3 +1,7 @@
+---
+title: ADR-006: Observability with Grafana, Loki, and Promtail
+---
+
 # ADR-006: Observability with Grafana, Loki, and Promtail
 
 **Status:** Accepted

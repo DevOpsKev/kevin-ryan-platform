@@ -1,3 +1,7 @@
+---
+title: ADR-013: Monorepo with pnpm Workspaces
+---
+
 # ADR-013: Monorepo with pnpm Workspaces
 
 **Status:** Accepted

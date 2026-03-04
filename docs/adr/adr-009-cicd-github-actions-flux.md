@@ -1,3 +1,7 @@
+---
+title: ADR-009: CI/CD with GitHub Actions and Flux CD
+---
+
 # ADR-009: CI/CD with GitHub Actions and Flux CD
 
 **Status:** Accepted

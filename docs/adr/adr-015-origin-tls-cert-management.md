@@ -1,3 +1,7 @@
+---
+title: DR-015: Origin TLS certificate as Kubernetes secret with 1Password backup
+---
+
 # ADR-015: Origin TLS certificate as Kubernetes secret with 1Password backup
 
 **Status:** Accepted

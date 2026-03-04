@@ -1,3 +1,7 @@
+---
+title: ADR-010: ACR as primary registry, retain GHCR
+---
+
 # ADR-010: ACR as primary registry, retain GHCR
 
 **Status:** Accepted
