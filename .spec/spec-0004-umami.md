@@ -1,20 +1,20 @@
-# Spec 4: Umami Analytics
+# Spec 0004: Umami Analytics
 
 ## Task
 
-1. Save this spec to `.spec/spec-4-umami.md` in the repo (create the `.spec/` directory if it does not exist).
+1. Save this spec to `.spec/spec-0004-umami.md` in the repo (create the `.spec/` directory if it does not exist).
 2. Implement all Terraform and Kubernetes manifest changes described below.
-3. After completing all work, create a provenance record at `.provenance/spec-4-umami.provenance.md` (create the `.provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
+3. After completing all work, create a provenance record at `.provenance/spec-0004-umami.provenance.md` (create the `.provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
 
 ## Prerequisites
 
-- Spec 2 deployed: PostgreSQL Flexible Server running, `umami_db` database created, credentials in Key Vault (`pg-admin-password`, `pg-fqdn`, `pg-admin-username`)
-- Spec 3 deployed: ESO running, ClusterSecretStore `azure-keyvault` is `Valid` and `Ready`
+- Spec 0002 deployed: PostgreSQL Flexible Server running, `umami_db` database created, credentials in Key Vault (`pg-admin-password`, `pg-fqdn`, `pg-admin-username`)
+- Spec 0003 deployed: ESO running, ClusterSecretStore `azure-keyvault` is `Valid` and `Ready`
 - Read ADR-003 (`docs/adr/adr-003-self-host-umami-analytics.md`) — the architectural decision to self-host Umami
 
 ## Context
 
-ADR-003 mandates self-hosted Umami analytics backed by PostgreSQL. The database (`umami_db`) and secret pipeline (Key Vault -> ESO -> K8s Secret) are already in place from Specs 2 and 3. This spec deploys Umami as a Kubernetes workload, creates its ExternalSecret for database credentials, wires up DNS and ingress, and adds `APP_SECRET` to Key Vault.
+ADR-003 mandates self-hosted Umami analytics backed by PostgreSQL. The database (`umami_db`) and secret pipeline (Key Vault -> ESO -> K8s Secret) are already in place from Specs 0002 and 0003. This spec deploys Umami as a Kubernetes workload, creates its ExternalSecret for database credentials, wires up DNS and ingress, and adds `APP_SECRET` to Key Vault.
 
 ### Current state (read these files before making changes)
 
@@ -130,6 +130,7 @@ spec:
 ```
 
 **Design notes:**
+
 - `template.data` constructs `DATABASE_URL` from individual Key Vault secrets — no connection string stored in Key Vault, reducing secret sprawl.
 - `sslmode=require` because Azure PostgreSQL Flexible Server enforces SSL by default.
 - `refreshInterval: 1h` means credential rotation in Key Vault propagates within an hour.
@@ -186,6 +187,7 @@ spec:
 ```
 
 **Design notes:**
+
 - `envFrom.secretRef` injects all keys from the `umami-db` Secret as env vars (`DATABASE_URL`, `APP_SECRET`).
 - `DISABLE_TELEMETRY=1` set directly as an env var (not a secret, not sensitive).
 - Resource limits are generous for initial startup (Umami runs Prisma migrations on first boot, which can be CPU/memory intensive). Steady-state usage is ~200MB RAM.
@@ -229,6 +231,7 @@ spec:
 ```
 
 **Design notes:**
+
 - Follows the exact same Traefik IngressRoute pattern as `kevinryan-io`, `brand-kevinryan-io`, etc.
 - `tls: {}` uses Traefik's default TLS certificate (Cloudflare handles SSL termination at the edge; Traefik handles it between Cloudflare and the pod since Cloudflare is set to Full SSL mode).
 
@@ -288,6 +291,7 @@ terraform apply
 ```
 
 Verify:
+
 ```bash
 az keyvault secret list --vault-name kv-kevinryan-io --query "[].name" -o tsv
 # Should include: umami-app-secret (alongside existing pg-* secrets)
@@ -317,21 +321,23 @@ az vm run-command invoke \
 ```
 
 Final check — hit the health endpoint:
+
 ```bash
 curl -k https://analytics.kevinryan.io/api/heartbeat
 ```
+
 Should return `ok`.
 
 Default admin login: `admin` / `umami` — change immediately after first login.
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-4-umami.provenance.md` with the following structure:
+After completing the work, create `.provenance/spec-0004-umami.provenance.md` with the following structure:
 
 ```markdown
-# Provenance: Spec 4 — Umami Analytics
+# Provenance: Spec 0004 — Umami Analytics
 
-**Spec:** `.spec/spec-4-umami.md`
+**Spec:** `.spec/spec-0004-umami.md`
 **Executed:** <timestamp>
 **Agent:** <agent identifier if available>
 
@@ -368,7 +374,7 @@ Results of each validation step from the spec (pass/fail with details).
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-4-umami.md`
+1. This spec has been saved to `.spec/spec-0004-umami.md`
 2. `infra/main.tf` contains `random_password.umami_app_secret`, `azurerm_key_vault_secret.umami_app_secret`, and `cloudflare_record.analytics`
 3. No other Terraform files (variables, outputs, modules) were modified
 4. `k8s/umami/` exists with exactly 5 files: `namespace.yaml`, `externalsecret.yaml`, `deployment.yaml`, `service.yaml`, `ingress.yaml`
@@ -382,5 +388,5 @@ After completing all work, confirm:
 12. `k8s/flux-system/kustomization.yaml` includes `umami-sync.yaml`
 13. `terraform fmt -check -recursive infra/` passes
 14. `pnpm lint` passes
-15. The provenance record exists at `.provenance/spec-4-umami.provenance.md` and contains all required sections
+15. The provenance record exists at `.provenance/spec-0004-umami.provenance.md` and contains all required sections
 16. All files (spec, Terraform changes, K8s manifests, provenance) are committed together

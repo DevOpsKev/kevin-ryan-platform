@@ -1,6 +1,6 @@
-# Provenance: Spec 3 — External Secrets Operator
+# Provenance: Spec 0003 — External Secrets Operator
 
-**Spec:** `.spec/spec-3-external-secrets-operator.md`
+**Spec:** `.spec/spec-0003-external-secrets-operator.md`
 **Executed:** 2026-03-05
 **Agent:** Claude (claude-sonnet-4-6), Claude Code CLI
 
@@ -8,14 +8,14 @@
 
 1. Checked out branch `claude/external-secrets-operator-v1Zqg` (already existed)
 2. Checked ArtifactHub (`https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets`) for current ESO chart version — confirmed latest stable is **2.0.1** (2.x series)
-3. Created `.spec/spec-3-external-secrets-operator.md` — saved full spec verbatim
+3. Created `.spec/spec-0003-external-secrets-operator.md` — saved full spec verbatim
 4. Created `k8s/external-secrets/namespace.yaml`
 5. Created `k8s/external-secrets/helmrepository.yaml`
 6. Created `k8s/external-secrets/helmrelease.yaml` — with semver range adjusted to `>=2.0.0 <3.0.0` (see Decisions Made)
 7. Created `k8s/external-secrets/clustersecretstore.yaml`
 8. Created `k8s/flux-system/external-secrets-sync.yaml`
 9. Modified `k8s/flux-system/kustomization.yaml` — added `external-secrets-sync.yaml` to resources list
-10. Created `.provenance/spec-3-external-secrets-operator.provenance.md` (this file)
+10. Created `.provenance/spec-0003-external-secrets-operator.provenance.md` (this file)
 11. Committed all changes and pushed to `claude/external-secrets-operator-v1Zqg`
 
 ## Decisions Made
@@ -32,18 +32,18 @@ No deviations from spec.
 
 | File | Status |
 |------|--------|
-| `.spec/spec-3-external-secrets-operator.md` | Created |
+| `.spec/spec-0003-external-secrets-operator.md` | Created |
 | `k8s/external-secrets/namespace.yaml` | Created |
 | `k8s/external-secrets/helmrepository.yaml` | Created |
 | `k8s/external-secrets/helmrelease.yaml` | Created |
 | `k8s/external-secrets/clustersecretstore.yaml` | Created |
 | `k8s/flux-system/external-secrets-sync.yaml` | Created |
 | `k8s/flux-system/kustomization.yaml` | Modified |
-| `.provenance/spec-3-external-secrets-operator.provenance.md` | Created |
+| `.provenance/spec-0003-external-secrets-operator.provenance.md` | Created |
 
 ## Validation Results
 
-1. **Spec saved to `.spec/spec-3-external-secrets-operator.md`** — PASS
+1. **Spec saved to `.spec/spec-0003-external-secrets-operator.md`** — PASS
 2. **`k8s/external-secrets/` exists with exactly 4 files** — PASS (`namespace.yaml`, `helmrepository.yaml`, `helmrelease.yaml`, `clustersecretstore.yaml`)
 3. **HelmRepository points to `https://charts.external-secrets.io`** — PASS
 4. **HelmRelease has valid semver range, `crds: CreateReplace`, `installCRDs: true`** — PASS (`>=2.0.0 <3.0.0`, CreateReplace on both install and upgrade, installCRDs: true)

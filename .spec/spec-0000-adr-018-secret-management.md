@@ -1,10 +1,10 @@
-# Spec 0: Write ADR-018 — Secret Management with Key Vault and ESO
+# Spec 0000: Write ADR-018 — Secret Management with Key Vault and ESO
 
 ## Task
 
-1. Save this spec to `.spec/spec-0-adr-018-secret-management.md` in the repo (create the `.spec/` directory if it does not exist).
+1. Save this spec to `.spec/spec-0000-adr-018-secret-management.md` in the repo (create the `.spec/` directory if it does not exist).
 2. Create the file `docs/adr/adr-018-secret-management-keyvault-eso.md` following the project's ADR template at `docs/adr/template.md`. Match the depth, tone, and structure of existing ADRs (see `docs/adr/adr-017-managed-postgresql-shared-database.md` and `docs/adr/adr-016-second-k3s-node-for-observability.md` for reference).
-3. After completing all work, create a provenance record at `.provenance/spec-0-adr-018-secret-management.provenance.md` (create the `.provenance/` directory if it does not exist). See the Provenance Record section below for the required format.
+3. After completing all work, create a provenance record at `.provenance/spec-0000-adr-018-secret-management.provenance.md` (create the `.provenance/` directory if it does not exist). See the Provenance Record section below for the required format.
 
 ## Metadata
 
@@ -79,7 +79,7 @@ Key details:
 
 - **Key Vault access misconfiguration:** If the VM managed identity lacks the Key Vault Secrets User role, ESO cannot read secrets and all ExternalSecrets fail. Mitigation: Terraform handles role assignment declaratively; validate by checking ClusterSecretStore health status after deployment.
 - **ESO availability:** If the ESO pod crashes, existing K8s Secrets remain (they're regular Secrets once created) but won't refresh. Mitigation: ESO is lightweight and well-tested; standard pod restart policies apply.
-- **Helm-controller dependency:** ESO deployment is blocked until helm-controller is added to Flux. Mitigation: this is addressed in the ADR-016 implementation (Spec 1) which is sequenced before ESO deployment.
+- **Helm-controller dependency:** ESO deployment is blocked until helm-controller is added to Flux. Mitigation: this is addressed in the ADR-016 implementation (Spec 0001) which is sequenced before ESO deployment.
 
 ## Agent Decisions table
 
@@ -97,12 +97,12 @@ Use the standard "No agent implementation decisions recorded" row — this ADR d
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-0-adr-018-secret-management.provenance.md` with the following structure:
+After completing the work, create `.provenance/spec-0000-adr-018-secret-management.provenance.md` with the following structure:
 
 ```markdown
-# Provenance: Spec 0 — ADR-018 Secret Management with Key Vault and ESO
+# Provenance: Spec 0000 — ADR-018 Secret Management with Key Vault and ESO
 
-**Spec:** `.spec/spec-0-adr-018-secret-management.md`
+**Spec:** `.spec/spec-0000-adr-018-secret-management.md`
 **Executed:** <timestamp>
 **Agent:** <agent identifier if available>
 
@@ -128,9 +128,9 @@ Any points where the agent deviated from the spec, and why. If none, state: "No 
 
 | File | Status |
 |------|--------|
-| `.spec/spec-0-adr-018-secret-management.md` | Created / Modified |
+| `.spec/spec-0000-adr-018-secret-management.md` | Created / Modified |
 | `docs/adr/adr-018-secret-management-keyvault-eso.md` | Created |
-| `.provenance/spec-0-adr-018-secret-management.provenance.md` | Created |
+| `.provenance/spec-0000-adr-018-secret-management.provenance.md` | Created |
 
 ## Validation Results
 
@@ -143,7 +143,7 @@ This provenance record must be committed alongside the spec and ADR in the same 
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-0-adr-018-secret-management.md`
+1. This spec has been saved to `.spec/spec-0000-adr-018-secret-management.md`
 2. The file exists at `docs/adr/adr-018-secret-management-keyvault-eso.md`
 3. The frontmatter title field matches the pattern `"ADR-018: ..."`
 4. The file follows the template structure (all sections present: Context, Decision Drivers, Options Considered, Decision, Consequences, Agent Decisions, References)
@@ -151,5 +151,5 @@ After completing all work, confirm:
 6. The deviation from ADR-017's managed identity auth is explicitly called out
 7. `pnpm lint` passes (markdownlint will catch formatting issues)
 8. No broken relative links in the References section — verify the referenced ADR filenames exist in `docs/adr/`
-9. The provenance record exists at `.provenance/spec-0-adr-018-secret-management.provenance.md` and contains all required sections
+9. The provenance record exists at `.provenance/spec-0000-adr-018-secret-management.provenance.md` and contains all required sections
 10. All three files (spec, ADR, provenance) are committed together

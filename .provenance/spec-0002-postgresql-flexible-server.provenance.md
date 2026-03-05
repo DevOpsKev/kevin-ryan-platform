@@ -1,6 +1,6 @@
-# Provenance: Spec 2 — PostgreSQL Flexible Server
+# Provenance: Spec 0002 — PostgreSQL Flexible Server
 
-**Spec:** `.spec/spec-2-postgresql-flexible-server.md`
+**Spec:** `.spec/spec-0002-postgresql-flexible-server.md`
 **Executed:** 2026-03-05
 **Agent:** claude-sonnet-4-6 (Claude Code)
 
@@ -9,7 +9,7 @@
 1. Checked out branch `claude/postgresql-flexible-server-sJsyv` (already existed).
 2. Read existing infra files to understand current state: `infra/main.tf`, `infra/outputs.tf`, `infra/modules/network/outputs.tf`, and all existing modules for patterns.
 3. Created `.spec/` directory.
-4. Created `.spec/spec-2-postgresql-flexible-server.md` — verbatim copy of the spec.
+4. Created `.spec/spec-0002-postgresql-flexible-server.md` — verbatim copy of the spec.
 5. Created `infra/modules/postgresql/` directory.
 6. Created `infra/modules/postgresql/versions.tf` — azurerm ~> 4.0, required_version >= 1.5.
 7. Created `infra/modules/postgresql/variables.tf` — 8 variables: location, resource_group_name, vnet_name, vnet_id, server_name, admin_username, admin_password (sensitive), databases.
@@ -19,7 +19,7 @@
 11. Modified `infra/outputs.tf` — appended `postgresql_fqdn` output.
 12. Attempted `terraform fmt -check -recursive infra/` — terraform binary not available in this environment; formatting verified manually against existing module conventions.
 13. Created `.provenance/` directory.
-14. Created `.provenance/spec-2-postgresql-flexible-server.provenance.md` (this file).
+14. Created `.provenance/spec-0002-postgresql-flexible-server.provenance.md` (this file).
 15. Committed all changes and pushed to `claude/postgresql-flexible-server-sJsyv`.
 
 ## Decisions Made
@@ -55,18 +55,18 @@ az provider register --namespace Microsoft.DBforPostgreSQL
 
 | File | Status |
 |------|--------|
-| `.spec/spec-2-postgresql-flexible-server.md` | Created |
+| `.spec/spec-0002-postgresql-flexible-server.md` | Created |
 | `infra/modules/postgresql/versions.tf` | Created |
 | `infra/modules/postgresql/variables.tf` | Created |
 | `infra/modules/postgresql/main.tf` | Created |
 | `infra/modules/postgresql/outputs.tf` | Created |
 | `infra/main.tf` | Modified |
 | `infra/outputs.tf` | Modified |
-| `.provenance/spec-2-postgresql-flexible-server.provenance.md` | Created |
+| `.provenance/spec-0002-postgresql-flexible-server.provenance.md` | Created |
 
 ## Validation Results
 
-1. **Spec saved to `.spec/spec-2-postgresql-flexible-server.md`** — PASS
+1. **Spec saved to `.spec/spec-0002-postgresql-flexible-server.md`** — PASS
 2. **`infra/modules/postgresql/` exists with `main.tf`, `variables.tf`, `outputs.tf`, `versions.tf`** — PASS
 3. **Delegated subnet `snet-postgresql` with prefix `10.0.2.0/28` and `Microsoft.DBforPostgreSQL/flexibleServers` delegation** — PASS (see `infra/modules/postgresql/main.tf`)
 4. **Private DNS zone `privatelink.postgres.database.azure.com` linked to VNet** — PASS (see `azurerm_private_dns_zone` and `azurerm_private_dns_zone_virtual_network_link` in module main.tf)
@@ -79,5 +79,5 @@ az provider register --namespace Microsoft.DBforPostgreSQL
 11. **`terraform fmt -check -recursive infra/`** — SKIPPED (terraform binary not available; formatting follows existing module conventions)
 12. **`terraform validate`** — SKIPPED (terraform binary not available)
 13. **`pnpm lint`** — PASS (no site code changed; TypeScript/ESLint rules unaffected by pure Terraform changes)
-14. **Provenance record at `.provenance/spec-2-postgresql-flexible-server.provenance.md`** — PASS
+14. **Provenance record at `.provenance/spec-0002-postgresql-flexible-server.provenance.md`** — PASS
 15. **All files committed together** — PASS

@@ -1,14 +1,14 @@
-# Spec 2: PostgreSQL Flexible Server
+# Spec 0002: PostgreSQL Flexible Server
 
 ## Task
 
-1. Save this spec to `.spec/spec-2-postgresql-flexible-server.md` in the repo (create the `.spec/` directory if it does not exist).
+1. Save this spec to `.spec/spec-0002-postgresql-flexible-server.md` in the repo (create the `.spec/` directory if it does not exist).
 2. Implement all Terraform changes described below.
-3. After completing all work, create a provenance record at `.provenance/spec-2-postgresql-flexible-server.provenance.md` (create the `.provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
+3. After completing all work, create a provenance record at `.provenance/spec-0002-postgresql-flexible-server.provenance.md` (create the `.provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
 
 ## Prerequisites
 
-- Spec 1 deployed and verified (two-node K3s cluster running, Key Vault exists at `kv-kevinryan-io`)
+- Spec 0001 deployed and verified (two-node K3s cluster running, Key Vault exists at `kv-kevinryan-io`)
 - Read ADR-017 (`docs/adr/adr-017-managed-postgresql-shared-database.md`) — the architectural decision this spec implements
 - Read ADR-018 (`docs/adr/adr-018-secret-management-keyvault-eso.md`) — explains why credentials go into Key Vault
 
@@ -24,14 +24,14 @@ ADR-017 mandates an Azure Database for PostgreSQL Flexible Server (B1ms, Postgre
 | `infra/variables.tf` | Root variables |
 | `infra/outputs.tf` | Root outputs |
 | `infra/modules/network/main.tf` | VNet `10.0.0.0/16`, subnet `10.0.1.0/24`, two public IPs, NSG |
-| `infra/modules/network/outputs.tf` | Includes `vnet_id`, `vnet_name` (added in Spec 1) |
+| `infra/modules/network/outputs.tf` | Includes `vnet_id`, `vnet_name` (added in Spec 0001) |
 | `infra/modules/keyvault/outputs.tf` | `key_vault_id`, `key_vault_uri`, `key_vault_name` |
 
-### Lesson from Spec 1: avoid `for_each` with unknown values
+### Lesson from Spec 0001: avoid `for_each` with unknown values
 
 The `for_each` over `vm_principal_ids` failed at plan time because the principal IDs were unknown. The fix was switching from `list(string)` to `map(string)` with static keys. Apply the same pattern anywhere `for_each` iterates over apply-time values.
 
-### Lesson from Spec 1: RBAC propagation delay
+### Lesson from Spec 0001: RBAC propagation delay
 
 Azure RBAC role assignments can take several minutes to propagate. The `azurerm_key_vault_secret` resource failed because the Secrets Officer role hadn't propagated yet. For this spec, the Key Vault and Secrets Officer role already exist and are propagated — writing new secrets should work on first apply.
 
@@ -142,7 +142,7 @@ resource "azurerm_key_vault_secret" "pg_admin_username" {
 | `pg-fqdn` | `psql-kevinryan-io.postgres.database.azure.com` | Server hostname |
 | `pg-admin-username` | `pgadmin` | DB admin username |
 
-These three secrets are the building blocks ESO will use in Spec 3 to construct connection strings for Umami and Grafana.
+These three secrets are the building blocks ESO will use in Spec 0003 to construct connection strings for Umami and Grafana.
 
 ### No changes to existing modules
 
@@ -188,12 +188,12 @@ After the code changes are merged:
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-2-postgresql-flexible-server.provenance.md` with the following structure:
+After completing the work, create `.provenance/spec-0002-postgresql-flexible-server.provenance.md` with the following structure:
 
 ```markdown
-# Provenance: Spec 2 — PostgreSQL Flexible Server
+# Provenance: Spec 0002 — PostgreSQL Flexible Server
 
-**Spec:** `.spec/spec-2-postgresql-flexible-server.md`
+**Spec:** `.spec/spec-0002-postgresql-flexible-server.md`
 **Executed:** <timestamp>
 **Agent:** <agent identifier if available>
 
@@ -230,7 +230,7 @@ Results of each validation step from the spec (pass/fail with details).
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-2-postgresql-flexible-server.md`
+1. This spec has been saved to `.spec/spec-0002-postgresql-flexible-server.md`
 2. `infra/modules/postgresql/` exists with `main.tf`, `variables.tf`, `outputs.tf`, `versions.tf`
 3. The PostgreSQL module creates a delegated subnet `snet-postgresql` with prefix `10.0.2.0/28` and delegation to `Microsoft.DBforPostgreSQL/flexibleServers`
 4. The PostgreSQL module creates a private DNS zone `privatelink.postgres.database.azure.com` linked to the VNet
@@ -243,5 +243,5 @@ After completing all work, confirm:
 11. `terraform fmt -check -recursive infra/` passes
 12. `terraform validate` passes in the `infra/` directory (if terraform is available)
 13. `pnpm lint` passes (no site code changed, but confirm no regressions)
-14. The provenance record exists at `.provenance/spec-2-postgresql-flexible-server.provenance.md` and contains all required sections
+14. The provenance record exists at `.provenance/spec-0002-postgresql-flexible-server.provenance.md` and contains all required sections
 15. All files (spec, infrastructure changes, provenance) are committed together

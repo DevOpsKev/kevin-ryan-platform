@@ -1,22 +1,22 @@
-# Spec 3: External Secrets Operator
+# Spec 0003: External Secrets Operator
 
 ## Task
 
-1. Save this spec to `.spec/spec-3-external-secrets-operator.md` in the repo (create the `.spec/` directory if it does not exist).
+1. Save this spec to `.spec/spec-0003-external-secrets-operator.md` in the repo (create the `.spec/` directory if it does not exist).
 2. Implement all Kubernetes manifest changes described below.
-3. After completing all work, create a provenance record at `.provenance/spec-3-external-secrets-operator.provenance.md` (create the `.provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
+3. After completing all work, create a provenance record at `.provenance/spec-0003-external-secrets-operator.provenance.md` (create the `.provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
 
 ## Prerequisites
 
-- Spec 1 deployed: two-node K3s cluster with Flux (including helm-controller) running
-- Spec 2 deployed: PostgreSQL Flexible Server provisioned, Key Vault contains `pg-admin-password`, `pg-fqdn`, `pg-admin-username`
+- Spec 0001 deployed: two-node K3s cluster with Flux (including helm-controller) running
+- Spec 0002 deployed: PostgreSQL Flexible Server provisioned, Key Vault contains `pg-admin-password`, `pg-fqdn`, `pg-admin-username`
 - Read ADR-018 (`docs/adr/adr-018-secret-management-keyvault-eso.md`) — the architectural decision this spec implements
 
 ## Context
 
 ADR-018 mandates Azure Key Vault + External Secrets Operator (ESO) as the platform-wide secret management pattern. Terraform writes secrets to Key Vault; ESO syncs them into native Kubernetes Secrets for pod consumption.
 
-This spec deploys ESO via Flux HelmRelease and creates a ClusterSecretStore backed by Azure Key Vault, authenticated via the VM's system-assigned managed identity. Application-specific ExternalSecrets are defined in later specs (Spec 4 for Umami, Spec 5 for Observability).
+This spec deploys ESO via Flux HelmRelease and creates a ClusterSecretStore backed by Azure Key Vault, authenticated via the VM's system-assigned managed identity. Application-specific ExternalSecrets are defined in later specs (Spec 0004 for Umami, Spec 0005 for Observability).
 
 ### Current state (read these files before making changes)
 
@@ -36,7 +36,7 @@ This spec deploys ESO via Flux HelmRelease and creates a ClusterSecretStore back
 - **ESO Helm chart repo:** `https://charts.external-secrets.io`
 - **ESO chart name:** `external-secrets`
 - **Both VM managed identities** already have `Key Vault Secrets User` role (granted in `infra/modules/keyvault/main.tf`)
-- **Flux has helm-controller** (installed via cloud-init in Spec 1)
+- **Flux has helm-controller** (installed via cloud-init in Spec 0001)
 - **Node2 has taint** `observability=true:NoSchedule` — ESO will schedule on node1 by default (no toleration needed, node1 is fine for ESO)
 
 ## 1. Create `k8s/external-secrets/` directory
@@ -168,7 +168,7 @@ resources:
 
 ## No Terraform changes
 
-This spec is purely Kubernetes manifests. No Terraform changes are needed — Key Vault and RBAC are already provisioned by Specs 1 and 2.
+This spec is purely Kubernetes manifests. No Terraform changes are needed — Key Vault and RBAC are already provisioned by Specs 0001 and 0002.
 
 ## Manual steps (not performed by the agent)
 
@@ -181,12 +181,12 @@ After the code changes are merged to `main`:
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-3-external-secrets-operator.provenance.md` with the following structure:
+After completing the work, create `.provenance/spec-0003-external-secrets-operator.provenance.md` with the following structure:
 
 ```markdown
-# Provenance: Spec 3 — External Secrets Operator
+# Provenance: Spec 0003 — External Secrets Operator
 
-**Spec:** `.spec/spec-3-external-secrets-operator.md`
+**Spec:** `.spec/spec-0003-external-secrets-operator.md`
 **Executed:** <timestamp>
 **Agent:** <agent identifier if available>
 
@@ -223,7 +223,7 @@ Results of each validation step from the spec (pass/fail with details).
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-3-external-secrets-operator.md`
+1. This spec has been saved to `.spec/spec-0003-external-secrets-operator.md`
 2. `k8s/external-secrets/` exists with exactly 4 files: `namespace.yaml`, `helmrepository.yaml`, `helmrelease.yaml`, `clustersecretstore.yaml`
 3. The HelmRepository points to `https://charts.external-secrets.io`
 4. The HelmRelease installs chart `external-secrets` with a valid semver range, `crds: CreateReplace`, and `installCRDs: true`
@@ -232,7 +232,7 @@ After completing all work, confirm:
 7. `k8s/flux-system/kustomization.yaml` includes `external-secrets-sync.yaml` in its resources list
 8. No Terraform files were modified
 9. `pnpm lint` passes (no site code changed, but confirm no regressions)
-10. The provenance record exists at `.provenance/spec-3-external-secrets-operator.provenance.md` and contains all required sections
+10. The provenance record exists at `.provenance/spec-0003-external-secrets-operator.provenance.md` and contains all required sections
 11. All files (spec, K8s manifests, provenance) are committed together
 
 ### Post-merge validation (manual, performed by the operator after Flux reconciles)

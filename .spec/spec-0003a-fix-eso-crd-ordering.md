@@ -1,16 +1,16 @@
-# Spec 3a: Fix ESO CRD Ordering — Split ClusterSecretStore into Dependent Kustomization
+# Spec 0003a: Fix ESO CRD Ordering — Split ClusterSecretStore into Dependent Kustomization
 
 ## Task
 
-1. Save this spec to `.spec/spec-3a-fix-eso-crd-ordering.md` in the repo.
+1. Save this spec to `.spec/spec-0003a-fix-eso-crd-ordering.md` in the repo.
 2. Implement all changes described below.
-3. After completing all work, create a provenance record at `.provenance/spec-3a-fix-eso-crd-ordering.provenance.md`. See the **Provenance Record** section for the required format.
+3. After completing all work, create a provenance record at `.provenance/spec-0003a-fix-eso-crd-ordering.provenance.md`. See the **Provenance Record** section for the required format.
 
 ## Problem
 
-Spec 3 placed the `ClusterSecretStore` in the same Flux Kustomization as the ESO HelmRelease (`k8s/external-secrets/`). Flux's kustomize-controller performs a **server-side dry-run of ALL resources before applying ANY of them**. The `ClusterSecretStore` CRD does not exist until ESO installs it via the HelmRelease, so the dry-run fails:
+Spec 0003 placed the `ClusterSecretStore` in the same Flux Kustomization as the ESO HelmRelease (`k8s/external-secrets/`). Flux's kustomize-controller performs a **server-side dry-run of ALL resources before applying ANY of them**. The `ClusterSecretStore` CRD does not exist until ESO installs it via the HelmRelease, so the dry-run fails:
 
-```
+```text
 ClusterSecretStore/azure-keyvault dry-run failed: no matches for kind "ClusterSecretStore" in version "external-secrets.io/v1"
 ```
 
@@ -113,12 +113,12 @@ resources:
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-3a-fix-eso-crd-ordering.provenance.md` with the following structure:
+After completing the work, create `.provenance/spec-0003a-fix-eso-crd-ordering.provenance.md` with the following structure:
 
 ```markdown
-# Provenance: Spec 3a — Fix ESO CRD Ordering
+# Provenance: Spec 0003a — Fix ESO CRD Ordering
 
-**Spec:** `.spec/spec-3a-fix-eso-crd-ordering.md`
+**Spec:** `.spec/spec-0003a-fix-eso-crd-ordering.md`
 **Executed:** <timestamp>
 **Agent:** <agent identifier if available>
 
@@ -155,7 +155,7 @@ Results of each validation step from the spec (pass/fail with details).
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-3a-fix-eso-crd-ordering.md`
+1. This spec has been saved to `.spec/spec-0003a-fix-eso-crd-ordering.md`
 2. `k8s/external-secrets/clustersecretstore.yaml` does **NOT** exist (deleted)
 3. `k8s/external-secrets/` contains exactly 3 files: `namespace.yaml`, `helmrepository.yaml`, `helmrelease.yaml`
 4. `k8s/external-secrets-store/clustersecretstore.yaml` exists with correct content (`authType: ManagedIdentity`, `vaultUrl: "https://kv-kevinryan-io.vault.azure.net/"`)
@@ -163,5 +163,5 @@ After completing all work, confirm:
 6. `k8s/flux-system/kustomization.yaml` includes both `external-secrets-sync.yaml` and `external-secrets-store-sync.yaml`
 7. `k8s/flux-system/external-secrets-sync.yaml` is unchanged from its current content
 8. No Terraform files were modified
-9. The provenance record exists at `.provenance/spec-3a-fix-eso-crd-ordering.provenance.md` and contains all required sections
+9. The provenance record exists at `.provenance/spec-0003a-fix-eso-crd-ordering.provenance.md` and contains all required sections
 10. All files (spec, K8s manifests, provenance) are committed together
