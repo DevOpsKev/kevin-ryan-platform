@@ -2,7 +2,7 @@
 title: "ADR-007: PostgreSQL on Azure Database Flexible Server"
 ---
 
-**Status:** Accepted
+**Status:** Superseded by [ADR-017](adr-017-managed-postgresql-shared-database.md)
 **Date:** 2026-02-28
 **Decision Makers:** Human + AI
 **Prompted By:** ADR-003 (Umami) and ADR-006 (Grafana) both depend on PostgreSQL. The K3s cluster runs on an Azure Spot VM (ADR-005) that can be evicted at any time. PostgreSQL state must survive VM lifecycle events without manual intervention.
