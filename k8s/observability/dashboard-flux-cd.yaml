@@ -1,0 +1,146 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dashboard-flux-cd
+  namespace: observability
+  labels:
+    grafana_dashboard: "1"
+data:
+  flux-cd.json: |
+    {
+      "annotations": {
+        "list": []
+      },
+      "editable": false,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 1,
+      "links": [],
+      "panels": [
+        {
+          "title": "Reconciliation Activity",
+          "type": "timeseries",
+          "gridPos": { "h": 6, "w": 24, "x": 0, "y": 0 },
+          "datasource": { "type": "loki", "uid": "" },
+          "targets": [
+            {
+              "expr": "sum by (container) (count_over_time({namespace=\"flux-system\", container=~\"$controller\"} |~ \"(?i)reconcil\" [$__interval]))",
+              "legendFormat": "{{ container }}",
+              "refId": "A"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "drawStyle": "bars",
+                "fillOpacity": 60,
+                "stacking": { "mode": "normal" }
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "options": {
+            "tooltip": { "mode": "multi" },
+            "legend": { "displayMode": "list", "placement": "bottom" }
+          }
+        },
+        {
+          "title": "Flux Errors and Warnings",
+          "type": "timeseries",
+          "gridPos": { "h": 6, "w": 24, "x": 0, "y": 6 },
+          "datasource": { "type": "loki", "uid": "" },
+          "targets": [
+            {
+              "expr": "sum by (container) (count_over_time({namespace=\"flux-system\", container=~\"$controller\"} |~ \"(?i)(error|warn|failed)\" [$__interval]))",
+              "legendFormat": "{{ container }}",
+              "refId": "A"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "drawStyle": "line",
+                "fillOpacity": 20,
+                "lineWidth": 2,
+                "pointSize": 5
+              },
+              "color": { "mode": "palette-classic" },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "options": {
+            "tooltip": { "mode": "multi" },
+            "legend": { "displayMode": "list", "placement": "bottom" }
+          }
+        },
+        {
+          "title": "Reconciliation Events",
+          "type": "logs",
+          "gridPos": { "h": 10, "w": 24, "x": 0, "y": 12 },
+          "datasource": { "type": "loki", "uid": "" },
+          "targets": [
+            {
+              "expr": "{namespace=\"flux-system\", container=~\"$controller\"} |~ \"(?i)(reconcil|applied|created|deleted|updated|drift|error|warn|failed)\"",
+              "refId": "A"
+            }
+          ],
+          "options": {
+            "showTime": true,
+            "showLabels": true,
+            "showCommonLabels": false,
+            "wrapLogMessage": true,
+            "prettifyLogMessage": false,
+            "enableLogDetails": true,
+            "sortOrder": "Descending",
+            "dedupStrategy": "none"
+          }
+        },
+        {
+          "title": "All Flux Logs",
+          "type": "logs",
+          "gridPos": { "h": 10, "w": 24, "x": 0, "y": 22 },
+          "datasource": { "type": "loki", "uid": "" },
+          "targets": [
+            {
+              "expr": "{namespace=\"flux-system\", container=~\"$controller\"}",
+              "refId": "A"
+            }
+          ],
+          "options": {
+            "showTime": true,
+            "showLabels": true,
+            "showCommonLabels": false,
+            "wrapLogMessage": true,
+            "prettifyLogMessage": false,
+            "enableLogDetails": true,
+            "sortOrder": "Descending",
+            "dedupStrategy": "none"
+          }
+        }
+      ],
+      "schemaVersion": 39,
+      "tags": ["flux", "gitops", "loki"],
+      "templating": {
+        "list": [
+          {
+            "name": "controller",
+            "type": "custom",
+            "current": { "text": "All", "value": "$__all" },
+            "includeAll": true,
+            "allValue": "kustomize-controller|helm-controller|source-controller",
+            "options": [
+              { "text": "All", "value": "$__all", "selected": true },
+              { "text": "kustomize-controller", "value": "kustomize-controller", "selected": false },
+              { "text": "helm-controller", "value": "helm-controller", "selected": false },
+              { "text": "source-controller", "value": "source-controller", "selected": false }
+            ],
+            "query": "kustomize-controller,helm-controller,source-controller",
+            "multi": true
+          }
+        ]
+      },
+      "time": { "from": "now-6h", "to": "now" },
+      "title": "Flux CD",
+      "uid": "flux-cd"
+    }

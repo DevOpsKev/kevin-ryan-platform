@@ -49,6 +49,13 @@ spec:
             access: proxy
             url: http://loki.observability.svc.cluster.local:3100
             isDefault: true
+    sidecar:
+      dashboards:
+        enabled: true
+        label: grafana_dashboard
+        labelValue: "1"
+        searchNamespace: observability
+        folderAnnotation: grafana_folder
     service:
       type: ClusterIP
       port: 80
