@@ -9,6 +9,16 @@ export default defineConfig({
     starlight({
       title: 'Kevin Ryan — Docs',
       favicon: '/favicon-dark.ico',
+      head: [
+        {
+          tag: 'script',
+          attrs: {
+            defer: true,
+            src: 'https://analytics.kevinryan.io/script.js',
+            'data-website-id': '7982fbc0-012b-4c04-8ec3-a9de42462351',
+          },
+        },
+      ],
       social: [
         {
           icon: 'github',
