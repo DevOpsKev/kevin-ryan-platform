@@ -11,3 +11,4 @@ resources:
   - distributedequity-org-sync.yaml
   - docs-kevinryan-io-sync.yaml
   - external-secrets-sync.yaml
+  - external-secrets-store-sync.yaml
