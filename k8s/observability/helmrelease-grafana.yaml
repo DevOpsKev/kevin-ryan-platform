@@ -49,6 +49,11 @@ spec:
             access: proxy
             url: http://loki.observability.svc.cluster.local:3100
             isDefault: true
+          - name: VictoriaMetrics
+            type: prometheus
+            access: proxy
+            url: http://vmsingle-vm.observability.svc.cluster.local:8428
+            isDefault: false
     sidecar:
       dashboards:
         enabled: true
