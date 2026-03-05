@@ -13,3 +13,4 @@ resources:
   - external-secrets-sync.yaml
   - external-secrets-store-sync.yaml
   - umami-sync.yaml
+  - observability-sync.yaml
