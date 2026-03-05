@@ -10,3 +10,4 @@ resources:
   - sddbook-com-sync.yaml
   - distributedequity-org-sync.yaml
   - docs-kevinryan-io-sync.yaml
+  - external-secrets-sync.yaml
