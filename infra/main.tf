@@ -1,9 +1,8 @@
 # Circular dependency resolution:
-# compute needs the ACR login server, registry needs the VM principal ID.
-# The ACR login server is deterministic: <acr_name>.azurecr.io
-# So we pass the constructed value to compute and create the ACR independently.
-# The registry module then assigns AcrPull to the VM's managed identity after
-# both resources exist. This avoids the cycle and produces a clean plan.
+# module.keyvault needs vm_principal_ids from node1 and node2 (for RBAC).
+# The cloud-init templates need the Key Vault name — passed via var.keyvault_name (a root variable),
+# NOT via module.keyvault.key_vault_name. This breaks the cycle: nodes have no Terraform
+# dependency on keyvault; keyvault depends on node principal IDs only.
 
 terraform {
   required_version = ">= 1.5"
@@ -27,6 +26,10 @@ terraform {
     cloudflare = {
       source  = "cloudflare/cloudflare"
       version = "~> 4.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.0"
     }
   }
 }
@@ -55,8 +58,9 @@ module "network" {
   admin_ip = var.admin_ip
 }
 
-module "compute" {
+module "node1" {
   source               = "./modules/compute"
+  vm_name              = "vm-kevinryan-node1"
   location             = module.network.resource_group_location
   resource_group_name  = module.network.resource_group_name
   subnet_id            = module.network.subnet_id
@@ -65,9 +69,52 @@ module "compute" {
   vm_size              = var.vm_size
   admin_username       = var.admin_username
   admin_ssh_public_key = var.admin_ssh_public_key
-  acr_login_server     = "${var.acr_name}.azurecr.io"
-  acr_name             = var.acr_name
-  github_token         = var.github_token
+  custom_data = base64encode(templatefile("${path.module}/cloud-init-server.yaml", {
+    acr_login_server = "${var.acr_name}.azurecr.io"
+    acr_name         = var.acr_name
+    github_token     = var.github_token
+    keyvault_name    = var.keyvault_name
+  }))
+}
+
+module "node2" {
+  source               = "./modules/compute"
+  vm_name              = "vm-kevinryan-node2"
+  location             = module.network.resource_group_location
+  resource_group_name  = module.network.resource_group_name
+  subnet_id            = module.network.subnet_id
+  public_ip_id         = module.network.public_ip_id_node2
+  nsg_id               = module.network.nsg_id
+  vm_size              = var.vm_size
+  admin_username       = var.admin_username
+  admin_ssh_public_key = var.admin_ssh_public_key
+  custom_data = base64encode(templatefile("${path.module}/cloud-init-agent.yaml", {
+    acr_login_server = "${var.acr_name}.azurecr.io"
+    acr_name         = var.acr_name
+    keyvault_name    = var.keyvault_name
+    node1_private_ip = module.node1.private_ip_address
+  }))
+}
+
+module "keyvault" {
+  source              = "./modules/keyvault"
+  name                = var.keyvault_name
+  location            = module.network.resource_group_location
+  resource_group_name = module.network.resource_group_name
+  tenant_id           = data.azurerm_client_config.current.tenant_id
+  terraform_object_id = data.azurerm_client_config.current.object_id
+  vm_principal_ids    = [module.node1.vm_principal_id, module.node2.vm_principal_id]
+}
+
+resource "random_password" "k3s_token" {
+  length  = 48
+  special = false
+}
+
+resource "azurerm_key_vault_secret" "k3s_token" {
+  name         = "k3s-token"
+  value        = random_password.k3s_token.result
+  key_vault_id = module.keyvault.key_vault_id
 }
 
 module "registry" {
@@ -75,7 +122,7 @@ module "registry" {
   location            = module.network.resource_group_location
   resource_group_name = module.network.resource_group_name
   acr_name            = var.acr_name
-  vm_principal_id     = module.compute.vm_principal_id
+  vm_principal_ids    = [module.node1.vm_principal_id, module.node2.vm_principal_id]
 }
 
 module "cloudflare" {

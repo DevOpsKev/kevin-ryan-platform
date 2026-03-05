@@ -1,0 +1,106 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+packages:
+  - curl
+  - apt-transport-https
+  - ca-certificates
+  - jq
+
+write_files:
+  - path: /usr/local/bin/refresh-acr-credentials.sh
+    permissions: "0755"
+    content: |
+      #!/bin/bash
+      set -euo pipefail
+      TOKEN=$(az acr login --name "${acr_name}" --expose-token --output tsv --query accessToken 2>/dev/null) || exit 1
+      cat > /etc/rancher/k3s/registries.yaml << REGISTRIES
+      mirrors:
+        "${acr_login_server}":
+          endpoint:
+            - "https://${acr_login_server}"
+      configs:
+        "${acr_login_server}":
+          auth:
+            username: "00000000-0000-0000-0000-000000000000"
+            password: "$TOKEN"
+      REGISTRIES
+      systemctl restart k3s || true
+
+  - path: /etc/systemd/system/refresh-acr-credentials.service
+    content: |
+      [Unit]
+      Description=Refresh ACR credentials for K3s
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/local/bin/refresh-acr-credentials.sh
+
+  - path: /etc/systemd/system/refresh-acr-credentials.timer
+    content: |
+      [Unit]
+      Description=Refresh ACR credentials every 2 hours
+
+      [Timer]
+      OnBootSec=5min
+      OnUnitActiveSec=2h
+      Persistent=true
+
+      [Install]
+      WantedBy=timers.target
+
+runcmd:
+  # Install Azure CLI for managed identity authentication
+  - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
+  # Login with managed identity
+  - az login --identity --allow-no-subscriptions
+
+  # Retrieve K3s token from Key Vault with retry and install K3s server
+  # VMs may boot before the secret is written — retry up to 30 times (5 minutes total)
+  - |
+    for i in $(seq 1 30); do
+      K3S_TOKEN=$(az keyvault secret show --vault-name "${keyvault_name}" --name k3s-token --query value -o tsv 2>/dev/null) && break
+      sleep 10
+    done
+    if [ -z "$K3S_TOKEN" ]; then echo "FATAL: Failed to retrieve K3s token from Key Vault after 5 minutes"; exit 1; fi
+    curl -sfL https://get.k3s.io | K3S_TOKEN="$K3S_TOKEN" INSTALL_K3S_CHANNEL=stable sh -
+
+  # Wait for K3s to be ready
+  - until kubectl get nodes --kubeconfig /etc/rancher/k3s/k3s.yaml 2>/dev/null | grep -q ' Ready'; do sleep 5; done
+
+  # Configure kubectl for root
+  - export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+  - echo 'export KUBECONFIG=/etc/rancher/k3s/k3s.yaml' >> /root/.bashrc
+
+  # Ensure K3s registries directory exists
+  - mkdir -p /etc/rancher/k3s
+
+  # Run initial ACR credential refresh
+  - /usr/local/bin/refresh-acr-credentials.sh
+
+  # Enable the systemd timer for periodic credential refresh
+  # ACR tokens expire after 3 hours; refreshing every 2 hours ensures continuity
+  - systemctl daemon-reload
+  - systemctl enable --now refresh-acr-credentials.timer
+
+  # Install Flux CLI
+  - curl -s https://fluxcd.io/install.sh | bash
+
+  # Bootstrap Flux (connects to GitHub repo, installs controllers, creates flux-system namespace)
+  # GITHUB_TOKEN env var is read automatically by flux CLI (--token flag is unreliable in cloud-init)
+  # --kubeconfig is explicit because cloud-init runs as root and K3s kubeconfig is non-default path
+  - |
+    export GITHUB_TOKEN="${github_token}"
+    flux bootstrap github \
+      --kubeconfig=/etc/rancher/k3s/k3s.yaml \
+      --owner=DevOpsKev \
+      --repository=kevin-ryan-platform \
+      --branch=main \
+      --path=k8s/flux-system \
+      --personal \
+      --token-auth \
+      --components=source-controller,kustomize-controller,helm-controller
