@@ -1,8 +1,10 @@
 ---
-title: "ADR Template"
+title: "ADR-NNN: Short Decision Title"
 ---
 
 <!--
+  TEMPLATE GUIDANCE — remove this comment block from generated ADRs.
+
   ADR File Naming Convention
   ──────────────────────────
   Filename:  adr-NNN-short-kebab-title.md
