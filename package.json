@@ -17,7 +17,7 @@
   "lint-staged": {
     "sites/kevinryan-io/**/*.{ts,tsx}": [
       "eslint --fix -c sites/kevinryan-io/eslint.config.mjs",
-      "tsc-files --noEmit"
+      "tsc-files --noEmit -p sites/kevinryan-io/tsconfig.json"
     ],
     "*.{tf,tfvars}": [
       "terraform fmt -check"

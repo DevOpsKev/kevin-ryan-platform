@@ -24,8 +24,8 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <Script
-          src="https://cloud.umami.is/script.js"
-          data-website-id="274c83f6-0775-49a8-824c-da380cf7535b"
+          src="https://analytics.kevinryan.io/script.js"
+          data-website-id="155819eb-1dde-475a-95ed-9bc0b1b161b6"
           strategy="afterInteractive"
         />
       </body>
