@@ -75,4 +75,8 @@ jobs:
           git add k8s/docs-kevinryan-io/deployment.yaml
           git diff --cached --quiet && echo "No changes to commit" && exit 0
           git commit -m "[deploy] docs-kevinryan-io: ${{ steps.vars.outputs.SHA }}"
-          git push
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            sleep $((i * 2))
+          done
+          echo "Failed to push after 5 attempts" && exit 1
