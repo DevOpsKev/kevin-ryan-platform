@@ -103,7 +103,10 @@ module "keyvault" {
   resource_group_name = module.network.resource_group_name
   tenant_id           = data.azurerm_client_config.current.tenant_id
   terraform_object_id = data.azurerm_client_config.current.object_id
-  vm_principal_ids    = [module.node1.vm_principal_id, module.node2.vm_principal_id]
+  vm_principal_ids = {
+    node1 = module.node1.vm_principal_id
+    node2 = module.node2.vm_principal_id
+  }
 }
 
 resource "random_password" "k3s_token" {
@@ -122,7 +125,10 @@ module "registry" {
   location            = module.network.resource_group_location
   resource_group_name = module.network.resource_group_name
   acr_name            = var.acr_name
-  vm_principal_ids    = [module.node1.vm_principal_id, module.node2.vm_principal_id]
+  vm_principal_ids = {
+    node1 = module.node1.vm_principal_id
+    node2 = module.node2.vm_principal_id
+  }
 }
 
 module "cloudflare" {

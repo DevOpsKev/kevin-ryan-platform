@@ -19,6 +19,6 @@ variable "acr_name" {
 }
 
 variable "vm_principal_ids" {
-  description = "List of VM managed identity principal IDs to grant AcrPull role"
-  type        = list(string)
+  description = "Map of VM name to managed identity principal ID to grant AcrPull role"
+  type        = map(string)
 }

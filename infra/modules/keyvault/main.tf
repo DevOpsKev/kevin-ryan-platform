@@ -5,12 +5,12 @@ resource "azurerm_key_vault" "main" {
   tenant_id           = var.tenant_id
   sku_name            = "standard"
 
-  enable_rbac_authorization = true
-  purge_protection_enabled  = false
+  rbac_authorization_enabled = true
+  purge_protection_enabled   = false
 }
 
 resource "azurerm_role_assignment" "vm_secrets_user" {
-  for_each = toset(var.vm_principal_ids)
+  for_each = var.vm_principal_ids
 
   scope                = azurerm_key_vault.main.id
   role_definition_name = "Key Vault Secrets User"

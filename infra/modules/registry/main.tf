@@ -7,7 +7,7 @@ resource "azurerm_container_registry" "main" {
 }
 
 resource "azurerm_role_assignment" "acr_pull" {
-  for_each = toset(var.vm_principal_ids)
+  for_each = var.vm_principal_ids
 
   scope                = azurerm_container_registry.main.id
   role_definition_name = "AcrPull"
