@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: specmcp-ai
-          image: kevinryanacr.azurecr.io/specmcp-ai:16f9442
+          image: kevinryanacr.azurecr.io/specmcp-ai:888c8b1
           ports:
             - containerPort: 8080
           livenessProbe:
