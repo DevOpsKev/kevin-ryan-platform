@@ -163,6 +163,17 @@ resource "azurerm_key_vault_secret" "umami_app_secret" {
   key_vault_id = module.keyvault.key_vault_id
 }
 
+resource "random_password" "grafana_admin_password" {
+  length  = 32
+  special = false
+}
+
+resource "azurerm_key_vault_secret" "grafana_admin_password" {
+  name         = "grafana-admin-password"
+  value        = random_password.grafana_admin_password.result
+  key_vault_id = module.keyvault.key_vault_id
+}
+
 module "registry" {
   source              = "./modules/registry"
   location            = module.network.resource_group_location
@@ -185,6 +196,15 @@ module "cloudflare" {
 resource "cloudflare_record" "analytics" {
   zone_id = var.cloudflare_zone_id
   name    = "analytics"
+  content = module.network.public_ip_address
+  type    = "A"
+  proxied = true
+  ttl     = 1
+}
+
+resource "cloudflare_record" "monitoring" {
+  zone_id = var.cloudflare_zone_id
+  name    = "monitoring"
   content = module.network.public_ip_address
   type    = "A"
   proxied = true
