@@ -120,6 +120,38 @@ resource "azurerm_key_vault_secret" "k3s_token" {
   key_vault_id = module.keyvault.key_vault_id
 }
 
+resource "random_password" "pg_admin_password" {
+  length  = 32
+  special = true
+}
+
+module "postgresql" {
+  source              = "./modules/postgresql"
+  location            = module.network.resource_group_location
+  resource_group_name = module.network.resource_group_name
+  vnet_name           = module.network.vnet_name
+  vnet_id             = module.network.vnet_id
+  admin_password      = random_password.pg_admin_password.result
+}
+
+resource "azurerm_key_vault_secret" "pg_admin_password" {
+  name         = "pg-admin-password"
+  value        = random_password.pg_admin_password.result
+  key_vault_id = module.keyvault.key_vault_id
+}
+
+resource "azurerm_key_vault_secret" "pg_fqdn" {
+  name         = "pg-fqdn"
+  value        = module.postgresql.server_fqdn
+  key_vault_id = module.keyvault.key_vault_id
+}
+
+resource "azurerm_key_vault_secret" "pg_admin_username" {
+  name         = "pg-admin-username"
+  value        = module.postgresql.admin_username
+  key_vault_id = module.keyvault.key_vault_id
+}
+
 module "registry" {
   source              = "./modules/registry"
   location            = module.network.resource_group_location
