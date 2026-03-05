@@ -23,8 +23,8 @@ data:
           "datasource": { "type": "loki", "uid": "" },
           "targets": [
             {
-              "expr": "sum by (container) (count_over_time({namespace=\"flux-system\", container=~\"$controller\"} |~ \"(?i)reconcil\" [$__interval]))",
-              "legendFormat": "{{ container }}",
+              "expr": "sum by (pod) (count_over_time({namespace=\"flux-system\", pod=~\"$controller.*\"} |~ \"(?i)reconcil\" [$__interval]))",
+              "legendFormat": "{{ pod }}",
               "refId": "A"
             }
           ],
@@ -51,8 +51,8 @@ data:
           "datasource": { "type": "loki", "uid": "" },
           "targets": [
             {
-              "expr": "sum by (container) (count_over_time({namespace=\"flux-system\", container=~\"$controller\"} |~ \"(?i)(error|warn|failed)\" [$__interval]))",
-              "legendFormat": "{{ container }}",
+              "expr": "sum by (pod) (count_over_time({namespace=\"flux-system\", pod=~\"$controller.*\"} |~ \"(?i)(error|warn|failed)\" [$__interval]))",
+              "legendFormat": "{{ pod }}",
               "refId": "A"
             }
           ],
@@ -81,7 +81,7 @@ data:
           "datasource": { "type": "loki", "uid": "" },
           "targets": [
             {
-              "expr": "{namespace=\"flux-system\", container=~\"$controller\"} |~ \"(?i)(reconcil|applied|created|deleted|updated|drift|error|warn|failed)\"",
+              "expr": "{namespace=\"flux-system\", pod=~\"$controller.*\"} |~ \"(?i)(reconcil|applied|created|deleted|updated|drift|error|warn|failed)\"",
               "refId": "A"
             }
           ],
@@ -103,7 +103,7 @@ data:
           "datasource": { "type": "loki", "uid": "" },
           "targets": [
             {
-              "expr": "{namespace=\"flux-system\", container=~\"$controller\"}",
+              "expr": "{namespace=\"flux-system\", pod=~\"$controller.*\"}",
               "refId": "A"
             }
           ],
@@ -129,6 +129,7 @@ data:
             "current": { "text": "All", "value": "$__all" },
             "includeAll": true,
             "allValue": "kustomize-controller|helm-controller|source-controller",
+            "regex": true,
             "options": [
               { "text": "All", "value": "$__all", "selected": true },
               { "text": "kustomize-controller", "value": "kustomize-controller", "selected": false },
