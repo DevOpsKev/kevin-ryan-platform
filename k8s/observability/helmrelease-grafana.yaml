@@ -29,6 +29,9 @@ spec:
         operator: Equal
         value: "true"
         effect: NoSchedule
+    admin:
+      existingSecret: grafana-db
+      passwordKey: GF_SECURITY_ADMIN_PASSWORD
     envFromSecret: grafana-db
     grafana.ini:
       server:
