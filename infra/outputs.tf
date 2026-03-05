@@ -53,3 +53,8 @@ output "node2_public_ip" {
   description = "Public IP address of node2 (K3s agent)"
   value       = module.network.public_ip_address_node2
 }
+
+output "postgresql_fqdn" {
+  description = "FQDN of the PostgreSQL Flexible Server"
+  value       = module.postgresql.server_fqdn
+}
