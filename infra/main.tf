@@ -152,6 +152,17 @@ resource "azurerm_key_vault_secret" "pg_admin_username" {
   key_vault_id = module.keyvault.key_vault_id
 }
 
+resource "random_password" "umami_app_secret" {
+  length  = 64
+  special = false
+}
+
+resource "azurerm_key_vault_secret" "umami_app_secret" {
+  name         = "umami-app-secret"
+  value        = random_password.umami_app_secret.result
+  key_vault_id = module.keyvault.key_vault_id
+}
+
 module "registry" {
   source              = "./modules/registry"
   location            = module.network.resource_group_location
@@ -169,6 +180,15 @@ module "cloudflare" {
   vm_public_ip = module.network.public_ip_address
   domain       = "kevinryan.io"
   subdomains   = ["brand", "docs"]
+}
+
+resource "cloudflare_record" "analytics" {
+  zone_id = var.cloudflare_zone_id
+  name    = "analytics"
+  content = module.network.public_ip_address
+  type    = "A"
+  proxied = true
+  ttl     = 1
 }
 
 module "cloudflare_aiimmigrants" {
