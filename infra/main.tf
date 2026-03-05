@@ -122,7 +122,7 @@ resource "azurerm_key_vault_secret" "k3s_token" {
 
 resource "random_password" "pg_admin_password" {
   length  = 32
-  special = true
+  special = false
 }
 
 module "postgresql" {
