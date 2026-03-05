@@ -1,6 +1,7 @@
 name: Build and Deploy SpecMCP
 
 on:
+  workflow_dispatch:
   push:
     branches: ["main"]
     paths:
