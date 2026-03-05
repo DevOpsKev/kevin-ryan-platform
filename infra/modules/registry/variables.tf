@@ -18,7 +18,7 @@ variable "acr_name" {
   }
 }
 
-variable "vm_principal_id" {
-  description = "Principal ID of the VM's managed identity for AcrPull role assignment"
-  type        = string
+variable "vm_principal_ids" {
+  description = "List of VM managed identity principal IDs to grant AcrPull role"
+  type        = list(string)
 }

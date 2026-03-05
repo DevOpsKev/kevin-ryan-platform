@@ -79,3 +79,9 @@ variable "cloudflare_zone_id_distributedequity" {
   description = "Cloudflare zone ID for distributedequity.org"
   type        = string
 }
+
+variable "keyvault_name" {
+  description = "Globally unique name for the Azure Key Vault (3-24 chars, alphanumeric + hyphens)"
+  type        = string
+  default     = "kv-kevinryan-io"
+}

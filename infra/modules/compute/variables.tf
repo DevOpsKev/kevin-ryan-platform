@@ -1,3 +1,8 @@
+variable "vm_name" {
+  description = "Name of the virtual machine (used for VM, NIC, and OS disk)"
+  type        = string
+}
+
 variable "location" {
   description = "Azure region"
   type        = string
@@ -40,18 +45,7 @@ variable "admin_ssh_public_key" {
   type        = string
 }
 
-variable "acr_login_server" {
-  description = "ACR login server FQDN (e.g. myacr.azurecr.io)"
+variable "custom_data" {
+  description = "Base64-encoded cloud-init configuration to run on first boot"
   type        = string
-}
-
-variable "acr_name" {
-  description = "ACR name (without .azurecr.io)"
-  type        = string
-}
-
-variable "github_token" {
-  description = "GitHub PAT for Flux bootstrap"
-  type        = string
-  sensitive   = true
 }

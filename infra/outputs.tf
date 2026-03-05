@@ -43,3 +43,13 @@ output "github_actions_acr_login_server" {
   description = "ACR_LOGIN_SERVER GitHub Actions secret"
   value       = module.registry.acr_login_server
 }
+
+output "node1_public_ip" {
+  description = "Public IP address of node1 (K3s server)"
+  value       = module.network.public_ip_address
+}
+
+output "node2_public_ip" {
+  description = "Public IP address of node2 (K3s agent)"
+  value       = module.network.public_ip_address_node2
+}

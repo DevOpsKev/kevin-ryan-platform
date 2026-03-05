@@ -26,6 +26,15 @@ resource "azurerm_public_ip" "main" {
   zones               = ["1"]
 }
 
+resource "azurerm_public_ip" "node2" {
+  name                = "pip-kevinryan-node2"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+  zones               = ["1"]
+}
+
 resource "azurerm_network_security_group" "main" {
   name                = "nsg-kevinryan-io"
   location            = azurerm_resource_group.main.location

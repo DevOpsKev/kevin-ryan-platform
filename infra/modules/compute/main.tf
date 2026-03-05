@@ -1,5 +1,5 @@
 resource "azurerm_network_interface" "main" {
-  name                = "nic-kevinryan-io"
+  name                = "nic-${var.vm_name}"
   location            = var.location
   resource_group_name = var.resource_group_name
 
@@ -17,7 +17,7 @@ resource "azurerm_network_interface_security_group_association" "main" {
 }
 
 resource "azurerm_linux_virtual_machine" "main" {
-  name                = "vm-kevinryan-io"
+  name                = var.vm_name
   location            = var.location
   resource_group_name = var.resource_group_name
   size                = var.vm_size
@@ -40,6 +40,7 @@ resource "azurerm_linux_virtual_machine" "main" {
   }
 
   os_disk {
+    name                 = "osdisk-${var.vm_name}"
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
     disk_size_gb         = 30
@@ -49,11 +50,7 @@ resource "azurerm_linux_virtual_machine" "main" {
     type = "SystemAssigned"
   }
 
-  custom_data = base64encode(templatefile("${path.module}/cloud-init.yaml", {
-    acr_login_server = var.acr_login_server
-    acr_name         = var.acr_name
-    github_token     = var.github_token
-  }))
+  custom_data = var.custom_data
 
   lifecycle {
     ignore_changes = [custom_data]
