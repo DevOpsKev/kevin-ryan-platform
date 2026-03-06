@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>specmcp.ai — Your specs, always in context</title>
+<title>specmcp.ai — The coordination layer for multi-agent development</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -243,6 +243,9 @@
   .t-method { color: #818cf8; }
   .t-string { color: #fbbf24; }
   .t-muted { color: var(--text-muted); }
+  .t-agent-a { color: #f472b6; }
+  .t-agent-b { color: #60a5fa; }
+  .t-agent-c { color: #a78bfa; }
   .t-line {
     opacity: 0;
     animation: typeLine 0.4s ease forwards;
@@ -254,6 +257,8 @@
   .t-line:nth-child(5) { animation-delay: 2.0s; }
   .t-line:nth-child(6) { animation-delay: 2.3s; }
   .t-line:nth-child(7) { animation-delay: 2.6s; }
+  .t-line:nth-child(8) { animation-delay: 2.9s; }
+  .t-line:nth-child(9) { animation-delay: 3.2s; }
 
   /* Features */
   .features {
@@ -416,8 +421,8 @@
     line-height: 1.55;
   }
 
-  /* Investor / Business Case */
-  .investor {
+  /* Sponsor section */
+  .sponsor {
     position: relative;
     z-index: 10;
     max-width: 900px;
@@ -427,11 +432,11 @@
     animation: fadeUp 0.7s ease forwards;
     animation-delay: 1.1s;
   }
-  .investor-header {
+  .sponsor-header {
     text-align: center;
     margin-bottom: 56px;
   }
-  .investor-header .section-tag {
+  .sponsor-header .section-tag {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -446,20 +451,20 @@
     text-transform: uppercase;
     margin-bottom: 24px;
   }
-  .investor-header h2 {
+  .sponsor-header h2 {
     font-size: 32px;
     font-weight: 700;
     letter-spacing: -1.2px;
     line-height: 1.2;
     margin-bottom: 14px;
   }
-  .investor-header h2 .highlight-orange {
+  .sponsor-header h2 .highlight-orange {
     background: linear-gradient(135deg, var(--orange), #fbbf24);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .investor-header > p {
+  .sponsor-header > p {
     color: var(--text-muted);
     font-size: 17px;
     line-height: 1.6;
@@ -595,19 +600,81 @@
     color: var(--text-muted);
   }
 
+  /* Sponsor tiers */
+  .sponsor-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .sponsor-tier {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .sponsor-tier:hover {
+    border-color: #f59e0b40;
+    transform: translateY(-2px);
+  }
+  .sponsor-tier.featured {
+    border-color: #f59e0b40;
+    background: linear-gradient(135deg, #f59e0b08, var(--surface));
+  }
+  .tier-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--orange);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .sponsor-tier h3 {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+  }
+  .sponsor-tier p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .tier-perks {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .tier-perk {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tier-perk::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 11px;
+  }
+
   /* Bottom CTA */
-  .investor-cta {
+  .sponsor-cta {
     text-align: center;
     padding: 40px 0 0;
     border-top: 1px solid var(--border);
   }
-  .investor-cta p {
+  .sponsor-cta p {
     font-size: 15px;
     color: var(--text-muted);
     margin-bottom: 24px;
     line-height: 1.6;
   }
-  .investor-cta .cta-btn {
+  .sponsor-cta .cta-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -623,7 +690,7 @@
     text-decoration: none;
     transition: transform 0.15s, box-shadow 0.2s;
   }
-  .investor-cta .cta-btn:hover {
+  .sponsor-cta .cta-btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 8px 30px #f59e0b30;
   }
@@ -677,12 +744,13 @@
     .pillars { padding: 0 24px; margin-top: 80px; }
     .pillars h2 { font-size: 26px; }
     .pillar-grid { grid-template-columns: 1fr; }
-    .investor { padding: 0 24px; margin-top: 80px; }
-    .investor-header h2 { font-size: 26px; }
+    .sponsor { padding: 0 24px; margin-top: 80px; }
+    .sponsor-header h2 { font-size: 26px; }
     .stats-row { grid-template-columns: 1fr 1fr; }
     .evidence-row { grid-template-columns: 90px 65px 1fr; padding: 14px 16px; }
     .evidence-row .evidence-quote { font-size: 12px; }
     .convergence-callout { flex-direction: column; gap: 16px; padding: 24px; }
+    .sponsor-tiers { grid-template-columns: 1fr; }
     .usecases { padding: 0 24px; }
     .usecase-grid { grid-template-columns: 1fr; }
     footer { padding: 60px 24px 36px; }
@@ -708,8 +776,8 @@
     <span class="dot"></span>
     Model Context Protocol
   </div>
-  <h1>Your specs,<br>always <span class="highlight">in context</span></h1>
-  <p>A managed MCP server for your product specs, API docs, and architecture decisions. Give your AI tools the context they actually need.</p>
+  <h1>The coordination layer<br>for <span class="highlight">multi-agent</span> development</h1>
+  <p>A managed MCP server that keeps multiple AI agents coherent. Shared specs, versioned decisions, one source of truth — so every agent builds the same thing.</p>
   <form class="signup-form" onsubmit="handleSubmit(event)">
     <input type="email" placeholder="you@company.com" required>
     <button type="submit">Get Early Access</button>
@@ -722,45 +790,46 @@
       <div class="terminal-dot"></div>
       <div class="terminal-dot"></div>
       <div class="terminal-dot"></div>
-      <div class="terminal-title">claude — mcp</div>
+      <div class="terminal-title">3 agents — 1 spec — specmcp</div>
     </div>
     <div class="terminal-body">
-      <div class="t-line"><span class="t-comment">// Your AI assistant calls specmcp</span></div>
-      <div class="t-line"><span class="t-method">tool_call</span> <span class="t-muted">→</span> <span class="t-key">get_spec</span>(<span class="t-string">"auth-service-v2"</span>)</div>
+      <div class="t-line"><span class="t-comment">// Three agents. Same spec. No drift.</span></div>
+      <div class="t-line"><span class="t-agent-a">[agent:implementer]</span> <span class="t-muted">→</span> <span class="t-key">get_spec</span>(<span class="t-string">"auth-service-v2"</span>)</div>
+      <div class="t-line"><span class="t-agent-b">[agent:tester]</span>      <span class="t-muted">→</span> <span class="t-key">get_spec</span>(<span class="t-string">"auth-service-v2"</span>)</div>
+      <div class="t-line"><span class="t-agent-c">[agent:reviewer]</span>    <span class="t-muted">→</span> <span class="t-key">get_spec</span>(<span class="t-string">"auth-service-v2"</span>)</div>
       <div class="t-line">&nbsp;</div>
-      <div class="t-line"><span class="t-comment">// Instantly gets the full spec</span></div>
-      <div class="t-line"><span class="t-muted">{</span> <span class="t-key">name</span>: <span class="t-string">"Auth Service v2"</span>,</div>
-      <div class="t-line">&nbsp; <span class="t-key">endpoints</span>: <span class="t-muted">[...],</span> <span class="t-key">schemas</span>: <span class="t-muted">[...],</span></div>
-      <div class="t-line">&nbsp; <span class="t-key">decisions</span>: <span class="t-muted">[...] }</span></div>
+      <div class="t-line"><span class="t-comment">// All read the same canonical version</span></div>
+      <div class="t-line"><span class="t-muted">{</span> <span class="t-key">spec</span>: <span class="t-string">"auth-service-v2"</span>, <span class="t-key">version</span>: <span class="t-string">"1.4.2"</span>,</div>
+      <div class="t-line">&nbsp; <span class="t-key">agents_reading</span>: <span class="t-muted">3,</span> <span class="t-key">drift</span>: <span class="t-string">"none"</span> <span class="t-muted">}</span></div>
     </div>
   </div>
 </div>
 
 <div class="features">
   <div class="feature">
-    <div class="feature-icon">📄</div>
-    <h3>Upload & Sync</h3>
-    <p>Import specs from markdown, Notion, Confluence, or GitHub. Keep them in sync automatically.</p>
+    <div class="feature-icon">🤝</div>
+    <h3>Agent Coordination</h3>
+    <p>Implementer, tester, reviewer — all reading the same spec version. Prevents agents contradicting each other or drifting from intent.</p>
   </div>
   <div class="feature">
     <div class="feature-icon">🔌</div>
     <h3>MCP Native</h3>
-    <p>Works instantly with Claude, Cursor, Windsurf, and any MCP-compatible AI tool. Zero config.</p>
+    <p>Works instantly with Claude Code, Cursor, Windsurf, and any MCP-compatible AI tool. Drop in, no config.</p>
   </div>
   <div class="feature">
-    <div class="feature-icon">👥</div>
-    <h3>Team Ready</h3>
-    <p>Shared spec libraries with access controls. Everyone's AI tools pull from the same source of truth.</p>
+    <div class="feature-icon">🔒</div>
+    <h3>Role-Scoped Access</h3>
+    <p>Define which agents can read specs and which can write them. The spec is a controlled artefact, not a free-for-all.</p>
   </div>
 </div>
 
 <section class="pillars">
-  <h2>Specs are infrastructure.<br>Treat them that way.</h2>
+  <h2>The spec is the contract.<br>Every agent answers to it.</h2>
   <div class="pillar-grid">
     <div class="pillar">
       <div class="pillar-num">01</div>
-      <h3>Stop Spec Drift</h3>
-      <p>Specs rot in wikis and docs. When your AI tools pull from a stale spec, they build the wrong thing. specmcp keeps one canonical version — versioned, diffable, and always current.</p>
+      <h3>Multi-Agent Coherence</h3>
+      <p>Without a shared spec, parallel agents hallucinate intent independently. specmcp gives every agent the same ground truth — so divergence signals a real problem, not a coordination failure.</p>
     </div>
     <div class="pillar">
       <div class="pillar-num">02</div>
@@ -770,48 +839,48 @@
     <div class="pillar">
       <div class="pillar-num">03</div>
       <h3>Agentic Provenance</h3>
-      <p>Know exactly which spec version an AI agent used when it generated code or made a decision. Full traceability from spec to output, every time.</p>
+      <p>Know exactly which spec version each agent used when it generated code or made a decision. Full traceability from spec to output, every time.</p>
     </div>
     <div class="pillar">
       <div class="pillar-num">04</div>
       <h3>Audit Everything</h3>
-      <p>Who read what spec, when, and from which tool. Complete audit logs for compliance, debugging, and understanding how AI agents interact with your specifications.</p>
+      <p>Which agent read what spec, when, and from which tool. Complete logs for compliance, debugging, and understanding how AI agents interact with your specifications.</p>
     </div>
   </div>
 </section>
 
 <section class="usecases">
   <h2>Built for how you work</h2>
-  <p>Give every AI interaction the context it needs to get things right the first time.</p>
+  <p>From solo developers to engineering orgs running agent fleets.</p>
   <div class="usecase-grid">
     <div class="usecase">
-      <div class="usecase-label">Solo Dev</div>
-      <h4>Side projects & freelance</h4>
-      <p>Store your project specs and architecture decisions. Your AI pair programmer always knows the plan.</p>
+      <div class="usecase-label">Multi-Agent</div>
+      <h4>Parallel agents, zero drift</h4>
+      <p>Run implementer, tester, and reviewer agents simultaneously. specmcp keeps them coherent — same spec, same version, no contradictions.</p>
     </div>
     <div class="usecase">
-      <div class="usecase-label">Startup</div>
-      <h4>Move fast, stay aligned</h4>
-      <p>Keep product specs, API contracts, and design docs accessible to every team member's AI tools.</p>
+      <div class="usecase-label">Solo Dev</div>
+      <h4>Your AI pair always knows the plan</h4>
+      <p>Store project specs and architecture decisions. No more re-explaining context at the start of every session.</p>
     </div>
     <div class="usecase">
       <div class="usecase-label">Enterprise</div>
       <h4>Specs at scale</h4>
-      <p>Centralize specifications across teams with granular access controls and audit logging.</p>
+      <p>Centralize specifications across teams with granular access controls, versioning, and audit logging built in.</p>
     </div>
     <div class="usecase">
-      <div class="usecase-label">Agency</div>
-      <h4>Client-ready context</h4>
-      <p>Organize specs per client. Onboard AI tools to any project in seconds, not hours.</p>
+      <div class="usecase-label">Platform Teams</div>
+      <h4>Guardrails for every agent</h4>
+      <p>Publish canonical API contracts and architecture standards. Every agent in the org inherits your guardrails automatically.</p>
     </div>
   </div>
 </section>
 
-<section class="investor">
-  <div class="investor-header">
-    <div class="section-tag">Market Validation</div>
-    <h2>The business case is <span class="highlight-orange">already proven</span></h2>
-    <p>Between November 2025 and February 2026, every major technology company shifted from code-centric to specification-centric development. specmcp is the infrastructure layer for this transition.</p>
+<section class="sponsor">
+  <div class="sponsor-header">
+    <div class="section-tag">Sponsorship</div>
+    <h2>Get in front of the<br><span class="highlight-orange">people building what's next</span></h2>
+    <p>specmcp.ai is where senior engineers, platform leads, and AI-native teams come to understand spec-driven development and multi-agent workflows. Early sponsors get direct access to that audience from day one.</p>
   </div>
 
   <div class="stats-row">
@@ -878,14 +947,49 @@
   <div class="convergence-callout">
     <div class="convergence-icon">⟐</div>
     <div>
-      <h3>The inversion is already here</h3>
-      <p>Engineers now spend 80% of their time on specification and review — exactly the inverse of the old model. The companies that have moved furthest (Anthropic, OpenAI, Spotify) are the ones that treat specification as the engineering discipline and code as a generated artefact. specmcp is the managed infrastructure that makes this workflow reliable, versioned, and team-ready.</p>
+      <h3>The spec layer is the missing piece</h3>
+      <p>The companies running furthest ahead — Anthropic, OpenAI, Spotify — treat specification as the engineering discipline and code as a generated artefact. Multi-agent workflows make this even more critical: without a shared, versioned spec, parallel agents drift, contradict each other, and produce irreconcilable outputs. specmcp is the infrastructure that makes multi-agent development reliable. Sponsors are aligned with that future.</p>
     </div>
   </div>
 
-  <div class="investor-cta">
-    <p>Specs are the new source code. The tooling layer is wide open.</p>
-    <a href="mailto:investors@specmcp.ai" class="cta-btn">Talk to Us ↗</a>
+  <div class="sponsor-tiers">
+    <div class="sponsor-tier">
+      <div class="tier-label">Community</div>
+      <h3>Early Supporter</h3>
+      <p>Help us build in public. Ideal for individuals, small tools, and open-source projects aligned with spec-driven development.</p>
+      <div class="tier-perks">
+        <div class="tier-perk">Logo in footer</div>
+        <div class="tier-perk">Early access to the product</div>
+        <div class="tier-perk">Shoutout in launch comms</div>
+      </div>
+    </div>
+    <div class="sponsor-tier featured">
+      <div class="tier-label">Launch Partner</div>
+      <h3>Founding Sponsor</h3>
+      <p>Visible, aligned partnership at launch. Best for dev tools, platforms, and companies building in the AI-native engineering space.</p>
+      <div class="tier-perks">
+        <div class="tier-perk">Prominent logo placement</div>
+        <div class="tier-perk">Co-authored launch content</div>
+        <div class="tier-perk">Featured in newsletter & socials</div>
+        <div class="tier-perk">Input on product roadmap</div>
+      </div>
+    </div>
+    <div class="sponsor-tier">
+      <div class="tier-label">Strategic</div>
+      <h3>Integration Partner</h3>
+      <p>Deep alignment. For companies whose product is directly complementary — agent orchestration, developer tooling, or platform infrastructure.</p>
+      <div class="tier-perks">
+        <div class="tier-perk">Native integration showcase</div>
+        <div class="tier-perk">Joint case study & content</div>
+        <div class="tier-perk">Direct audience access</div>
+        <div class="tier-perk">Custom commercial arrangement</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sponsor-cta">
+    <p>The tooling layer for multi-agent development is wide open. Let's build it together.</p>
+    <a href="mailto:sponsors@specmcp.ai" class="cta-btn">Become a Sponsor ↗</a>
   </div>
 </section>
 
@@ -895,7 +999,6 @@
 </footer>
 
 <script>
-// ← Replace with your Formspree form ID (e.g. "xpzvqkla")
 const FORMSPREE_ID = "xpqjkvjl";
 
 async function handleSubmit(e) {
@@ -904,7 +1007,6 @@ async function handleSubmit(e) {
   const button = e.target.querySelector('button');
   const email = input.value.trim();
 
-  // Validate email
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   if (!emailRegex.test(email)) {
     input.style.borderColor = '#ef4444';
@@ -917,7 +1019,6 @@ async function handleSubmit(e) {
     return;
   }
 
-  // Block disposable/free email domains (optional — remove if you want to allow them)
   const blocked = ['mailinator.com', 'guerrillamail.com', 'tempmail.com', 'throwaway.email', 'yopmail.com'];
   const domain = email.split('@')[1].toLowerCase();
   if (blocked.includes(domain)) {
@@ -931,7 +1032,6 @@ async function handleSubmit(e) {
     return;
   }
 
-  // Loading state
   button.disabled = true;
   button.textContent = 'Submitting…';
 
@@ -944,7 +1044,6 @@ async function handleSubmit(e) {
 
     if (!res.ok) throw new Error('Submission failed');
 
-    // Success state
     button.textContent = '✓ You\'re on the list';
     button.style.background = 'var(--surface-2)';
     button.style.color = 'var(--accent)';
@@ -952,14 +1051,12 @@ async function handleSubmit(e) {
     button.style.pointerEvents = 'none';
     input.style.display = 'none';
   } catch (err) {
-    // Error state
     button.textContent = 'Something went wrong — retry?';
     button.style.background = '#ef444420';
     button.style.color = '#ef4444';
     button.style.border = '1px solid #ef444440';
     button.disabled = false;
 
-    // Reset after 3s
     setTimeout(() => {
       button.textContent = 'Get Early Access';
       button.style.background = '';
