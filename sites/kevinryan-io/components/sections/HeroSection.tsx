@@ -97,7 +97,7 @@ export default function HeroSection() {
                 fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--grey-600)',
                 maxWidth: 500, marginBottom: '2.2rem',
               }}>
-                I used to direct teams of software engineers. Now I coordinate AI agents. Thirty years of building software and shipping products taught me the job was never about the tools — it's specification, role clarity, and amplifying human ingenuity. The tools change. Great teams building great products don't. Agents just mean we do it faster.
+                I used to direct teams of software engineers. Now I coordinate AI agents. Thirty years of building software and shipping products taught me the job was never about the tools — it's specification, role clarity, and amplifying human ingenuity. The tools change. It always takes great people to build great products. Agents just mean we do it faster.
               </p>
 
               {/* CTAs */}
