@@ -97,7 +97,7 @@ export default function HeroSection() {
                 fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--grey-600)',
                 maxWidth: 500, marginBottom: '2.2rem',
               }}>
-                I used to direct teams of software engineers. Now I coordinate AI agents. The skills transferred — specification, role clarity, coherence under pressure. The leverage didn't. Thirty years of platform engineering and DevOps delivery, embedded with the clients who need it most. Writing the book on what comes next.
+                I used to direct teams of software engineers. Now I coordinate AI agents. Thirty years of building software and shipping products taught me the job was never about the tools — it's specification, role clarity, and amplifying human ingenuity.
               </p>
 
               {/* CTAs */}
