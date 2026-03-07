@@ -1,4 +1,6 @@
-# Spec 0003a: Fix ESO CRD Ordering — Split ClusterSecretStore into Dependent Kustomization
+---
+title: "Spec 0003a: Fix ESO CRD Ordering — Split ClusterSecretStore into Dependent Kustomization"
+---
 
 ## Task
 

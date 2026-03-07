@@ -1,4 +1,6 @@
-# Provenance: Spec 0007 — Victoria Metrics Metrics Stack
+---
+title: "Provenance: Spec 0007 — Victoria Metrics Metrics Stack"
+---
 
 **Spec:** `.spec/spec-0007-victoria-metrics.md`
 **Executed:** 2026-03-05

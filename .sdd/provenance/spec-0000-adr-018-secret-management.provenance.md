@@ -1,4 +1,6 @@
-# Provenance: Spec 0000 — ADR-018 Secret Management with Key Vault and ESO
+---
+title: "Provenance: Spec 0000 — ADR-018 Secret Management with Key Vault and ESO"
+---
 
 **Spec:** `.spec/spec-0000-adr-018-secret-management.md`
 **Executed:** 2026-03-05T00:00:00Z

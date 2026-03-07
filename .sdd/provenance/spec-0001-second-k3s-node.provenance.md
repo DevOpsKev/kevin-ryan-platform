@@ -1,4 +1,6 @@
-# Provenance: Spec 0001 — Second K3s Node + Key Vault + Helm Controller
+---
+title: "Provenance: Spec 0001 — Second K3s Node + Key Vault + Helm Controller"
+---
 
 **Spec:** `.spec/spec-0001-second-k3s-node.md`
 **Executed:** 2026-03-05

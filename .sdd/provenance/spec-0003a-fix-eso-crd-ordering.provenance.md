@@ -1,4 +1,6 @@
-# Provenance: Spec 0003a — Fix ESO CRD Ordering
+---
+title: "Provenance: Spec 0003a — Fix ESO CRD Ordering"
+---
 
 **Spec:** `.spec/spec-0003a-fix-eso-crd-ordering.md`
 **Executed:** 2026-03-05

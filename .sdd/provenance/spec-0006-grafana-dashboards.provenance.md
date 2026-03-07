@@ -1,4 +1,6 @@
-# Provenance: Spec 0006 — Grafana Dashboards via GitOps
+---
+title: "Provenance: Spec 0006 — Grafana Dashboards via GitOps"
+---
 
 **Spec:** `.spec/spec-0006-grafana-dashboards.md`
 **Executed:** 2026-03-05

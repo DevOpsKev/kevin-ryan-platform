@@ -1,4 +1,6 @@
-# Spec 0005: Observability Stack (Grafana + Loki + Promtail)
+---
+title: "Spec 0005: Observability Stack (Grafana + Loki + Promtail)"
+---
 
 ## Task
 

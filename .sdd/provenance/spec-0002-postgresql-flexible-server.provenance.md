@@ -1,4 +1,6 @@
-# Provenance: Spec 0002 — PostgreSQL Flexible Server
+---
+title: "Provenance: Spec 0002 — PostgreSQL Flexible Server"
+---
 
 **Spec:** `.spec/spec-0002-postgresql-flexible-server.md`
 **Executed:** 2026-03-05

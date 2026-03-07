@@ -1,4 +1,6 @@
-# Provenance: Spec 0005 — Observability Stack
+---
+title: "Provenance: Spec 0005 — Observability Stack"
+---
 
 **Spec:** `.spec/spec-0005-observability-stack.md`
 **Executed:** 2026-03-05

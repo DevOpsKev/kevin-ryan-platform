@@ -1,4 +1,6 @@
-# Provenance: Spec 0004 — Umami Analytics
+---
+title: "Provenance: Spec 0004 — Umami Analytics"
+---
 
 **Spec:** `.spec/spec-0004-umami.md`
 **Executed:** 2026-03-05

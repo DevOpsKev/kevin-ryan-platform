@@ -1,4 +1,6 @@
-# Provenance: Spec 0003 — External Secrets Operator
+---
+title: "Provenance: Spec 0003 — External Secrets Operator"
+---
 
 **Spec:** `.spec/spec-0003-external-secrets-operator.md`
 **Executed:** 2026-03-05

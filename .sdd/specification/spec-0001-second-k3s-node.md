@@ -1,4 +1,6 @@
-# Spec 0001: Second K3s Node + Key Vault + Helm Controller
+---
+title: "Spec 0001: Second K3s Node + Key Vault + Helm Controller"
+---
 
 ## Task
 

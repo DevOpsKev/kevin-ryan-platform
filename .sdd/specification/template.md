@@ -1,4 +1,7 @@
-# Spec NNNN: <Title>
+---
+title: "Spec NNNN: <Title>"
+draft: true
+---
 
 ## Task
 

@@ -1,5 +1,6 @@
 ---
 title: "ADR-NNN: Short Decision Title"
+draft: true
 ---
 
 <!--

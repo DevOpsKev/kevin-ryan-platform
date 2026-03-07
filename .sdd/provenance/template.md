@@ -1,4 +1,7 @@
-# Provenance: Spec NNNN — <Title>
+---
+title: "Provenance: Spec NNNN — <Title>"
+draft: true
+---
 
 **Spec:** `.spec/spec-NNNN-<slug>.md`
 **Executed:** <YYYY-MM-DD or ISO timestamp>

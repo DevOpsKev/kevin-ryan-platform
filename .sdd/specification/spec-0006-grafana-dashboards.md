@@ -1,4 +1,6 @@
-# Spec 0006: Grafana Dashboards via GitOps
+---
+title: "Spec 0006: Grafana Dashboards via GitOps"
+---
 
 ## Task
 

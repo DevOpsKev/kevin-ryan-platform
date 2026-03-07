@@ -1,4 +1,6 @@
-# Spec 0000: Write ADR-018 — Secret Management with Key Vault and ESO
+---
+title: "Spec 0000: Write ADR-018 — Secret Management with Key Vault and ESO"
+---
 
 ## Task
 

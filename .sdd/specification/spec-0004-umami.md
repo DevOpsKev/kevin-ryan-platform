@@ -1,4 +1,6 @@
-# Spec 0004: Umami Analytics
+---
+title: "Spec 0004: Umami Analytics"
+---
 
 ## Task
 

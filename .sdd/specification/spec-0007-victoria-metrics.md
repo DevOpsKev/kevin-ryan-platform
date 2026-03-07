@@ -1,4 +1,6 @@
-# Spec 0007: Victoria Metrics Metrics Stack
+---
+title: "Spec 0007: Victoria Metrics Metrics Stack"
+---
 
 ## Task
 

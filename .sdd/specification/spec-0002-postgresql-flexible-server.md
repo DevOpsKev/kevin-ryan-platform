@@ -1,4 +1,6 @@
-# Spec 0002: PostgreSQL Flexible Server
+---
+title: "Spec 0002: PostgreSQL Flexible Server"
+---
 
 ## Task
 

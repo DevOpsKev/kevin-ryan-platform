@@ -1,4 +1,6 @@
-# Spec 0003: External Secrets Operator
+---
+title: "Spec 0003: External Secrets Operator"
+---
 
 ## Task
 
