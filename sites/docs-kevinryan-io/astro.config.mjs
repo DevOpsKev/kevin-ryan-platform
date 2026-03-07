@@ -34,18 +34,22 @@ export default defineConfig({
         { label: 'Home', link: '/' },
         {
           label: 'Architecture Decisions',
-          autogenerate: { directory: 'adr' },
+          collapsed: true,
+          autogenerate: { directory: 'adr', collapsed: true },
         },
         {
           label: 'SDD',
+          collapsed: true,
           items: [
             {
               label: 'Specifications',
-              autogenerate: { directory: 'specs' },
+              collapsed: true,
+              autogenerate: { directory: 'specs', collapsed: true },
             },
             {
               label: 'Provenance',
-              autogenerate: { directory: 'provenance' },
+              collapsed: true,
+              autogenerate: { directory: 'provenance', collapsed: true },
             },
           ],
         },

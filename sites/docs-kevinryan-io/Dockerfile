@@ -16,11 +16,12 @@ RUN pnpm install --frozen-lockfile
 
 WORKDIR /app
 COPY docs/ ./docs/
+COPY .sdd/ ./.sdd/
 COPY sites/docs-kevinryan-io/ ./sites/docs-kevinryan-io/
 
-# Replace symlink with real content (Docker COPY does not follow symlinks)
+# Replace symlinks with real content (Docker COPY does not follow symlinks for external targets)
 RUN rm -rf /app/sites/docs-kevinryan-io/src/content/docs && \
-    cp -r /app/docs /app/sites/docs-kevinryan-io/src/content/docs
+    cp -rL /app/docs /app/sites/docs-kevinryan-io/src/content/docs
 
 WORKDIR /app/sites/docs-kevinryan-io
 RUN pnpm build
