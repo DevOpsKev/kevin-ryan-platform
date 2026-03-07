@@ -4,9 +4,9 @@ title: "Spec 0002: PostgreSQL Flexible Server"
 
 ## Task
 
-1. Save this spec to `.spec/spec-0002-postgresql-flexible-server.md` in the repo (create the `.spec/` directory if it does not exist).
+1. Save this spec to `.sdd/specification/spec-0002-postgresql-flexible-server.md` in the repo (create the `.sdd/specification/` directory if it does not exist).
 2. Implement all Terraform changes described below.
-3. After completing all work, create a provenance record at `.provenance/spec-0002-postgresql-flexible-server.provenance.md` (create the `.provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
+3. After completing all work, create a provenance record at `.sdd/provenance/spec-0002-postgresql-flexible-server.provenance.md` (create the `.sdd/provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
 
 ## Prerequisites
 
@@ -190,12 +190,12 @@ After the code changes are merged:
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-0002-postgresql-flexible-server.provenance.md` with the following structure:
+After completing the work, create `.sdd/provenance/spec-0002-postgresql-flexible-server.provenance.md` with the following structure:
 
 ```markdown
 # Provenance: Spec 0002 — PostgreSQL Flexible Server
 
-**Spec:** `.spec/spec-0002-postgresql-flexible-server.md`
+**Spec:** `.sdd/specification/spec-0002-postgresql-flexible-server.md`
 **Executed:** <timestamp>
 **Agent:** <agent identifier if available>
 
@@ -232,7 +232,7 @@ Results of each validation step from the spec (pass/fail with details).
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-0002-postgresql-flexible-server.md`
+1. This spec has been saved to `.sdd/specification/spec-0002-postgresql-flexible-server.md`
 2. `infra/modules/postgresql/` exists with `main.tf`, `variables.tf`, `outputs.tf`, `versions.tf`
 3. The PostgreSQL module creates a delegated subnet `snet-postgresql` with prefix `10.0.2.0/28` and delegation to `Microsoft.DBforPostgreSQL/flexibleServers`
 4. The PostgreSQL module creates a private DNS zone `privatelink.postgres.database.azure.com` linked to the VNet
@@ -245,5 +245,5 @@ After completing all work, confirm:
 11. `terraform fmt -check -recursive infra/` passes
 12. `terraform validate` passes in the `infra/` directory (if terraform is available)
 13. `pnpm lint` passes (no site code changed, but confirm no regressions)
-14. The provenance record exists at `.provenance/spec-0002-postgresql-flexible-server.provenance.md` and contains all required sections
+14. The provenance record exists at `.sdd/provenance/spec-0002-postgresql-flexible-server.provenance.md` and contains all required sections
 15. All files (spec, infrastructure changes, provenance) are committed together

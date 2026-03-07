@@ -4,9 +4,9 @@ title: "Spec 0000: Write ADR-018 — Secret Management with Key Vault and ESO"
 
 ## Task
 
-1. Save this spec to `.spec/spec-0000-adr-018-secret-management.md` in the repo (create the `.spec/` directory if it does not exist).
+1. Save this spec to `.sdd/specification/spec-0000-adr-018-secret-management.md` in the repo (create the `.sdd/specification/` directory if it does not exist).
 2. Create the file `docs/adr/adr-018-secret-management-keyvault-eso.md` following the project's ADR template at `docs/adr/template.md`. Match the depth, tone, and structure of existing ADRs (see `docs/adr/adr-017-managed-postgresql-shared-database.md` and `docs/adr/adr-016-second-k3s-node-for-observability.md` for reference).
-3. After completing all work, create a provenance record at `.provenance/spec-0000-adr-018-secret-management.provenance.md` (create the `.provenance/` directory if it does not exist). See the Provenance Record section below for the required format.
+3. After completing all work, create a provenance record at `.sdd/provenance/spec-0000-adr-018-secret-management.provenance.md` (create the `.sdd/provenance/` directory if it does not exist). See the Provenance Record section below for the required format.
 
 ## Metadata
 
@@ -99,12 +99,12 @@ Use the standard "No agent implementation decisions recorded" row — this ADR d
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-0000-adr-018-secret-management.provenance.md` with the following structure:
+After completing the work, create `.sdd/provenance/spec-0000-adr-018-secret-management.provenance.md` with the following structure:
 
 ```markdown
 # Provenance: Spec 0000 — ADR-018 Secret Management with Key Vault and ESO
 
-**Spec:** `.spec/spec-0000-adr-018-secret-management.md`
+**Spec:** `.sdd/specification/spec-0000-adr-018-secret-management.md`
 **Executed:** <timestamp>
 **Agent:** <agent identifier if available>
 
@@ -130,9 +130,9 @@ Any points where the agent deviated from the spec, and why. If none, state: "No 
 
 | File | Status |
 |------|--------|
-| `.spec/spec-0000-adr-018-secret-management.md` | Created / Modified |
+| `.sdd/specification/spec-0000-adr-018-secret-management.md` | Created / Modified |
 | `docs/adr/adr-018-secret-management-keyvault-eso.md` | Created |
-| `.provenance/spec-0000-adr-018-secret-management.provenance.md` | Created |
+| `.sdd/provenance/spec-0000-adr-018-secret-management.provenance.md` | Created |
 
 ## Validation Results
 
@@ -145,7 +145,7 @@ This provenance record must be committed alongside the spec and ADR in the same 
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-0000-adr-018-secret-management.md`
+1. This spec has been saved to `.sdd/specification/spec-0000-adr-018-secret-management.md`
 2. The file exists at `docs/adr/adr-018-secret-management-keyvault-eso.md`
 3. The frontmatter title field matches the pattern `"ADR-018: ..."`
 4. The file follows the template structure (all sections present: Context, Decision Drivers, Options Considered, Decision, Consequences, Agent Decisions, References)
@@ -153,5 +153,5 @@ After completing all work, confirm:
 6. The deviation from ADR-017's managed identity auth is explicitly called out
 7. `pnpm lint` passes (markdownlint will catch formatting issues)
 8. No broken relative links in the References section — verify the referenced ADR filenames exist in `docs/adr/`
-9. The provenance record exists at `.provenance/spec-0000-adr-018-secret-management.provenance.md` and contains all required sections
+9. The provenance record exists at `.sdd/provenance/spec-0000-adr-018-secret-management.provenance.md` and contains all required sections
 10. All three files (spec, ADR, provenance) are committed together

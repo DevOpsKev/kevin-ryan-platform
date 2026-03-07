@@ -2,7 +2,7 @@
 title: "Provenance: Spec 0005 — Observability Stack"
 ---
 
-**Spec:** `.spec/spec-0005-observability-stack.md`
+**Spec:** `.sdd/specification/spec-0005-observability-stack.md`
 **Executed:** 2026-03-05
 **Agent:** Cursor (claude-4.6-opus)
 
@@ -13,7 +13,7 @@ title: "Provenance: Spec 0005 — Observability Stack"
 3. Confirmed `grafana_db` already exists in PostgreSQL module's default `databases` list — no DB changes needed
 4. Read existing Flux/K8s patterns: `k8s/flux-system/kustomization.yaml`, `k8s/flux-system/umami-sync.yaml`, `k8s/umami/externalsecret.yaml`, `k8s/umami/ingress.yaml`
 5. Researched current Helm chart repos — discovered Grafana chart migrated to `grafana-community` repo (Jan 2026)
-6. Saved spec to `.spec/spec-0005-observability-stack.md`
+6. Saved spec to `.sdd/specification/spec-0005-observability-stack.md`
 7. Modified `infra/main.tf`: added `random_password.grafana_admin_password`, `azurerm_key_vault_secret.grafana_admin_password`, `cloudflare_record.monitoring`
 8. Created `k8s/observability/` directory
 9. Created `k8s/observability/namespace.yaml`
@@ -47,7 +47,7 @@ No deviations from spec.
 
 | File | Status |
 |------|--------|
-| `.spec/spec-0005-observability-stack.md` | Created |
+| `.sdd/specification/spec-0005-observability-stack.md` | Created |
 | `infra/main.tf` | Modified (3 resources added) |
 | `k8s/observability/namespace.yaml` | Created |
 | `k8s/observability/helmrepository-grafana.yaml` | Created |
@@ -59,13 +59,13 @@ No deviations from spec.
 | `k8s/observability/ingress.yaml` | Created |
 | `k8s/flux-system/observability-sync.yaml` | Created |
 | `k8s/flux-system/kustomization.yaml` | Modified |
-| `.provenance/spec-0005-observability-stack.provenance.md` | Created |
+| `.sdd/provenance/spec-0005-observability-stack.provenance.md` | Created |
 
 ## Validation Results
 
 | Check | Result |
 |-------|--------|
-| Spec saved to `.spec/` | Pass |
+| Spec saved to `.sdd/specification/` | Pass |
 | `infra/main.tf` contains 3 new resources | Pass |
 | `k8s/observability/` has 8 files | Pass |
 | Loki: SingleBinary, replication_factor 1, filesystem, 744h, node2 | Pass |

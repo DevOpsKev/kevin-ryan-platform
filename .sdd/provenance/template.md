@@ -3,7 +3,7 @@ title: "Provenance: Spec NNNN — <Title>"
 draft: true
 ---
 
-**Spec:** `.spec/spec-NNNN-<slug>.md`
+**Spec:** `.sdd/specification/spec-NNNN-<slug>.md`
 **Executed:** <YYYY-MM-DD or ISO timestamp>
 **Agent:** <agent model and interface, e.g. "Cursor (claude-4.6-opus)" or "Claude Code CLI (claude-sonnet-4-6)">
 
@@ -37,9 +37,9 @@ No deviations from spec.
 
 | File | Status |
 |------|--------|
-| `.spec/spec-NNNN-<slug>.md` | Created |
+| `.sdd/specification/spec-NNNN-<slug>.md` | Created |
 | `path/to/file` | Created / Modified / Deleted |
-| `.provenance/spec-NNNN-<slug>.provenance.md` | Created |
+| `.sdd/provenance/spec-NNNN-<slug>.provenance.md` | Created |
 
 ## Validation Results
 
@@ -47,5 +47,5 @@ No deviations from spec.
 
 | # | Check | Result |
 |---|-------|--------|
-| 1 | Spec saved to `.spec/` | Pass |
+| 1 | Spec saved to `.sdd/specification/` | Pass |
 | 2 | Description of check | Pass / Fail — details |

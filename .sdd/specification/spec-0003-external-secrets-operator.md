@@ -4,9 +4,9 @@ title: "Spec 0003: External Secrets Operator"
 
 ## Task
 
-1. Save this spec to `.spec/spec-0003-external-secrets-operator.md` in the repo (create the `.spec/` directory if it does not exist).
+1. Save this spec to `.sdd/specification/spec-0003-external-secrets-operator.md` in the repo (create the `.sdd/specification/` directory if it does not exist).
 2. Implement all Kubernetes manifest changes described below.
-3. After completing all work, create a provenance record at `.provenance/spec-0003-external-secrets-operator.provenance.md` (create the `.provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
+3. After completing all work, create a provenance record at `.sdd/provenance/spec-0003-external-secrets-operator.provenance.md` (create the `.sdd/provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
 
 ## Prerequisites
 
@@ -183,12 +183,12 @@ After the code changes are merged to `main`:
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-0003-external-secrets-operator.provenance.md` with the following structure:
+After completing the work, create `.sdd/provenance/spec-0003-external-secrets-operator.provenance.md` with the following structure:
 
 ```markdown
 # Provenance: Spec 0003 — External Secrets Operator
 
-**Spec:** `.spec/spec-0003-external-secrets-operator.md`
+**Spec:** `.sdd/specification/spec-0003-external-secrets-operator.md`
 **Executed:** <timestamp>
 **Agent:** <agent identifier if available>
 
@@ -225,7 +225,7 @@ Results of each validation step from the spec (pass/fail with details).
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-0003-external-secrets-operator.md`
+1. This spec has been saved to `.sdd/specification/spec-0003-external-secrets-operator.md`
 2. `k8s/external-secrets/` exists with exactly 4 files: `namespace.yaml`, `helmrepository.yaml`, `helmrelease.yaml`, `clustersecretstore.yaml`
 3. The HelmRepository points to `https://charts.external-secrets.io`
 4. The HelmRelease installs chart `external-secrets` with a valid semver range, `crds: CreateReplace`, and `installCRDs: true`
@@ -234,7 +234,7 @@ After completing all work, confirm:
 7. `k8s/flux-system/kustomization.yaml` includes `external-secrets-sync.yaml` in its resources list
 8. No Terraform files were modified
 9. `pnpm lint` passes (no site code changed, but confirm no regressions)
-10. The provenance record exists at `.provenance/spec-0003-external-secrets-operator.provenance.md` and contains all required sections
+10. The provenance record exists at `.sdd/provenance/spec-0003-external-secrets-operator.provenance.md` and contains all required sections
 11. All files (spec, K8s manifests, provenance) are committed together
 
 ### Post-merge validation (manual, performed by the operator after Flux reconciles)

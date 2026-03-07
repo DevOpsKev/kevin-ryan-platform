@@ -4,9 +4,9 @@ title: "Spec 0006: Grafana Dashboards via GitOps"
 
 ## Task
 
-1. Save this spec to `.spec/spec-0006-grafana-dashboards.md` in the repo.
+1. Save this spec to `.sdd/specification/spec-0006-grafana-dashboards.md` in the repo.
 2. Implement all changes described below.
-3. After completing all work, create a provenance record at `.provenance/spec-0006-grafana-dashboards.provenance.md`. See the **Provenance Record** section for the required format.
+3. After completing all work, create a provenance record at `.sdd/provenance/spec-0006-grafana-dashboards.provenance.md`. See the **Provenance Record** section for the required format.
 
 ## Prerequisites
 
@@ -423,13 +423,13 @@ Then visit `https://monitoring.kevinryan.io` and verify both dashboards appear i
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-0006-grafana-dashboards.provenance.md` using the provenance template at `.provenance/template.md`.
+After completing the work, create `.sdd/provenance/spec-0006-grafana-dashboards.provenance.md` using the provenance template at `.sdd/provenance/template.md`.
 
 ## Validation steps
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-0006-grafana-dashboards.md`
+1. This spec has been saved to `.sdd/specification/spec-0006-grafana-dashboards.md`
 2. `k8s/observability/helmrelease-grafana.yaml` includes `sidecar.dashboards.enabled: true` with `label: grafana_dashboard`, `labelValue: "1"`, and `searchNamespace: observability`
 3. `k8s/observability/dashboard-platform-overview.yaml` exists as a ConfigMap with label `grafana_dashboard: "1"` and contains valid dashboard JSON with `"uid": "platform-overview"`
 4. The Platform Overview dashboard JSON includes: namespace template variable, log volume by namespace panel, error rate panel, error rate by namespace panel, and recent errors logs panel
@@ -439,5 +439,5 @@ After completing all work, confirm:
 8. No Terraform files were modified
 9. No new Flux sync resources were created (existing `observability-sync.yaml` covers `k8s/observability/`)
 10. `pnpm lint` passes (markdownlint on spec and provenance files)
-11. The provenance record exists at `.provenance/spec-0006-grafana-dashboards.provenance.md` and contains all required sections
+11. The provenance record exists at `.sdd/provenance/spec-0006-grafana-dashboards.provenance.md` and contains all required sections
 12. All files (spec, ConfigMaps, HelmRelease change, provenance) are committed together

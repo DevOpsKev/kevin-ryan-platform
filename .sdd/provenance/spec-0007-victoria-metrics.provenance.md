@@ -2,20 +2,20 @@
 title: "Provenance: Spec 0007 — Victoria Metrics Metrics Stack"
 ---
 
-**Spec:** `.spec/spec-0007-victoria-metrics.md`
+**Spec:** `.sdd/specification/spec-0007-victoria-metrics.md`
 **Executed:** 2026-03-05
 **Agent:** Cursor (claude-4.6-opus)
 
 ## Actions Taken
 
-1. Read `.spec/spec-0007-victoria-metrics.md` for full implementation requirements
+1. Read `.sdd/specification/spec-0007-victoria-metrics.md` for full implementation requirements
 2. Read `k8s/observability/helmrelease-grafana.yaml` for current Grafana datasource configuration
-3. Read `.provenance/template.md` for provenance record format
+3. Read `.sdd/provenance/template.md` for provenance record format
 4. Created `k8s/observability/helmrepository-victoriametrics.yaml` — Flux HelmRepository pointing at `https://victoriametrics.github.io/helm-charts/`
 5. Created `k8s/observability/helmrelease-victoria-metrics.yaml` — HelmRelease for `victoria-metrics-k8s-stack` chart with all values from the spec (VMSingle, VMAgent, node-exporter, kube-state-metrics, disabled components, K3s-specific overrides)
 6. Modified `k8s/observability/helmrelease-grafana.yaml` — added `VictoriaMetrics` as a second datasource (type `prometheus`, URL `http://vmsingle-vm.observability.svc.cluster.local:8428`, `isDefault: false`) alongside existing Loki datasource
 7. Ran `pnpm lint` — passed (0 errors, 2 pre-existing warnings unrelated to this spec)
-8. Created `.provenance/spec-0007-victoria-metrics.provenance.md` (this file)
+8. Created `.sdd/provenance/spec-0007-victoria-metrics.provenance.md` (this file)
 
 ## Decisions Made
 
@@ -29,17 +29,17 @@ No deviations from spec.
 
 | File | Status |
 |------|--------|
-| `.spec/spec-0007-victoria-metrics.md` | Already existed (written in prior session) |
+| `.sdd/specification/spec-0007-victoria-metrics.md` | Already existed (written in prior session) |
 | `k8s/observability/helmrepository-victoriametrics.yaml` | Created |
 | `k8s/observability/helmrelease-victoria-metrics.yaml` | Created |
 | `k8s/observability/helmrelease-grafana.yaml` | Modified — added VictoriaMetrics datasource |
-| `.provenance/spec-0007-victoria-metrics.provenance.md` | Created |
+| `.sdd/provenance/spec-0007-victoria-metrics.provenance.md` | Created |
 
 ## Validation Results
 
 | # | Check | Result |
 |---|-------|--------|
-| 1 | Spec saved to `.spec/spec-0007-victoria-metrics.md` | Pass |
+| 1 | Spec saved to `.sdd/specification/spec-0007-victoria-metrics.md` | Pass |
 | 2 | `helmrepository-victoriametrics.yaml` exists with correct URL | Pass |
 | 3 | `helmrelease-victoria-metrics.yaml` exists with chart `victoria-metrics-k8s-stack`, `fullnameOverride: vm` | Pass |
 | 4 | VMSingle: `retentionPeriod: "31d"`, `storage: 10Gi`, node2 scheduling | Pass |

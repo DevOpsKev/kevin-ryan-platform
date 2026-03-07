@@ -4,9 +4,9 @@ title: "Spec 0007: Victoria Metrics Metrics Stack"
 
 ## Task
 
-1. Save this spec to `.spec/spec-0007-victoria-metrics.md` in the repo.
+1. Save this spec to `.sdd/specification/spec-0007-victoria-metrics.md` in the repo.
 2. Implement all changes described below.
-3. After completing all work, create a provenance record at `.provenance/spec-0007-victoria-metrics.provenance.md`. See the **Provenance Record** section for the required format.
+3. After completing all work, create a provenance record at `.sdd/provenance/spec-0007-victoria-metrics.provenance.md`. See the **Provenance Record** section for the required format.
 
 ## Prerequisites
 
@@ -315,13 +315,13 @@ If dashboards do not appear in Grafana after the chart installs:
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-0007-victoria-metrics.provenance.md` using the provenance template at `.provenance/template.md`.
+After completing the work, create `.sdd/provenance/spec-0007-victoria-metrics.provenance.md` using the provenance template at `.sdd/provenance/template.md`.
 
 ## Validation steps
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-0007-victoria-metrics.md`
+1. This spec has been saved to `.sdd/specification/spec-0007-victoria-metrics.md`
 2. `k8s/observability/helmrepository-victoriametrics.yaml` exists with URL `https://victoriametrics.github.io/helm-charts/`
 3. `k8s/observability/helmrelease-victoria-metrics.yaml` exists with chart `victoria-metrics-k8s-stack`, `fullnameOverride: vm`, and all values from Section 2
 4. VMSingle is configured with `retentionPeriod: "31d"`, `storage: 10Gi`, and schedules on node2 (`nodeSelector` + `tolerations`)
@@ -334,5 +334,5 @@ After completing all work, confirm:
 11. `k8s/observability/helmrelease-grafana.yaml` has a second datasource named `VictoriaMetrics` with type `prometheus` and URL `http://vmsingle-vm.observability.svc.cluster.local:8428`
 12. Loki remains `isDefault: true`, VictoriaMetrics is `isDefault: false`
 13. `pnpm lint` passes
-14. The provenance record exists at `.provenance/spec-0007-victoria-metrics.provenance.md` and contains all required sections
+14. The provenance record exists at `.sdd/provenance/spec-0007-victoria-metrics.provenance.md` and contains all required sections
 15. All files (spec, manifests, provenance) are committed together

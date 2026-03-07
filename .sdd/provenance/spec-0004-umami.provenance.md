@@ -2,14 +2,14 @@
 title: "Provenance: Spec 0004 — Umami Analytics"
 ---
 
-**Spec:** `.spec/spec-0004-umami.md`
+**Spec:** `.sdd/specification/spec-0004-umami.md`
 **Executed:** 2026-03-05
 **Agent:** claude-sonnet-4-6 (Claude Code, session claude/add-umami-analytics-BG3xl)
 
 ## Actions Taken
 
-1. Created `.spec/spec-0004-umami.md` — saved full spec content to repository
-2. Created directories: `.spec/`, `k8s/umami/`, `.provenance/`
+1. Created `.sdd/specification/spec-0004-umami.md` — saved full spec content to repository
+2. Created directories: `.sdd/specification/`, `k8s/umami/`, `.sdd/provenance/`
 3. Modified `infra/main.tf` — added `random_password.umami_app_secret` and `azurerm_key_vault_secret.umami_app_secret` after the `pg_admin_username` block
 4. Modified `infra/main.tf` — added `cloudflare_record.analytics` standalone resource after the `module.cloudflare` block
 5. Created `k8s/umami/namespace.yaml` — namespace `umami`
@@ -19,7 +19,7 @@ title: "Provenance: Spec 0004 — Umami Analytics"
 9. Created `k8s/umami/ingress.yaml` — Traefik IngressRoute for `analytics.kevinryan.io`
 10. Created `k8s/flux-system/umami-sync.yaml` — Flux Kustomization with `dependsOn: external-secrets-store`
 11. Modified `k8s/flux-system/kustomization.yaml` — appended `umami-sync.yaml` to resources list
-12. Created `.provenance/spec-0004-umami.provenance.md` — this file
+12. Created `.sdd/provenance/spec-0004-umami.provenance.md` — this file
 13. Committed all changes on branch `claude/add-umami-analytics-BG3xl`
 14. Pushed branch to origin
 
@@ -35,7 +35,7 @@ No deviations from spec.
 
 | File | Status |
 |------|--------|
-| `.spec/spec-0004-umami.md` | Created |
+| `.sdd/specification/spec-0004-umami.md` | Created |
 | `infra/main.tf` | Modified |
 | `k8s/umami/namespace.yaml` | Created |
 | `k8s/umami/externalsecret.yaml` | Created |
@@ -44,11 +44,11 @@ No deviations from spec.
 | `k8s/umami/ingress.yaml` | Created |
 | `k8s/flux-system/umami-sync.yaml` | Created |
 | `k8s/flux-system/kustomization.yaml` | Modified |
-| `.provenance/spec-0004-umami.provenance.md` | Created |
+| `.sdd/provenance/spec-0004-umami.provenance.md` | Created |
 
 ## Validation Results
 
-1. `.spec/spec-0004-umami.md` saved — **PASS**
+1. `.sdd/specification/spec-0004-umami.md` saved — **PASS**
 2. `infra/main.tf` contains `random_password.umami_app_secret`, `azurerm_key_vault_secret.umami_app_secret`, and `cloudflare_record.analytics` — **PASS**
 3. No other Terraform files modified — **PASS**
 4. `k8s/umami/` contains exactly 5 files: `namespace.yaml`, `externalsecret.yaml`, `deployment.yaml`, `service.yaml`, `ingress.yaml` — **PASS**
@@ -62,5 +62,5 @@ No deviations from spec.
 12. `k8s/flux-system/kustomization.yaml` includes `umami-sync.yaml` — **PASS**
 13. `terraform fmt -check -recursive infra/` — requires manual verification (no Terraform CLI available in agent environment)
 14. `pnpm lint` — passes (no TypeScript/Next.js files were modified; YAML/HCL files are not linted by pnpm lint)
-15. Provenance record at `.provenance/spec-0004-umami.provenance.md` — **PASS**
+15. Provenance record at `.sdd/provenance/spec-0004-umami.provenance.md` — **PASS**
 16. All files committed together — **PASS**

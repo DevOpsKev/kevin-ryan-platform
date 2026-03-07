@@ -4,9 +4,9 @@ title: "Spec 0005: Observability Stack (Grafana + Loki + Promtail)"
 
 ## Task
 
-1. Save this spec to `.spec/spec-0005-observability-stack.md` in the repo (create the `.spec/` directory if it does not exist).
+1. Save this spec to `.sdd/specification/spec-0005-observability-stack.md` in the repo (create the `.sdd/specification/` directory if it does not exist).
 2. Implement all Terraform and Kubernetes manifest changes described below.
-3. After completing all work, create a provenance record at `.provenance/spec-0005-observability-stack.provenance.md` (create the `.provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
+3. After completing all work, create a provenance record at `.sdd/provenance/spec-0005-observability-stack.provenance.md` (create the `.sdd/provenance/` directory if it does not exist). See the **Provenance Record** section for the required format.
 
 ## Prerequisites
 
@@ -483,12 +483,12 @@ Login: `admin` / the password from `az keyvault secret show --vault-name kv-kevi
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-0005-observability-stack.provenance.md` with the following structure:
+After completing the work, create `.sdd/provenance/spec-0005-observability-stack.provenance.md` with the following structure:
 
 ```markdown
 # Provenance: Spec 0005 — Observability Stack
 
-**Spec:** `.spec/spec-0005-observability-stack.md`
+**Spec:** `.sdd/specification/spec-0005-observability-stack.md`
 **Executed:** <timestamp>
 **Agent:** <agent identifier if available>
 
@@ -525,7 +525,7 @@ Results of each validation step from the spec (pass/fail with details).
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-0005-observability-stack.md`
+1. This spec has been saved to `.sdd/specification/spec-0005-observability-stack.md`
 2. `infra/main.tf` contains `random_password.grafana_admin_password`, `azurerm_key_vault_secret.grafana_admin_password`, and `cloudflare_record.monitoring`
 3. `k8s/observability/` exists with exactly 8 files: `namespace.yaml`, `helmrepository-grafana.yaml`, `helmrepository-grafana-community.yaml`, `helmrelease-loki.yaml`, `helmrelease-promtail.yaml`, `helmrelease-grafana.yaml`, `externalsecret.yaml`, `ingress.yaml`
 4. Loki HelmRelease uses `deploymentMode: SingleBinary` with `replication_factor: 1`, filesystem storage, 744h retention, and schedules on node2 (`nodeSelector` + `tolerations`)
@@ -538,5 +538,5 @@ After completing all work, confirm:
 11. `k8s/flux-system/kustomization.yaml` includes `observability-sync.yaml`
 12. `terraform fmt -check -recursive infra/` passes
 13. `pnpm lint` passes
-14. The provenance record exists at `.provenance/spec-0005-observability-stack.provenance.md` and contains all required sections
+14. The provenance record exists at `.sdd/provenance/spec-0005-observability-stack.provenance.md` and contains all required sections
 15. All files (spec, Terraform changes, K8s manifests, provenance) are committed together

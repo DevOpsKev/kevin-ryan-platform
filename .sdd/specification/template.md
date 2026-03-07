@@ -5,9 +5,9 @@ draft: true
 
 ## Task
 
-1. Save this spec to `.spec/spec-NNNN-<slug>.md` in the repo.
+1. Save this spec to `.sdd/specification/spec-NNNN-<slug>.md` in the repo.
 2. Implement all changes described below.
-3. After completing all work, create a provenance record at `.provenance/spec-NNNN-<slug>.provenance.md`. See the **Provenance Record** section for the required format.
+3. After completing all work, create a provenance record at `.sdd/provenance/spec-NNNN-<slug>.provenance.md`. See the **Provenance Record** section for the required format.
 
 ## Prerequisites
 
@@ -67,7 +67,7 @@ verification-command
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-NNNN-<slug>.provenance.md` using the provenance template at `.provenance/template.md`.
+After completing the work, create `.sdd/provenance/spec-NNNN-<slug>.provenance.md` using the provenance template at `.sdd/provenance/template.md`.
 
 ## Validation steps
 
@@ -75,10 +75,10 @@ After completing all work, confirm:
 
 <!-- Numbered checklist. Each item should be independently verifiable. Cover: file existence, content correctness, linting, formatting, no regressions, provenance completeness, commit integrity. -->
 
-1. This spec has been saved to `.spec/spec-NNNN-<slug>.md`
+1. This spec has been saved to `.sdd/specification/spec-NNNN-<slug>.md`
 2. <File/directory exists with expected contents>
 3. <Specific content check — be precise about what to look for>
 4. `terraform fmt -check -recursive infra/` passes (if Terraform files changed)
 5. `pnpm lint` passes (if site code or markdown changed)
-6. The provenance record exists at `.provenance/spec-NNNN-<slug>.provenance.md` and contains all required sections
+6. The provenance record exists at `.sdd/provenance/spec-NNNN-<slug>.provenance.md` and contains all required sections
 7. All files (spec, implementation, provenance) are committed together

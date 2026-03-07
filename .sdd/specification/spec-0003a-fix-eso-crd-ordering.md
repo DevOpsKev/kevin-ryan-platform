@@ -4,9 +4,9 @@ title: "Spec 0003a: Fix ESO CRD Ordering — Split ClusterSecretStore into Depen
 
 ## Task
 
-1. Save this spec to `.spec/spec-0003a-fix-eso-crd-ordering.md` in the repo.
+1. Save this spec to `.sdd/specification/spec-0003a-fix-eso-crd-ordering.md` in the repo.
 2. Implement all changes described below.
-3. After completing all work, create a provenance record at `.provenance/spec-0003a-fix-eso-crd-ordering.provenance.md`. See the **Provenance Record** section for the required format.
+3. After completing all work, create a provenance record at `.sdd/provenance/spec-0003a-fix-eso-crd-ordering.provenance.md`. See the **Provenance Record** section for the required format.
 
 ## Problem
 
@@ -115,12 +115,12 @@ resources:
 
 ## Provenance Record
 
-After completing the work, create `.provenance/spec-0003a-fix-eso-crd-ordering.provenance.md` with the following structure:
+After completing the work, create `.sdd/provenance/spec-0003a-fix-eso-crd-ordering.provenance.md` with the following structure:
 
 ```markdown
 # Provenance: Spec 0003a — Fix ESO CRD Ordering
 
-**Spec:** `.spec/spec-0003a-fix-eso-crd-ordering.md`
+**Spec:** `.sdd/specification/spec-0003a-fix-eso-crd-ordering.md`
 **Executed:** <timestamp>
 **Agent:** <agent identifier if available>
 
@@ -157,7 +157,7 @@ Results of each validation step from the spec (pass/fail with details).
 
 After completing all work, confirm:
 
-1. This spec has been saved to `.spec/spec-0003a-fix-eso-crd-ordering.md`
+1. This spec has been saved to `.sdd/specification/spec-0003a-fix-eso-crd-ordering.md`
 2. `k8s/external-secrets/clustersecretstore.yaml` does **NOT** exist (deleted)
 3. `k8s/external-secrets/` contains exactly 3 files: `namespace.yaml`, `helmrepository.yaml`, `helmrelease.yaml`
 4. `k8s/external-secrets-store/clustersecretstore.yaml` exists with correct content (`authType: ManagedIdentity`, `vaultUrl: "https://kv-kevinryan-io.vault.azure.net/"`)
@@ -165,5 +165,5 @@ After completing all work, confirm:
 6. `k8s/flux-system/kustomization.yaml` includes both `external-secrets-sync.yaml` and `external-secrets-store-sync.yaml`
 7. `k8s/flux-system/external-secrets-sync.yaml` is unchanged from its current content
 8. No Terraform files were modified
-9. The provenance record exists at `.provenance/spec-0003a-fix-eso-crd-ordering.provenance.md` and contains all required sections
+9. The provenance record exists at `.sdd/provenance/spec-0003a-fix-eso-crd-ordering.provenance.md` and contains all required sections
 10. All files (spec, K8s manifests, provenance) are committed together
